@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⚡ Arun's Fitness Guide</title>
+    <style>
+        :root {
+            --bg-canvas: #f1f5f9;
+            --panel-bg: rgba(255, 255, 255, 0.88);
+            --card-inner-bg: rgba(248, 250, 252, 0.8);
+            --varsity-navy: #1e3a8a;
+            --athletic-teal: #0d9488;
+            --soft-emerald: #10b981;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-clean: rgba(226, 232, 240, 0.8);
+            --danger-btn: #ef4444;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            color: var(--text-main);
+            padding: 16px 12px;
+            font-size: 15px;
+            overflow-x: hidden;
+            letter-spacing: -0.1px;
+            background-color: var(--bg-canvas);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.08;
+            filter: grayscale(30%);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            text-align: center;
+            color: var(--varsity-navy);
+            margin: 8px 0 16px 0;
+        }
+
+        /* Top Module Router */
+        .module-router {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .module-btn {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text-muted);
+            border: 1px solid var(--border-clean);
+            padding: 12px 4px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .module-btn.active {
+            background: var(--varsity-navy);
+            color: #ffffff;
+            border-color: var(--varsity-navy);
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        h2 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--varsity-navy);
+        }
+
+        section {
+            display: none; /* Controlled via JS switch Module */
+            background-color: var(--panel-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-clean);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+        }
+
+        section.module-active {
+            display: block;
+        }
+
+        .checklist-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 4px;
+            border-bottom: 1px solid var(--border-clean);
+            gap: 12px;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-details {
+            flex-grow: 1;
+        }
+
+        .checklist-title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .checklist-details strong {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .checklist-details p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .check-action-block {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--athletic-teal);
+            cursor: pointer;
+        }
+
+        .tab-row {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            margin-bottom: 14px;
+            scrollbar-width: none;
+        }
+
+        .tab-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: rgba(248, 250, 252, 0.8);
+            color: var(--text-muted);
+            border: 1px solid var(--border-clean);
+            padding: 8px 14px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-weight: 500;
+            cursor: pointer;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        .tab-btn.active {
+            background: var(--athletic-teal);
+            color: #ffffff;
+            border-color: var(--athletic-teal);
+            font-weight: 600;
+        }
+
+        .diet-card {
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid var(--border-clean);
+            padding: 12px 14px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            border-left: 4px solid var(--athletic-teal);
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .diet-card.highlight-prep {
+            border-left-color: var(--varsity-navy);
+            background: rgba(30, 58, 138, 0.04);
+        }
+
+        .diet-time {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--athletic-teal);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .diet-card.highlight-prep .diet-time {
+            color: var(--varsity-navy);
+        }
+
+        .diet-macros {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .workout-card {
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid var(--border-clean);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+
+        .workout-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-clean);
+        }
+
+        .ex-name {
+            font-size: 0.95rem;
+            color: var(--varsity-navy);
+            font-weight: 600;
+        }
+
+        .yt-badge {
+            background: rgba(220, 38, 38, 0.06);
+            color: #dc2626;
+            border: 1px solid rgba(220, 38, 38, 0.15);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .meta-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .meta-cell {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        .meta-cell span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .meta-cell strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .guide-box {
+            font-size: 0.8rem;
+            color: #334155;
+            line-height: 1.4;
+            padding-left: 8px;
+            border-left: 2.5px solid var(--athletic-teal);
+            font-weight: 400;
+        }
+
+        .mini-reset-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--danger-btn);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .supp-table-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-clean);
+            background: rgba(248, 250, 252, 0.6);
+        }
+
+        table.supp-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+            min-width: 450px;
+        }
+
+        table.supp-table th, table.supp-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-clean);
+            vertical-align: top;
+            line-height: 1.35;
+        }
+
+        table.supp-table th {
+            background: rgba(30, 58, 138, 0.05);
+            color: var(--varsity-navy);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        table.supp-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-status.yes { background: rgba(13, 148, 136, 0.1); color: var(--athletic-teal); }
+        .badge-status.no { background: rgba(239, 68, 68, 0.1); color: var(--danger-btn); }
+        .badge-status.opt { background: rgba(71, 85, 105, 0.1); color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>⚡ Arun's Fitness Guide</h1>
+
+    <!-- Top Module Nav Banners -->
+    <div class="module-router">
+        <button class="module-btn active" onclick="routeModule('diet', this)">Diet</button>
+        <button class="module-btn" onclick="routeModule('warmup', this)">Warmup</button>
+        <button class="module-btn" onclick="routeModule('workout', this)">Workout</button>
+        <button class="module-btn" onclick="routeModule('supplements', this)">Supps</button>
+    </div>
+
+    <!-- DIET Section (Preselected Active Window) -->
+    <section id="mod-diet" class="module-active">
+        <div class="section-header">
+            <h2>🥗 CHRONOLOGICAL DIET SPLITS</h2>
+        </div>
+        <div class="tab-row">
+            <button class="tab-btn diet-t active" onclick="switchDiet('morning', this)">Morning Split</button>
+            <button class="tab-btn diet-t" onclick="switchDiet('midday', this)">Mid-Day Split</button>
+            <button class="tab-btn diet-t" onclick="switchDiet('evening', this)">Evening Split</button>
+        </div>
+        <div id="diet-display"></div>
+    </section>
+
+    <!-- WARMUP Section -->
+    <section id="mod-warmup">
+        <div class="section-header">
+            <h2>🛠️ POSTURE & CORE WARMUP</h2>
+            <button class="mini-reset-btn" onclick="resetChecklist()">Reset</button>
+        </div>
+        <div id="checklist-container"></div>
+    </section>
+
+    <!-- WORKOUT Section -->
+    <section id="mod-workout">
+        <div class="section-header">
+            <h2>🏋️‍♂️ TRAINING INTERFACE PROTOCOLS</h2>
+        </div>
+        <div class="tab-row" id="workout-tabs"></div>
+        <div id="workout-display"></div>
+    </section>
+
+    <!-- SUPPLEMENTS Section -->
+    <section id="mod-supplements">
+        <div class="section-header">
+            <h2>💊 MASTER SUPPLEMENT FRAMEWORK</h2>
+        </div>
+        <div class="supp-table-container">
+            <table class="supp-table">
+                <thead>
+                    <tr>
+                        <th>Supplement</th>
+                        <th>Status</th>
+                        <th>Protocol / Target Coverage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Whey Protein</strong></td>
+                        <td><span class="badge-status yes">YES</span></td>
+                        <td><strong>1 Scoop Daily:</strong> Pre-gym for Morning window, 4:30 PM for Mid-day/Rest slots, Post-gym for Evening layout.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Creatine Monohydrate</strong></td>
+                        <td><span class="badge-status yes">YES</span></td>
+                        <td><strong>5g Daily:</strong> Take with pre-workout carbs on training days. Take with your 4:30 PM snack on rest days.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fish Oil (Omega-3)</strong></td>
+                        <td><span class="badge-status yes">YES</span></td>
+                        <td><strong>1g–2g Daily:</strong> Consume with your heaviest whole-food meal (Lunch or Dinner) to maintain clean joint lubrication.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vitamin D3 + K2</strong></td>
+                        <td><span class="badge-status yes">YES</span></td>
+                        <td><strong>2,000–5,000 IU Daily:</strong> Take in the morning alongside your 3 whole eggs (lipids ensure correct absorption matrix).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multivitamin</strong></td>
+                        <td><span class="badge-status opt">OPT</span></td>
+                        <td><strong>1 Pill Daily:</strong> Optional trace mineral insurance policy to protect gaps safely while in a calorie deficit.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zinc & Magnesium</strong></td>
+                        <td><span class="badge-status no">NO</span></td>
+                        <td><strong>Fully Covered:</strong> Your overnight soaking of Jar 1 & 2 isolates phytic acid, unlocking natural minerals from your nuts/seeds.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BCAAs & Fat Burners</strong></td>
+                        <td><span class="badge-status no">NO</span></td>
+                        <td><strong>Fully Covered:</strong> Whole-food arrays cover aminos. The strict 1,850 kcal ceiling handles core visceral fat burn safely.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+    const activationExercises = [
+        { name: "Dynamic Mobility Loop", desc: "10 reps chest openers & leg swings to lubricate sockets." },
+        { name: "Couch Stretch", desc: "1 Min/side. Forced holds to turn off tight hip flexors." },
+        { name: "Dead-Bugs", desc: "3 Sets x 10/side. Flatten lower back completely to floor." },
+        { name: "Glute Bridges", desc: "2 Sets x 12. Drive heels, squeeze glutes to counter APT." }
+    ];
+
+    const commonPrepCard = {
+        label: "0. Overnight Soaking Prep (Common to All Schedules)",
+        desc: "Jar 1 (Breakfast Container): 1/2 cup Oats + 5 Almonds + 5 Groundnuts + Liquid. | Jar 2 (Snack Container): 1 cup low-fat Greek Yogurt + 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin/Cucumber Seeds. (Store both containers in the refrigerator overnight)"
+    };
+
+    const dietData = {
+        morning: [
+            { label: "1. Pre-workout (7:00 AM)", desc: "25g P / 24g C / 1g F: 1 scoop Whey Protein + 5g Creatine + 1 Medium Banana (205 kcal)" },
+            { label: "2. Post-workout / Breakfast (9:00 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 (Pre-soaked Oats/Nuts) + 1 cup Veggies (410 kcal)" },
+            { label: "3. Breakfast", desc: "Saturated via Post-workout profile details directly above." },
+            { label: "4. Lunch (1:00 PM)", desc: "35g P / 30g C / 14g F: 150g Fresh Paneer, 150g Firm Tofu, or 50g Dry Soy Chunks + 1/2 cup Brown Rice + Steamed Broccoli/Cauliflower (380 kcal)" },
+            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Jar 2 (Pre-soaked Greek Yogurt/Seeds base) eaten cold. (250 kcal)" },
+            { label: "6. Dinner (8:00 PM)", desc: "45g P / 45g C / 15g F: 150g Baked Salmon, Chicken, or 200g Stir-Fried Tofu/Soy Chunks + 150g Sweet Potato + Lentil-Veg Soup (500 kcal)" }
+        ],
+        midday: [
+            { label: "1. Pre-workout Fuel (11:20 AM)", desc: "0g P / 20g C / 0g F: 5g Creatine Monohydrate + 80g Boiled Sweet Potato or 1 Banana (90 kcal)" },
+            { label: "2. Post-workout / Lunch (1:15 PM)", desc: "35g P / 30g C / 14g F: 150g Fresh Paneer, 150g Firm Tofu, or 50g Dry Soy Chunks + 1/2 cup Brown Rice + 200g Stir-fried Cauliflower/Broccoli (380 kcal)" },
+            { label: "3. Breakfast (8:30 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 (Pre-soaked Oats/Nuts) (410 kcal)" },
+            { label: "4. Lunch", desc: "Saturated via Post-workout / Lunch profile details directly above." },
+            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "47g P / 15g C / 15g F: 1 scoop Whey Protein stirred straight into room-temp Jar 2 base. (375 kcal)" },
+            { label: "6. Dinner (8:00 PM)", desc: "45g P / 45g C / 15g F: 150g Baked Salmon, Chicken, or 200g Stir-Fried Tofu + 150g Sweet Potato + Mixed Sprout Salad (500 kcal)" }
+        ],
+        evening: [
+            { label: "1. Pre-workout (6:00 PM)", desc: "25g P / 30g C / 1g F: 1 scoop Whey Protein + 5g Creatine + 120g Boiled Sweet Potato (230 kcal)" },
+            { label: "2. Post-workout / Dinner (8:15 PM)", desc: "45g P / 25g C / 12g F: 150g Pan-Seared Salmon, Chicken, or 200g Grilled Tofu + 80g Boiled Sweet Potato + Green Salad (385 kcal)" },
+            { label: "3. Breakfast (8:30 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 (Pre-soaked Oats/Nuts) (410 kcal)" },
+            { label: "4. Lunch (1:00 PM)", desc: "35g P / 35g C / 14g F: 150g Fresh Paneer or Firm Tofu + 1/2 cup Brown Rice + Veggies & Green Peas (400 kcal)" },
+            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Jar 2 (Pre-soaked Greek Yogurt/Seeds base) eaten cold. (250 kcal)" },
+            { label: "6. Dinner", desc: "Saturated via Post-workout / Dinner profile details directly above." }
+        ]
+    };
+
+    const workoutData = {
+        "PUSH": [
+            { name: "Machine Chest Press", eq: "Chest Press Machine (Backup: DB Bench)", target: "Mid/Lower Chest Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase." },
+            { name: "HS MTS Shoulder Press", eq: "MTS Press Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to stay safe." },
+            { name: "Cable Lateral Raise", eq: "Cable Machine (Backup: 5kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper framework." },
+            { name: "Cable Tricep Push Down", eq: "Cable Machine (Backup: 8kg DB Overhead)", target: "Triceps (Back of arms)", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension." },
+            { name: "Doorway Stretch & Posture Squats", eq: "Doorframe & Bodyweight", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT." }
+        ],
+        "PULL": [
+            { name: "Lat Pulldown Machine", eq: "Lat Pulldown Machine (Backup: BB Row)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets." },
+            { name: "Seated Row Machine", eq: "Seated Row Machine (Backup: 8kg DB Row)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction." },
+            { name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: 5kg DB Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders." },
+            { name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: 8kg DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase." },
+            { name: "Lat Stretch & Child's Pose", eq: "Machine Frame & Mat", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain." }
+        ],
+        "LEGS": [
+            { name: "Seated Leg Press", eq: "Seated Leg Press (Backup: 8kg DB Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine." },
+            { name: "Glute Machine", eq: "Glute Machine (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back." },
+            { name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds." },
+            { name: "Abdominal Machine", eq: "Abdominal Machine (Backup: Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep." }
+        ],
+        "REST 1": [
+            { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "No active training. Walk, drink 3-4L of water, and process muscle tissue healing." }
+        ],
+        "UPPER": [
+            { name: "HS Chest Press", eq: "HS Press Machine (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size." },
+            { name: "Dual Pulley Pulldown", eq: "Dual Pulley Machine (Backup: 8kg DB Pullover)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth." },
+            { name: "Cable Lateral Raise", eq: "Cable Machine (Backup: 5kg DB Raise)", target: "Side Shoulders (Broad Frame Cap)", vol: "4 Sets x 15 Reps", rest: "60s", guide: "High volume burn-out set. Keep neck completely relaxed during extensions." },
+            { name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: 5kg DB Kickback)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension." }
+        ],
+        "LOWER": [
+            { name: "Seated Leg Press (High Feet)", eq: "Seated Leg Press (Backup: 8kg DB RDL)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings." },
+            { name: "Hip Abduction Machine", eq: "Hip Abduction Machine (Backup: Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width." },
+            { name: "Dual Pulley Row OR Low Row", eq: "Pulley / Low Row (Backup: DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely." },
+            { name: "Torso Machine", eq: "Torso Machine (Backup: 5kg DB Woodchopper)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum." }
+        ],
+        "REST 2": [
+            { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "Relax, let your muscles repair, and prepare your clean nutritional macros." }
+        ]
+    };
+
+    // Master App Module Router Switch
+    function routeModule(moduleId, btnElement) {
+        document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+
+        document.querySelectorAll('section').forEach(sect => sect.classList.remove('module-active'));
+        document.getElementById(`mod-${moduleId}`).classList.add('module-active');
+    }
+
+    function initChecklist() {
+        const wrapper = document.getElementById('checklist-container');
+        wrapper.innerHTML = '';
+        activationExercises.forEach((item, index) => {
+            const state = sessionStorage.getItem(`apt_act_${index}`) === 'true' ? 'checked' : '';
+            const cleanQuery = encodeURIComponent(item.name + " form guide");
+            const ytURL = `https://www.youtube.com/results?search_query=${cleanQuery}`;
+            
+            const div = document.createElement('div');
+            div.className = 'checklist-item';
+            div.innerHTML = `
+                <div class="checklist-details">
+                    <div class="checklist-title-row">
+                        <strong>${item.name}</strong>
+                        <a class="yt-badge" href="${ytURL}" target="_blank">🎬 VIDEO</a>
+                    </div>
+                    <p>${item.desc}</p>
+                </div>
+                <div class="check-action-block">
+                    <input type="checkbox" id="chk_${index}" ${state} onclick="saveCheck(${index}, this.checked)">
+                </div>
+            `;
+            wrapper.appendChild(div);
+        });
+    }
+
+    function saveCheck(id, val) {
+        sessionStorage.setItem(`apt_act_${id}`, val);
+    }
+
+    function resetChecklist() {
+        activationExercises.forEach((_, index) => {
+            sessionStorage.removeItem(`apt_act_${index}`);
+        });
+        initChecklist();
+    }
+
+    function initDietTabs() {
+        const firstBtn = document.querySelector('.diet-t');
+        if(firstBtn) switchDiet('morning', firstBtn);
+    }
+
+    function switchDiet(slot, element) {
+        document.querySelectorAll('.diet-t').forEach(b => b.classList.remove('active'));
+        element.classList.add('active');
+        
+        const display = document.getElementById('diet-display');
+        display.innerHTML = '';
+        
+        // Render single merged common row 0 top block
+        const prepDiv = document.createElement('div');
+        prepDiv.className = 'diet-card highlight-prep';
+        prepDiv.innerHTML = `
+            <div class="diet-time">${commonPrepCard.label}</div>
+            <div class="diet-macros">${commonPrepCard.desc}</div>
+        `;
+        display.appendChild(prepDiv);
+        
+        // Render sequential layout elements
+        dietData[slot].forEach(meal => {
+            const div = document.createElement('div');
+            div.className = 'diet-card';
+            div.innerHTML = `
+                <div class="diet-time">${meal.label}</div>
+                <div class="diet-macros">${meal.desc}</div>
+            `;
+            display.appendChild(div);
+        });
+    }
+
+    function initWorkoutTabs() {
+        const tabWrapper = document.getElementById('workout-tabs');
+        let index = 0;
+        
+        for (const targetDay in workoutData) {
+            const btn = document.createElement('button');
+            btn.className = 'tab-btn workout-t';
+            btn.innerText = targetDay;
+            btn.onclick = (e) => triggerWorkoutView(targetDay, e.target);
+            tabWrapper.appendChild(btn);
+            
+            if(index === 0) triggerWorkoutView(targetDay, btn);
+            index++;
+        }
+    }
+
+    function triggerWorkoutView(dayKey, element) {
+        document.querySelectorAll('.workout-t').forEach(b => b.classList.remove('active'));
+        element.classList.add('active');
+        
+        const targetBody = document.getElementById('workout-display');
+        targetBody.innerHTML = '';
+        
+        workoutData[dayKey].forEach(row => {
+            const cleanQuery = encodeURIComponent(row.name + " form guide");
+            const ytURL = `https://www.youtube.com/results?search_query=${cleanQuery}`;
+            
+            const card = document.createElement('div');
+            card.className = 'workout-card';
+            card.innerHTML = `
+                <div class="workout-card-header">
+                    <div class="ex-name">${row.name}</div>
+                    <a class="yt-badge" href="${ytURL}" target="_blank">🎬 VIDEO</a>
+                </div>
+                <div class="meta-row">
+                    <div class="meta-cell"><span>SETUP</span><strong>${row.eq}</strong></div>
+                    <div class="meta-cell"><span>TARGET</span><strong>${row.target}</strong></div>
+                    <div class="meta-cell"><span>VOLUME</span><strong>${row.vol}</strong></div>
+                    <div class="meta-cell"><span>REST</span><strong>${row.rest}</strong></div>
+                </div>
+                <div class="guide-box">${row.guide}</div>
+            `;
+            targetBody.appendChild(card);
+        });
+    }
+
+    window.onload = function() {
+        initChecklist();
+        initDietTabs();
+        initWorkoutTabs();
+    };
+</script>
+
+</body>
+</html>
