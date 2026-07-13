@@ -325,6 +325,15 @@
             font-weight: 500;
         }
 
+        /* Grayed-out Backup Label Styling */
+        .backup-text {
+            color: #94a3b8;
+            font-size: 0.78rem;
+            font-weight: 400;
+            display: block;
+            margin-top: 2px;
+        }
+
         .guide-box {
             font-size: 0.8rem;
             color: #334155;
@@ -668,6 +677,14 @@
         }
     }
 
+    function formatEquipmentString(rawString) {
+        // Find parenthesis and apply a distinct gray class to the backup description text block
+        if (rawString.includes('(')) {
+            return rawString.replace('(', '<span class="backup-text">(').replace(')', ')</span>');
+        }
+        return rawString;
+    }
+
     function triggerWorkoutView(dayKey, element) {
         document.querySelectorAll('.workout-t').forEach(b => b.classList.remove('active'));
         element.classList.add('active');
@@ -687,7 +704,7 @@
                     <a class="yt-badge" href="${ytURL}" target="_blank">🎬 VIDEO</a>
                 </div>
                 <div class="meta-row">
-                    <div class="meta-cell"><span>SETUP</span><strong>${row.eq}</strong></div>
+                    <div class="meta-cell"><span>SETUP</span><strong>${formatEquipmentString(row.eq)}</strong></div>
                     <div class="meta-cell"><span>TARGET</span><strong>${row.target}</strong></div>
                     <div class="meta-cell"><span>VOLUME</span><strong>${row.vol}</strong></div>
                     <div class="meta-cell"><span>REST</span><strong>${row.rest}</strong></div>
