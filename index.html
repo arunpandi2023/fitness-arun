@@ -545,39 +545,39 @@
 
     const workoutData = {
         "PUSH": [
-            { name: "Machine Chest Press", eq: "MTS Chest Press Machine", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase." },
-            { name: "HS MTS Shoulder Press", eq: "MTS Shoulder Press Machine", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints." },
-            { name: "Cable Lateral Raise", eq: "Cable Station (Dual Pulley)", target: "Side Shoulders (V-Shape Framework)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework." },
-            { name: "Cable Tricep Push Down", eq: "Cable Station", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension." },
-            { name: "Doorway Stretch & Posture Squats", eq: "Doorframe & Bodyweight", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT." }
+            { name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase." },
+            { name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints." },
+            { name: "Cable Lateral Raise", eq: "Cable Station (Backup: 8kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework." },
+            { name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Press)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension." },
+            { name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT." }
         ],
         "PULL": [
-            { name: "Lat Pulldown Machine", eq: "Lat Pulldown Machine", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets." },
-            { name: "Seated Row Machine", eq: "Seated Row Machine", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction." },
-            { name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders." },
-            { name: "Biceps Curl Machine", eq: "Biceps Machine", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase." },
-            { name: "Lat Stretch & Child's Pose", eq: "Machine Frame & Mat", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain." }
+            { name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: DB Pullovers / Rows)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets." },
+            { name: "Seated Row Machine", eq: "Seated Row (Backup: Single-Arm DB Rows)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction." },
+            { name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: DB Rear Delt Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders." },
+            { name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Regular DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase." },
+            { name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain." }
         ],
         "LEGS": [
-            { name: "Seated Leg Press", eq: "Seated Leg Press Machine", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine." },
-            { name: "Glute Machine", eq: "Glute Kickback Machine", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back." },
-            { name: "Leg Extension Machine", eq: "Leg Extension Machine", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds." },
-            { name: "Abdominal Machine", eq: "Abdominal Machine", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep." }
+            { name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine." },
+            { name: "Glute Machine", eq: "Glute Kickback (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back." },
+            { name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: DB Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds." },
+            { name: "Abdominal Machine", eq: "Ab Machine (Backup: Long Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep." }
         ],
         "REST 1": [
             { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "No active training. Walk, drink 3-4L of water, and process muscle tissue healing." }
         ],
         "UPPER": [
-            { name: "HS Chest Press", eq: "Hammer Strength Machine", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size." },
-            { name: "Dual Pulley Pulldown", eq: "Cable Station (Dual Pulley)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth." },
-            { name: "Cable Lateral Raise", eq: "Cable Station", target: "Side Shoulders (Broad Frame Cap)", vol: "4 Sets x 15 Reps", rest: "60s", guide: "High volume burn-out set. Keep neck completely relaxed during extensions." },
-            { name: "Triceps Extension Machine", eq: "Triceps Machine", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension." }
+            { name: "HS Chest Press", eq: "Hammer Strength (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size." },
+            { name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullovers)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth." },
+            { name: "Cable Lateral Raise", eq: "Cable Station (Backup: 5kg Light DB Raise)", target: "Side Shoulders (Broad Frame Cap)", vol: "4 Sets x 15 Reps", rest: "60s", guide: "High volume burn-out set. Keep neck completely relaxed during extensions." },
+            { name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: Light DB Kickbacks)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension." }
         ],
         "LOWER": [
-            { name: "Seated Leg Press (High Feet)", eq: "Seated Leg Press Machine", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings." },
-            { name: "Hip Abduction Machine", eq: "Hip Abduction Machine", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width." },
-            { name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Dual Pulley)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely." },
-            { name: "Torso Machine", eq: "Torso Rotation Machine", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum." }
+            { name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL Holds)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings." },
+            { name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Floor Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width." },
+            { name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Regular DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely." },
+            { name: "Torso Machine", eq: "Torso Rotation (Backup: DB Woodchoppers)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum." }
         ],
         "REST 2": [
             { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "Relax, let your muscles repair, and prepare your clean nutritional macros." }
