@@ -301,7 +301,7 @@
             letter-spacing: 0.2px;
             display: inline-flex;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
         }
 
         .yt-badge.backup-link {
@@ -625,7 +625,7 @@
                 <div class="checklist-details">
                     <div class="checklist-title-row">
                         <strong>${item.name}</strong>
-                        <a class="yt-badge" href="${ytURL}" target="_blank">🎬 VIDEO</a>
+                        <a class="yt-badge" href="${ytURL}" target="_blank">🎬 GUIDE</a>
                     </div>
                     <p>${item.desc}</p>
                 </div>
@@ -705,10 +705,10 @@
         workoutData[dayKey].forEach(row => {
             let badgeBlock = '';
             if (row.mainYt) {
-                badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🎬 MACHINE VIDEO</a>`;
+                badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🤖 GUIDE</a>`;
             }
             if (row.altYt) {
-                badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🔄 BACKUP VIDEO</a>`;
+                badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ GUIDE</a>`;
             }
 
             const card = document.createElement('div');
