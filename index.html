@@ -625,7 +625,7 @@
                 <div class="checklist-details">
                     <div class="checklist-title-row">
                         <strong>${item.name}</strong>
-                        <a class="yt-badge" href="${ytURL}" target="_blank">🎬 GUIDE</a>
+                        <a class="yt-badge" href="${ytURL}" target="_blank">🎬 VIDEO</a>
                     </div>
                     <p>${item.desc}</p>
                 </div>
@@ -705,10 +705,10 @@
         workoutData[dayKey].forEach(row => {
             let badgeBlock = '';
             if (row.mainYt) {
-                badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🤖 GUIDE</a>`;
+                badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🤖 VIDEO</a>`;
             }
             if (row.altYt) {
-                badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ GUIDE</a>`;
+                badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ VIDEO</a>`;
             }
 
             const card = document.createElement('div');
