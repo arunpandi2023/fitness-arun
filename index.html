@@ -122,7 +122,7 @@
         }
 
         section {
-            display: none; /* Controlled via JS switch Module */
+            display: none;
             background-color: var(--panel-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -409,7 +409,7 @@
         <button class="module-btn" onclick="routeModule('supplements', this)">Supps</button>
     </div>
 
-    <!-- DIET Section (Preselected Active Window) -->
+    <!-- DIET Section -->
     <section id="mod-diet" class="module-active">
         <div class="section-header">
             <h2>🥗 CHRONOLOGICAL DIET SPLITS</h2>
@@ -418,6 +418,7 @@
             <button class="tab-btn diet-t active" onclick="switchDiet('morning', this)">Morning Split</button>
             <button class="tab-btn diet-t" onclick="switchDiet('midday', this)">Mid-Day Split</button>
             <button class="tab-btn diet-t" onclick="switchDiet('evening', this)">Evening Split</button>
+            <button class="tab-btn diet-t" onclick="switchDiet('restday', this)">Rest Day</button>
         </div>
         <div id="diet-display"></div>
     </section>
@@ -506,82 +507,86 @@
 
     const commonPrepCard = {
         label: "0. Overnight Soaking Prep (Common to All Schedules)",
-        desc: "Jar 1 (Breakfast Container): 1/2 cup Oats + 5 Almonds + 5 Groundnuts + Liquid. | Jar 2 (Snack Container): 1 cup low-fat Greek Yogurt + 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin/Cucumber Seeds. (Store both containers in the refrigerator overnight)"
+        desc: "Jar 1 (Breakfast Container): 1/2 cup Oats + 5 Almonds + 5 Groundnuts + Liquid. | Jar 2 (Snack Container): 1 cup low-fat Greek Yogurt + 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin/Cucumber Seeds. (Store both containers inside refrigerator overnight)"
     };
 
     const dietData = {
         morning: [
-            { label: "1. Pre-workout (7:00 AM)", desc: "25g P / 24g C / 1g F: 1 scoop Whey Protein + 5g Creatine + 1 Medium Banana (205 kcal)" },
-            { label: "2. Post-workout / Breakfast (9:00 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 (Pre-soaked Oats/Nuts) + 1 cup Veggies (410 kcal)" },
-            { label: "3. Breakfast", desc: "Saturated via Post-workout profile details directly above." },
+            { label: "1. Pre-workout (7:00 AM)", desc: "25g P / 24g C / 1g F: 1 scoop Whey Protein + 5g Creatine + 100g Cat. A Fruit (Banana/Mango/Grapes) (205 kcal)" },
+            { label: "2. Post-workout / Breakfast (9:00 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 (Pre-soaked base) + 1 cup Veggies (410 kcal)" },
+            { label: "3. Breakfast Slot", desc: "Saturated via Post-workout profile tracking block detailed directly above." },
             { label: "4. Lunch (1:00 PM)", desc: "35g P / 30g C / 14g F: 150g Fresh Paneer, 150g Firm Tofu, or 50g Dry Soy Chunks + 1/2 cup Brown Rice + Steamed Broccoli/Cauliflower (380 kcal)" },
-            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Jar 2 (Pre-soaked Greek Yogurt/Seeds base) eaten cold. (250 kcal)" },
-            { label: "6. Dinner (8:00 PM)", desc: "45g P / 45g C / 15g F: 150g Baked Salmon, Chicken, or 200g Stir-Fried Tofu/Soy Chunks + 150g Sweet Potato + Lentil-Veg Soup (500 kcal)" }
+            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Jar 2 base eaten cold + Optional 100g Cat. B Volumizer Fruit (Berries/Apple) (250 kcal)" },
+            { label: "6. Dinner (8:00 PM)", desc: "45g P / 45g C / 15g F: 150g Baked Salmon, Chicken, or 200g Firm Tofu + 100g Sweet Potato + Lentil-Veg Soup (500 kcal)" }
         ],
         midday: [
-            { label: "1. Pre-workout Fuel (11:20 AM)", desc: "0g P / 20g C / 0g F: 5g Creatine Monohydrate + 80g Boiled Sweet Potato or 1 Banana (90 kcal)" },
-            { label: "2. Post-workout / Lunch (1:15 PM)", desc: "35g P / 30g C / 14g F: 150g Fresh Paneer, 150g Firm Tofu, or 50g Dry Soy Chunks + 1/2 cup Brown Rice + 200g Stir-fried Cauliflower/Broccoli (380 kcal)" },
-            { label: "3. Breakfast (8:30 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 (Pre-soaked Oats/Nuts) (410 kcal)" },
-            { label: "4. Lunch", desc: "Saturated via Post-workout / Lunch profile details directly above." },
-            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "47g P / 15g C / 15g F: 1 scoop Whey Protein stirred straight into room-temp Jar 2 base. (375 kcal)" },
-            { label: "6. Dinner (8:00 PM)", desc: "45g P / 45g C / 15g F: 150g Baked Salmon, Chicken, or 200g Stir-Fried Tofu + 150g Sweet Potato + Mixed Sprout Salad (500 kcal)" }
+            { label: "1. Pre-workout Fuel (11:20 AM)", desc: "0g P / 20g C / 0g F: 5g Creatine Monohydrate + 100g Cat. A Fruit or 80g Sweet Potato (90 kcal)" },
+            { label: "2. Post-workout / Lunch (1:15 PM)", desc: "35g P / 30g C / 14g F: 150g Fresh Paneer, 150g Firm Tofu, or 50g Dry Soy Chunks + 1/2 cup Brown Rice + 200g Stir-fried Vegetables (380 kcal)" },
+            { label: "3. Breakfast (8:30 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 base + 100g Cat. B Fruit (410 kcal)" },
+            { label: "4. Lunch Slot", desc: "Saturated via Post-workout / Lunch tracking block detailed directly above." },
+            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "47g P / 15g C / 15g F: 1 scoop Whey Protein stirred straight into room-temp Jar 2 base (Desk Thaw Strategy) (375 kcal)" },
+            { label: "6. Dinner (8:00 PM)", desc: "45g P / 45g C / 15g F: 150g Baked Salmon, Chicken, or 200g Stir-Fried Tofu + 100g Sweet Potato + Mixed Sprout Salad (500 kcal)" }
         ],
         evening: [
-            { label: "1. Pre-workout (6:00 PM)", desc: "25g P / 30g C / 1g F: 1 scoop Whey Protein + 5g Creatine + 120g Boiled Sweet Potato (230 kcal)" },
+            { label: "1. Pre-workout (6:00 PM)", desc: "25g P / 30g C / 1g F: 1 scoop Whey Protein + 5g Creatine + 120g Boiled Sweet Potato or 100g Cat. A Fruit (230 kcal)" },
             { label: "2. Post-workout / Dinner (8:15 PM)", desc: "45g P / 25g C / 12g F: 150g Pan-Seared Salmon, Chicken, or 200g Grilled Tofu + 80g Boiled Sweet Potato + Green Salad (385 kcal)" },
-            { label: "3. Breakfast (8:30 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 (Pre-soaked Oats/Nuts) (410 kcal)" },
+            { label: "3. Breakfast (8:30 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 base + 100g Cat. B Fruit (410 kcal)" },
             { label: "4. Lunch (1:00 PM)", desc: "35g P / 35g C / 14g F: 150g Fresh Paneer or Firm Tofu + 1/2 cup Brown Rice + Veggies & Green Peas (400 kcal)" },
-            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Jar 2 (Pre-soaked Greek Yogurt/Seeds base) eaten cold. (250 kcal)" },
-            { label: "6. Dinner", desc: "Saturated via Post-workout / Dinner profile details directly above." }
+            { label: "5. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Jar 2 base eaten cold + Optional 100g Cat. B Volumizer Fruit (250 kcal)" },
+            { label: "6. Dinner Slot", desc: "Saturated via Post-workout / Dinner tracking block detailed directly above." }
+        ],
+        restday: [
+            { label: "1. Breakfast (8:30 AM)", desc: "26g P / 40g C / 18g F: 3 Whole Eggs + Jar 1 base + 100g Cat. B/C Fruit (Apple/Orange/Dragon Fruit) (410 kcal)" },
+            { label: "2. Lunch (1:00 PM)", desc: "35g P / 30g C / 14g F: 150g Fresh Paneer, Tofu, or 50g Dry Soy Chunks + 1/2 cup Brown Rice + 200g Cruciferous Veg (380 kcal)" },
+            { label: "3. Late Afternoon Snack (4:30 PM)", desc: "47g P / 15g C / 15g F: 1 scoop Whey Protein stirred straight into Jar 2 base + 5g Creatine mixed in water (375 kcal)" },
+            { label: "4. Dinner (8:00 PM)", desc: "45g P / 25g C / 12g F: 150g Baked Salmon, Chicken, or 200g Tofu + 80g Boiled Sweet Potato + Large Green Salad (385 kcal)" }
         ]
     };
 
     const workoutData = {
         "PUSH": [
-            { name: "Machine Chest Press", eq: "Chest Press Machine (Backup: DB Bench)", target: "Mid/Lower Chest Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase." },
-            { name: "HS MTS Shoulder Press", eq: "MTS Press Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to stay safe." },
-            { name: "Cable Lateral Raise", eq: "Cable Machine (Backup: 5kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper framework." },
-            { name: "Cable Tricep Push Down", eq: "Cable Machine (Backup: 8kg DB Overhead)", target: "Triceps (Back of arms)", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension." },
+            { name: "Machine Chest Press", eq: "MTS Chest Press Machine", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase." },
+            { name: "HS MTS Shoulder Press", eq: "MTS Shoulder Press Machine", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints." },
+            { name: "Cable Lateral Raise", eq: "Cable Station (Dual Pulley)", target: "Side Shoulders (V-Shape Framework)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework." },
+            { name: "Cable Tricep Push Down", eq: "Cable Station", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension." },
             { name: "Doorway Stretch & Posture Squats", eq: "Doorframe & Bodyweight", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT." }
         ],
         "PULL": [
-            { name: "Lat Pulldown Machine", eq: "Lat Pulldown Machine (Backup: BB Row)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets." },
-            { name: "Seated Row Machine", eq: "Seated Row Machine (Backup: 8kg DB Row)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction." },
-            { name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: 5kg DB Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders." },
-            { name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: 8kg DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase." },
+            { name: "Lat Pulldown Machine", eq: "Lat Pulldown Machine", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets." },
+            { name: "Seated Row Machine", eq: "Seated Row Machine", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction." },
+            { name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders." },
+            { name: "Biceps Curl Machine", eq: "Biceps Machine", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase." },
             { name: "Lat Stretch & Child's Pose", eq: "Machine Frame & Mat", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain." }
         ],
         "LEGS": [
-            { name: "Seated Leg Press", eq: "Seated Leg Press (Backup: 8kg DB Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine." },
-            { name: "Glute Machine", eq: "Glute Machine (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back." },
-            { name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds." },
-            { name: "Abdominal Machine", eq: "Abdominal Machine (Backup: Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep." }
+            { name: "Seated Leg Press", eq: "Seated Leg Press Machine", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine." },
+            { name: "Glute Machine", eq: "Glute Kickback Machine", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back." },
+            { name: "Leg Extension Machine", eq: "Leg Extension Machine", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds." },
+            { name: "Abdominal Machine", eq: "Abdominal Machine", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep." }
         ],
         "REST 1": [
             { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "No active training. Walk, drink 3-4L of water, and process muscle tissue healing." }
         ],
         "UPPER": [
-            { name: "HS Chest Press", eq: "HS Press Machine (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size." },
-            { name: "Dual Pulley Pulldown", eq: "Dual Pulley Machine (Backup: 8kg DB Pullover)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth." },
-            { name: "Cable Lateral Raise", eq: "Cable Machine (Backup: 5kg DB Raise)", target: "Side Shoulders (Broad Frame Cap)", vol: "4 Sets x 15 Reps", rest: "60s", guide: "High volume burn-out set. Keep neck completely relaxed during extensions." },
-            { name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: 5kg DB Kickback)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension." }
+            { name: "HS Chest Press", eq: "Hammer Strength Machine", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size." },
+            { name: "Dual Pulley Pulldown", eq: "Cable Station (Dual Pulley)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth." },
+            { name: "Cable Lateral Raise", eq: "Cable Station", target: "Side Shoulders (Broad Frame Cap)", vol: "4 Sets x 15 Reps", rest: "60s", guide: "High volume burn-out set. Keep neck completely relaxed during extensions." },
+            { name: "Triceps Extension Machine", eq: "Triceps Machine", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension." }
         ],
         "LOWER": [
-            { name: "Seated Leg Press (High Feet)", eq: "Seated Leg Press (Backup: 8kg DB RDL)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings." },
-            { name: "Hip Abduction Machine", eq: "Hip Abduction Machine (Backup: Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width." },
-            { name: "Dual Pulley Row OR Low Row", eq: "Pulley / Low Row (Backup: DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely." },
-            { name: "Torso Machine", eq: "Torso Machine (Backup: 5kg DB Woodchopper)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum." }
+            { name: "Seated Leg Press (High Feet)", eq: "Seated Leg Press Machine", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings." },
+            { name: "Hip Abduction Machine", eq: "Hip Abduction Machine", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width." },
+            { name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Dual Pulley)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely." },
+            { name: "Torso Machine", eq: "Torso Rotation Machine", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum." }
         ],
         "REST 2": [
             { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "Relax, let your muscles repair, and prepare your clean nutritional macros." }
         ]
     };
 
-    // Master App Module Router Switch
     function routeModule(moduleId, btnElement) {
         document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
-
         document.querySelectorAll('section').forEach(sect => sect.classList.remove('module-active'));
         document.getElementById(`mod-${moduleId}`).classList.add('module-active');
     }
@@ -612,14 +617,9 @@
         });
     }
 
-    function saveCheck(id, val) {
-        sessionStorage.setItem(`apt_act_${id}`, val);
-    }
-
+    function saveCheck(id, val) { sessionStorage.setItem(`apt_act_${id}`, val); }
     function resetChecklist() {
-        activationExercises.forEach((_, index) => {
-            sessionStorage.removeItem(`apt_act_${index}`);
-        });
+        activationExercises.forEach((_, index) => { sessionStorage.removeItem(`apt_act_${index}`); });
         initChecklist();
     }
 
@@ -635,7 +635,6 @@
         const display = document.getElementById('diet-display');
         display.innerHTML = '';
         
-        // Render single merged common row 0 top block
         const prepDiv = document.createElement('div');
         prepDiv.className = 'diet-card highlight-prep';
         prepDiv.innerHTML = `
@@ -644,7 +643,6 @@
         `;
         display.appendChild(prepDiv);
         
-        // Render sequential layout elements
         dietData[slot].forEach(meal => {
             const div = document.createElement('div');
             div.className = 'diet-card';
@@ -659,14 +657,12 @@
     function initWorkoutTabs() {
         const tabWrapper = document.getElementById('workout-tabs');
         let index = 0;
-        
         for (const targetDay in workoutData) {
             const btn = document.createElement('button');
             btn.className = 'tab-btn workout-t';
             btn.innerText = targetDay;
             btn.onclick = (e) => triggerWorkoutView(targetDay, e.target);
             tabWrapper.appendChild(btn);
-            
             if(index === 0) triggerWorkoutView(targetDay, btn);
             index++;
         }
