@@ -283,6 +283,12 @@
             font-weight: 600;
         }
 
+        .badge-group {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
         .yt-badge {
             background: rgba(220, 38, 38, 0.06);
             color: #dc2626;
@@ -296,6 +302,12 @@
             display: inline-flex;
             align-items: center;
             gap: 2px;
+        }
+
+        .yt-badge.backup-link {
+            background: rgba(71, 85, 105, 0.06);
+            color: #475569;
+            border: 1px solid rgba(71, 85, 105, 0.15);
         }
 
         .meta-row {
@@ -325,7 +337,6 @@
             font-weight: 500;
         }
 
-        /* Grayed-out Backup Label Styling */
         .backup-text {
             color: #94a3b8;
             font-size: 0.78rem;
@@ -554,42 +565,42 @@
 
     const workoutData = {
         "PUSH": [
-            { name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase." },
-            { name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints." },
-            { name: "Cable Lateral Raise", eq: "Cable Station (Backup: 8kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework." },
-            { name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Press)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension." },
-            { name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT." }
+            { name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase.", mainYt: "https://www.youtube.com/shorts/QSCLE820K9k", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU" },
+            { name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints.", mainYt: "https://www.youtube.com/shorts/PM1hB_2xNBU", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY" },
+            { name: "Cable Lateral Raise", eq: "Cable Station (Backup: 8kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework.", mainYt: "https://www.youtube.com/shorts/xrBcuPNTxLg", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs" },
+            { name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Press)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension.", mainYt: "https://www.youtube.com/shorts/1FjkhpZsaxc", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM" },
+            { name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT.", mainYt: "", altYt: "" }
         ],
         "PULL": [
-            { name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: DB Pullovers / Rows)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets." },
-            { name: "Seated Row Machine", eq: "Seated Row (Backup: Single-Arm DB Rows)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction." },
-            { name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: DB Rear Delt Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders." },
-            { name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Regular DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase." },
-            { name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain." }
+            { name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: DB Rows)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets.", mainYt: "https://www.youtube.com/shorts/bNmvKpJSWKM", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4" },
+            { name: "Seated Row Machine", eq: "Seated Row (Backup: Single-Arm DB Rows)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction.", mainYt: "https://www.youtube.com/shorts/TXPefiUFMvw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw" },
+            { name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: DB Rear Delt Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders.", mainYt: "https://www.youtube.com/shorts/7tgx6QHB0-A", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo" },
+            { name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Regular DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase.", mainYt: "https://www.youtube.com/shorts/XFAYzZgcbSc", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w" },
+            { name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain.", mainYt: "", altYt: "https://www.youtube.com/shorts/kOUgceEh_zM" }
         ],
         "LEGS": [
-            { name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine." },
-            { name: "Glute Machine", eq: "Glute Kickback (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back." },
-            { name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: DB Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds." },
-            { name: "Abdominal Machine", eq: "Ab Machine (Backup: Long Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep." }
+            { name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI" },
+            { name: "Glute Machine", eq: "Glute Kickback (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back.", mainYt: "https://www.youtube.com/shorts/3fBptAH0Rnw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw" },
+            { name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: DB Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds.", mainYt: "https://www.youtube.com/shorts/uM86QE59Tgc", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs" },
+            { name: "Abdominal Machine", eq: "Ab Machine (Backup: Long Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep.", mainYt: "https://www.youtube.com/shorts/mnRhbUB3Fjs", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s" }
         ],
         "REST 1": [
-            { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "No active training. Walk, drink 3-4L of water, and process muscle tissue healing." }
+            { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "No active training. Walk, drink 3-4L of water, and process muscle tissue healing.", mainYt: "", altYt: "" }
         ],
         "UPPER": [
-            { name: "HS Chest Press", eq: "Hammer Strength (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size." },
-            { name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullovers)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth." },
-            { name: "Cable Lateral Raise", eq: "Cable Station (Backup: 5kg Light DB Raise)", target: "Side Shoulders (Broad Frame Cap)", vol: "4 Sets x 15 Reps", rest: "60s", guide: "High volume burn-out set. Keep neck completely relaxed during extensions." },
-            { name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: Light DB Kickbacks)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension." }
+            { name: "HS Chest Press", eq: "Hammer Strength (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size.", mainYt: "https://www.youtube.com/watch?v=xACdhd6HPMA", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ" },
+            { name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullovers)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth.", mainYt: "https://www.youtube.com/shorts/Sq28yhhKxJ8", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4" },
+            { name: "Cable Lateral Raise", eq: "Cable Station (Backup: 5kg Light DB Raise)", target: "Side Shoulders (Broad Frame Cap)", vol: "4 Sets x 15 Reps", rest: "60s", guide: "High volume burn-out set. Keep neck completely relaxed during extensions.", mainYt: "https://www.youtube.com/shorts/xrBcuPNTxLg", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs" },
+            { name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: Light DB Kickbacks)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension.", mainYt: "https://www.youtube.com/shorts/oy_AZhjxcMs", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8" }
         ],
         "LOWER": [
-            { name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL Holds)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings." },
-            { name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Floor Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width." },
-            { name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Regular DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely." },
-            { name: "Torso Machine", eq: "Torso Rotation (Backup: DB Woodchoppers)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum." }
+            { name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL Holds)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8" },
+            { name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Floor Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width.", mainYt: "https://www.youtube.com/shorts/tu4o4quPv2k", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells" },
+            { name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Regular DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely.", mainYt: "https://www.youtube.com/shorts/d_T8I-t1E_g", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8" },
+            { name: "Torso Machine", eq: "Torso Rotation (Backup: DB Woodchoppers)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum.", mainYt: "https://www.youtube.com/shorts/6aAQcnoVCns", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok" }
         ],
         "REST 2": [
-            { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "Relax, let your muscles repair, and prepare your clean nutritional macros." }
+            { name: "Complete Rest Day", eq: "Home / Off", target: "Systemic Recovery", vol: "Hydration Focus", rest: "—", guide: "Relax, let your muscles repair, and prepare your clean nutritional macros.", mainYt: "", altYt: "" }
         ]
     };
 
@@ -678,7 +689,6 @@
     }
 
     function formatEquipmentString(rawString) {
-        // Find parenthesis and apply a distinct gray class to the backup description text block
         if (rawString.includes('(')) {
             return rawString.replace('(', '<span class="backup-text">(').replace(')', ')</span>');
         }
@@ -693,15 +703,20 @@
         targetBody.innerHTML = '';
         
         workoutData[dayKey].forEach(row => {
-            const cleanQuery = encodeURIComponent(row.name + " form guide");
-            const ytURL = `https://www.youtube.com/results?search_query=${cleanQuery}`;
-            
+            let badgeBlock = '';
+            if (row.mainYt) {
+                badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🎬 MACHINE VIDEO</a>`;
+            }
+            if (row.altYt) {
+                badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🔄 BACKUP VIDEO</a>`;
+            }
+
             const card = document.createElement('div');
             card.className = 'workout-card';
             card.innerHTML = `
                 <div class="workout-card-header">
                     <div class="ex-name">${row.name}</div>
-                    <a class="yt-badge" href="${ytURL}" target="_blank">🎬 VIDEO</a>
+                    <div class="badge-group">${badgeBlock}</div>
                 </div>
                 <div class="meta-row">
                     <div class="meta-cell"><span>SETUP</span><strong>${formatEquipmentString(row.eq)}</strong></div>
