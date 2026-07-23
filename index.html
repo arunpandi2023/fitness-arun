@@ -78,8 +78,8 @@
         /* Top Module Router */
         .module-router {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
             margin-bottom: 16px;
         }
 
@@ -87,12 +87,12 @@
             background: rgba(255, 255, 255, 0.7);
             color: var(--text-muted);
             border: 1px solid var(--border-clean);
-            padding: 12px 4px;
-            border-radius: 12px;
-            font-size: 0.75rem;
+            padding: 10px 2px;
+            border-radius: 10px;
+            font-size: 0.68rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -269,7 +269,7 @@
             border: 1px solid var(--border-clean);
             border-radius: 14px;
             padding: 14px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .workout-card-header {
@@ -356,6 +356,180 @@
             padding-left: 8px;
             border-left: 2.5px solid var(--athletic-teal);
             font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        /* 3-SET MICRO MATRIX STYLES */
+        .logger-container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border-clean);
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .logger-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--varsity-navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .set-row {
+            display: grid;
+            grid-template-columns: 45px 1fr 1fr;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .set-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid var(--border-clean);
+            border-radius: 6px;
+            padding: 2px 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: center;
+            background: transparent;
+        }
+
+        .input-group input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .input-unit {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 2px;
+        }
+
+        .logger-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-clean);
+        }
+
+        .save-log-btn {
+            background: var(--athletic-teal);
+            color: #ffffff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.2);
+        }
+
+        /* DEDICATED HISTORY PAGE STYLES */
+        .history-card {
+            background: rgba(248, 250, 252, 0.9);
+            border: 1px solid var(--border-clean);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--varsity-navy);
+        }
+
+        .history-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-clean);
+        }
+
+        .history-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--varsity-navy);
+        }
+
+        .history-date {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .history-set-box {
+            background: #ffffff;
+            border: 1px solid var(--border-clean);
+            border-radius: 6px;
+            padding: 4px;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+
+        .history-set-box span {
+            display: block;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .history-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+        }
+
+        .edit-hist-btn {
+            background: transparent;
+            border: 1px solid var(--border-clean);
+            color: var(--varsity-navy);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .delete-hist-btn {
+            background: transparent;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--danger-btn);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         .mini-reset-btn {
@@ -429,6 +603,7 @@
         <button class="module-btn" onclick="routeModule('warmup', this)">Warmup</button>
         <button class="module-btn" onclick="routeModule('workout', this)">Workout</button>
         <button class="module-btn" onclick="routeModule('supplements', this)">Supps</button>
+        <button class="module-btn" onclick="routeModule('history', this)">History</button>
     </div>
 
     <!-- DIET Section -->
@@ -517,6 +692,15 @@
             </table>
         </div>
     </section>
+
+    <!-- DEDICATED HISTORY MODULE -->
+    <section id="mod-history">
+        <div class="section-header">
+            <h2>📜 WORKOUT LOG HISTORY</h2>
+            <button class="mini-reset-btn" onclick="clearAllHistory()">Clear All</button>
+        </div>
+        <div id="history-display"></div>
+    </section>
 </div>
 
 <script>
@@ -573,33 +757,33 @@
 
     const workoutData = {
         "UPPER A": [
-            { name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase.", mainYt: "https://www.youtube.com/shorts/QSCLE820K9k", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU" },
-            { name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints.", mainYt: "https://www.youtube.com/shorts/PM1hB_2xNBU", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY" },
-            { name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: DB Rows)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets.", mainYt: "https://www.youtube.com/shorts/bNmvKpJSWKM", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4" },
-            { name: "Cable Lateral Raise", eq: "Cable Station (Backup: 8kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework.", mainYt: "https://www.youtube.com/shorts/xrBcuPNTxLg", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs" },
-            { name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Press)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension.", mainYt: "https://www.youtube.com/shorts/1FjkhpZsaxc", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM" }
+            { id: "ex_mcp", name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase.", mainYt: "https://www.youtube.com/shorts/QSCLE820K9k", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU" },
+            { id: "ex_msp", name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints.", mainYt: "https://www.youtube.com/shorts/PM1hB_2xNBU", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY" },
+            { id: "ex_lpd", name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: DB Rows)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets.", mainYt: "https://www.youtube.com/shorts/bNmvKpJSWKM", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4" },
+            { id: "ex_clr", name: "Cable Lateral Raise", eq: "Cable Station (Backup: 8kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework.", mainYt: "https://www.youtube.com/shorts/xrBcuPNTxLg", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs" },
+            { id: "ex_ctp", name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Press)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension.", mainYt: "https://www.youtube.com/shorts/1FjkhpZsaxc", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM" }
         ],
         "LOWER A": [
-            { name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI" },
-            { name: "Glute Machine", eq: "Glute Kickback (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back.", mainYt: "https://www.youtube.com/shorts/3fBptAH0Rnw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw" },
-            { name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: DB Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds.", mainYt: "https://www.youtube.com/shorts/uM86QE59Tgc", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs" },
-            { name: "Abdominal Machine", eq: "Ab Machine (Backup: Long Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep.", mainYt: "https://www.youtube.com/shorts/mnRhbUB3Fjs", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s" },
-            { name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT.", mainYt: "", altYt: "" }
+            { id: "ex_slp", name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI" },
+            { id: "ex_gmk", name: "Glute Machine", eq: "Glute Kickback (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back.", mainYt: "https://www.youtube.com/shorts/3fBptAH0Rnw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw" },
+            { id: "ex_lem", name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: DB Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds.", mainYt: "https://www.youtube.com/shorts/uM86QE59Tgc", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs" },
+            { id: "ex_abm", name: "Abdominal Machine", eq: "Ab Machine (Backup: Long Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep.", mainYt: "https://www.youtube.com/shorts/mnRhbUB3Fjs", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s" },
+            { id: "ex_dsp", name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT.", mainYt: "", altYt: "" }
         ],
         "UPPER B": [
-            { name: "HS Chest Press", eq: "Hammer Strength (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size.", mainYt: "https://www.youtube.com/watch?v=xACdhd6HPMA", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ" },
-            { name: "Seated Row Machine", eq: "Seated Row (Backup: Single-Arm DB Rows)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction.", mainYt: "https://www.youtube.com/shorts/TXPefiUFMvw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw" },
-            { name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullovers)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth.", mainYt: "https://www.youtube.com/shorts/Sq28yhhKxJ8", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4" },
-            { name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: DB Rear Delt Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders.", mainYt: "https://www.youtube.com/shorts/7tgx6QHB0-A", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo" },
-            { name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Regular DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase.", mainYt: "https://www.youtube.com/shorts/XFAYzZgcbSc", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w" },
-            { name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: Light DB Kickbacks)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension.", mainYt: "https://www.youtube.com/shorts/oy_AZhjxcMs", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8" }
+            { id: "ex_hcp", name: "HS Chest Press", eq: "Hammer Strength (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size.", mainYt: "https://www.youtube.com/watch?v=xACdhd6HPMA", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ" },
+            { id: "ex_srm", name: "Seated Row Machine", eq: "Seated Row (Backup: Single-Arm DB Rows)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction.", mainYt: "https://www.youtube.com/shorts/TXPefiUFMvw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw" },
+            { id: "ex_dpp", name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullovers)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth.", mainYt: "https://www.youtube.com/shorts/Sq28yhhKxJ8", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4" },
+            { id: "ex_rdm", name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: DB Rear Delt Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders.", mainYt: "https://www.youtube.com/shorts/7tgx6QHB0-A", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo" },
+            { id: "ex_bcm", name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Regular DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase.", mainYt: "https://www.youtube.com/shorts/XFAYzZgcbSc", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w" },
+            { id: "ex_tem", name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: Light DB Kickbacks)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension.", mainYt: "https://www.youtube.com/shorts/oy_AZhjxcMs", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8" }
         ],
         "LOWER B": [
-            { name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL Holds)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8" },
-            { name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Floor Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width.", mainYt: "https://www.youtube.com/shorts/tu4o4quPv2k", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells" },
-            { name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Regular DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely.", mainYt: "https://www.youtube.com/shorts/d_T8I-t1E_g", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8" },
-            { name: "Torso Machine", eq: "Torso Rotation (Backup: DB Woodchoppers)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum.", mainYt: "https://www.youtube.com/shorts/6aAQcnoVCns", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok" },
-            { name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain.", mainYt: "", altYt: "https://www.youtube.com/shorts/kOUgceEh_zM" }
+            { id: "ex_lph", name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL Holds)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8" },
+            { id: "ex_ham", name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Floor Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width.", mainYt: "https://www.youtube.com/shorts/tu4o4quPv2k", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells" },
+            { id: "ex_dpr", name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Regular DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely.", mainYt: "https://www.youtube.com/shorts/d_T8I-t1E_g", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8" },
+            { id: "ex_trm", name: "Torso Machine", eq: "Torso Rotation (Backup: DB Woodchoppers)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum.", mainYt: "https://www.youtube.com/shorts/6aAQcnoVCns", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok" },
+            { id: "ex_lsc", name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain.", mainYt: "", altYt: "https://www.youtube.com/shorts/kOUgceEh_zM" }
         ]
     };
 
@@ -608,6 +792,7 @@
         btnElement.classList.add('active');
         document.querySelectorAll('section').forEach(sect => sect.classList.remove('module-active'));
         document.getElementById(`mod-${moduleId}`).classList.add('module-active');
+        if (moduleId === 'history') renderHistoryPage();
     }
 
     function initChecklist() {
@@ -702,6 +887,125 @@
         return rawString;
     }
 
+    /* LOCALSTORAGE DATA MANAGERS */
+    function getAllMasterLogs() {
+        const raw = localStorage.getItem('arun_master_workout_history');
+        return raw ? JSON.parse(raw) : [];
+    }
+
+    function saveExerciseLog(exId, exName) {
+        const s1w = document.getElementById(`in_${exId}_s1_w`).value || document.getElementById(`in_${exId}_s1_w`).placeholder;
+        const s1r = document.getElementById(`in_${exId}_s1_r`).value || document.getElementById(`in_${exId}_s1_r`).placeholder;
+        const s2w = document.getElementById(`in_${exId}_s2_w`).value || document.getElementById(`in_${exId}_s2_w`).placeholder;
+        const s2r = document.getElementById(`in_${exId}_s2_r`).value || document.getElementById(`in_${exId}_s2_r`).placeholder;
+        const s3w = document.getElementById(`in_${exId}_s3_w`).value || document.getElementById(`in_${exId}_s3_w`).placeholder;
+        const s3r = document.getElementById(`in_${exId}_s3_r`).value || document.getElementById(`in_${exId}_s3_r`).placeholder;
+
+        const newEntry = {
+            logId: 'log_' + Date.now(),
+            exId: exId,
+            name: exName,
+            date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            s1: { w: s1w, r: s1r },
+            s2: { w: s2w, r: s2r },
+            s3: { w: s3w, r: s3r }
+        };
+
+        let masterHistory = getAllMasterLogs();
+        masterHistory.unshift(newEntry); // Add newest at top
+        localStorage.setItem('arun_master_workout_history', JSON.stringify(masterHistory));
+
+        // Save latest baseline for card placeholders
+        localStorage.setItem(`baseline_${exId}`, JSON.stringify(newEntry));
+
+        alert('✅ Sets Saved to Memory!');
+        const activeTab = document.querySelector('.workout-t.active');
+        if (activeTab) triggerWorkoutView(activeTab.innerText, activeTab);
+    }
+
+    function getLastBaseline(exId) {
+        const raw = localStorage.getItem(`baseline_${exId}`);
+        return raw ? JSON.parse(raw) : null;
+    }
+
+    function renderHistoryPage() {
+        const display = document.getElementById('history-display');
+        display.innerHTML = '';
+        const logs = getAllMasterLogs();
+
+        if (logs.length === 0) {
+            display.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">No workout history saved yet. Complete a workout to see entries here!</div>';
+            return;
+        }
+
+        logs.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'history-card';
+            card.id = `hcard_${item.logId}`;
+            card.innerHTML = `
+                <div class="history-card-header">
+                    <div class="history-title">${item.name}</div>
+                    <div class="history-date">${item.date}</div>
+                </div>
+                <div class="history-grid" id="hgrid_${item.logId}">
+                    <div class="history-set-box"><span>SET 1</span>${item.s1.w}kg × ${item.s1.r}</div>
+                    <div class="history-set-box"><span>SET 2</span>${item.s2.w}kg × ${item.s2.r}</div>
+                    <div class="history-set-box"><span>SET 3</span>${item.s3.w}kg × ${item.s3.r}</div>
+                </div>
+                <div class="history-actions" id="hact_${item.logId}">
+                    <button class="edit-hist-btn" onclick="enableHistoryEdit('${item.logId}', ${index})">✏️ EDIT</button>
+                    <button class="delete-hist-btn" onclick="deleteHistoryEntry(${index})">🗑️</button>
+                </div>
+            `;
+            display.appendChild(card);
+        });
+    }
+
+    function enableHistoryEdit(logId, index) {
+        const logs = getAllMasterLogs();
+        const item = logs[index];
+
+        const grid = document.getElementById(`hgrid_${logId}`);
+        grid.innerHTML = `
+            <div class="history-set-box"><span>SET 1</span><input type="number" id="eh_${logId}_s1w" value="${item.s1.w}" style="width:30px">kg <input type="number" id="eh_${logId}_s1r" value="${item.s1.r}" style="width:25px">r</div>
+            <div class="history-set-box"><span>SET 2</span><input type="number" id="eh_${logId}_s2w" value="${item.s2.w}" style="width:30px">kg <input type="number" id="eh_${logId}_s2r" value="${item.s2.r}" style="width:25px">r</div>
+            <div class="history-set-box"><span>SET 3</span><input type="number" id="eh_${logId}_s3w" value="${item.s3.w}" style="width:30px">kg <input type="number" id="eh_${logId}_s3r" value="${item.s3.r}" style="width:25px">r</div>
+        `;
+
+        const act = document.getElementById(`hact_${logId}`);
+        act.innerHTML = `<button class="save-log-btn" onclick="updateHistoryEntry(${index}, '${logId}')">💾 UPDATE</button>`;
+    }
+
+    function updateHistoryEntry(index, logId) {
+        let logs = getAllMasterLogs();
+        logs[index].s1.w = document.getElementById(`eh_${logId}_s1w`).value;
+        logs[index].s1.r = document.getElementById(`eh_${logId}_s1r`).value;
+        logs[index].s2.w = document.getElementById(`eh_${logId}_s2w`).value;
+        logs[index].s2.r = document.getElementById(`eh_${logId}_s2r`).value;
+        logs[index].s3.w = document.getElementById(`eh_${logId}_s3w`).value;
+        logs[index].s3.r = document.getElementById(`eh_${logId}_s3r`).value;
+
+        localStorage.setItem('arun_master_workout_history', JSON.stringify(logs));
+        alert('✅ Entry Updated!');
+        renderHistoryPage();
+    }
+
+    function deleteHistoryEntry(index) {
+        if (confirm('Delete this entry?')) {
+            let logs = getAllMasterLogs();
+            logs.splice(index, 1);
+            localStorage.setItem('arun_master_workout_history', JSON.stringify(logs));
+            renderHistoryPage();
+        }
+    }
+
+    function clearAllHistory() {
+        if (confirm('Are you sure you want to delete ALL workout history? This cannot be undone.')) {
+            localStorage.removeItem('arun_master_workout_history');
+            renderHistoryPage();
+        }
+    }
+
     function triggerWorkoutView(dayKey, element) {
         document.querySelectorAll('.workout-t').forEach(b => b.classList.remove('active'));
         element.classList.add('active');
@@ -711,12 +1015,16 @@
         
         workoutData[dayKey].forEach(row => {
             let badgeBlock = '';
-            if (row.mainYt) {
-                badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🤖 VIDEO</a>`;
-            }
-            if (row.altYt) {
-                badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ VIDEO</a>`;
-            }
+            if (row.mainYt) badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🤖 VIDEO</a>`;
+            if (row.altYt) badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ VIDEO</a>`;
+
+            const last = getLastBaseline(row.id);
+            const p1w = last ? last.s1.w : "0";
+            const p1r = last ? last.s1.r : "0";
+            const p2w = last ? last.s2.w : "0";
+            const p2r = last ? last.s2.r : "0";
+            const p3w = last ? last.s3.w : "0";
+            const p3r = last ? last.s3.r : "0";
 
             const card = document.createElement('div');
             card.className = 'workout-card';
@@ -732,6 +1040,36 @@
                     <div class="meta-cell"><span>REST</span><strong>${row.rest}</strong></div>
                 </div>
                 <div class="guide-box">${row.guide}</div>
+
+                <!-- 3-SET MICRO MATRIX LOGGING PANEL -->
+                <div class="logger-container">
+                    <div class="logger-header">
+                        <span>📊 3-Set Matrix</span>
+                        <span>Baseline (Last Saved)</span>
+                    </div>
+                    
+                    <div class="set-row">
+                        <span class="set-label">Set 1</span>
+                        <div class="input-group"><input type="number" id="in_${row.id}_s1_w" placeholder="${p1w}"><span class="input-unit">kg</span></div>
+                        <div class="input-group"><input type="number" id="in_${row.id}_s1_r" placeholder="${p1r}"><span class="input-unit">reps</span></div>
+                    </div>
+
+                    <div class="set-row">
+                        <span class="set-label">Set 2</span>
+                        <div class="input-group"><input type="number" id="in_${row.id}_s2_w" placeholder="${p2w}"><span class="input-unit">kg</span></div>
+                        <div class="input-group"><input type="number" id="in_${row.id}_s2_r" placeholder="${p2r}"><span class="input-unit">reps</span></div>
+                    </div>
+
+                    <div class="set-row">
+                        <span class="set-label">Set 3</span>
+                        <div class="input-group"><input type="number" id="in_${row.id}_s3_w" placeholder="${p3w}"><span class="input-unit">kg</span></div>
+                        <div class="input-group"><input type="number" id="in_${row.id}_s3_r" placeholder="${p3r}"><span class="input-unit">reps</span></div>
+                    </div>
+
+                    <div class="logger-actions">
+                        <button class="save-log-btn" onclick="saveExerciseLog('${row.id}', '${row.name.replace(/'/g, "\\'")}')">💾 SAVE SETS</button>
+                    </div>
+                </div>
             `;
             targetBody.appendChild(card);
         });
