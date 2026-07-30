@@ -600,7 +600,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 1000;
@@ -616,7 +616,7 @@
         .modal-content {
             background: #ffffff;
             border-radius: 16px;
-            max-width: 500px;
+            max-width: 480px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -664,19 +664,34 @@
             text-align: center;
         }
 
-        .modal-body img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
+        .svg-container {
+            background: #f8fafc;
             border: 1px solid var(--border-clean);
-            object-fit: cover;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .svg-container svg {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
         }
 
         .modal-caption {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 10px;
-            line-height: 1.4;
+            font-size: 0.82rem;
+            color: var(--text-main);
+            margin-top: 12px;
+            line-height: 1.45;
+            font-weight: 500;
+            text-align: left;
+            background: rgba(13, 148, 136, 0.05);
+            border-left: 3px solid var(--athletic-teal);
+            padding: 8px 12px;
+            border-radius: 0 8px 8px 0;
         }
     </style>
 </head>
@@ -784,23 +799,105 @@
 <div id="image-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
     <div class="modal-content">
         <div class="modal-header">
-            <div class="modal-title" id="modal-title">Exercise Visual Guide</div>
+            <div class="modal-title" id="modal-title">Exercise Anatomical Diagram</div>
             <button class="modal-close-btn" onclick="closeModal()">✕</button>
         </div>
         <div class="modal-body">
-            <img id="modal-img" src="" alt="Exercise Diagram">
+            <div class="svg-container" id="svg-box">
+                <!-- SVG Diagram rendered dynamically here -->
+            </div>
             <div class="modal-caption" id="modal-caption">Proper alignment & execution diagram.</div>
         </div>
     </div>
 </div>
 
 <script>
+    // --- NATIVE SVG DIAGRAM TEMPLATES ---
+    const svgTemplates = {
+        glute_bridge: `<svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#f8fafc" rx="8"/>
+            <line x1="20" y1="150" x2="280" y2="150" stroke="#cbd5e1" stroke-width="4"/>
+            <!-- Floor mat -->
+            <path d="M 40 148 L 90 148 L 160 85 L 210 120 L 250 148" fill="none" stroke="#1e3a8a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="250" cy="148" r="8" fill="#1e3a8a"/>
+            <!-- Head on floor -->
+            <circle cx="45" cy="140" r="10" fill="#1e3a8a"/>
+            <!-- Target Muscle Highlight (Glutes & Hamstrings) -->
+            <ellipse cx="160" cy="85" rx="14" ry="10" fill="#0d9488" opacity="0.85"/>
+            <!-- Heel Drive Arrow -->
+            <path d="M 210 140 L 210 125" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow)"/>
+            <text x="180" y="165" font-size="10" fill="#ef4444" font-weight="bold">DRIVE HEELS HARD</text>
+            <text x="120" y="65" font-size="10" fill="#0d9488" font-weight="bold">MAX GLUTE PEAK</text>
+            <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/>
+                </marker>
+            </defs>
+        </svg>`,
+        
+        bench_press: `<svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#f8fafc" rx="8"/>
+            <line x1="50" y1="130" x2="220" y2="130" stroke="#cbd5e1" stroke-width="8"/>
+            <!-- Bench Pad -->
+            <line x1="80" y1="130" x2="80" y2="160" stroke="#94a3b8" stroke-width="4"/>
+            <line x1="190" y1="130" x2="190" y2="160" stroke="#94a3b8" stroke-width="4"/>
+            <!-- Torso -->
+            <line x1="70" y1="122" x2="180" y2="122" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round"/>
+            <circle cx="60" cy="122" r="9" fill="#1e3a8a"/>
+            <!-- Arms / Bar Press -->
+            <path d="M 130 122 L 130 80 M 130 80 L 100 80 M 130 80 L 160 80" fill="none" stroke="#1e3a8a" stroke-width="5" stroke-linecap="round"/>
+            <rect x="90" y="75" width="80" height="10" fill="#475569" rx="2"/>
+            <!-- Chest Highlight -->
+            <circle cx="130" cy="122" r="12" fill="#0d9488" opacity="0.8"/>
+            <text x="105" y="55" font-size="10" fill="#0d9488" font-weight="bold">TARGET: PECTORALS</text>
+        </svg>`,
+
+        pulldown: `<svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#f8fafc" rx="8"/>
+            <!-- Pulldown Bar -->
+            <line x1="80" y1="40" x2="220" y2="40" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+            <line x1="150" y1="20" x2="150" y2="40" stroke="#94a3b8" stroke-width="3"/>
+            <!-- Seated Figure -->
+            <circle cx="150" cy="70" r="10" fill="#1e3a8a"/>
+            <line x1="150" y1="80" x2="150" y2="130" stroke="#1e3a8a" stroke-width="8"/>
+            <!-- Arms driving down -->
+            <path d="M 150 90 L 110 50 M 150 90 L 190 50" fill="none" stroke="#1e3a8a" stroke-width="5" stroke-linecap="round"/>
+            <!-- Lats highlight -->
+            <ellipse cx="150" cy="100" rx="16" ry="12" fill="#0d9488" opacity="0.8"/>
+            <text x="105" y="155" font-size="10" fill="#0d9488" font-weight="bold">DRIVE ELBOWS DOWN TO REAR POCKETS</text>
+        </svg>`,
+
+        squat_press: `<svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#f8fafc" rx="8"/>
+            <line x1="30" y1="160" x2="270" y2="160" stroke="#cbd5e1" stroke-width="4"/>
+            <!-- Seated Leg Press Angle -->
+            <path d="M 90 140 L 140 100 L 190 140 L 220 160" fill="none" stroke="#1e3a8a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="80" cy="120" r="10" fill="#1e3a8a"/>
+            <!-- Quads Highlight -->
+            <ellipse cx="165" cy="120" rx="14" ry="10" fill="#0d9488" opacity="0.85"/>
+            <text x="105" y="80" font-size="10" fill="#0d9488" font-weight="bold">TARGET: QUADS & GLUTES</text>
+            <text x="80" y="175" font-size="9" fill="#ef4444" font-weight="bold">STOP BEFORE TAILBONE ROLLS OFF PAD</text>
+        </svg>`,
+
+        generic_core: `<svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#f8fafc" rx="8"/>
+            <line x1="30" y1="140" x2="270" y2="140" stroke="#cbd5e1" stroke-width="4"/>
+            <!-- Figure -->
+            <circle cx="90" cy="110" r="10" fill="#1e3a8a"/>
+            <line x1="90" y1="120" x2="190" y2="120" stroke="#1e3a8a" stroke-width="7" stroke-linecap="round"/>
+            <path d="M 190 120 L 230 140 M 190 120 L 220 95" fill="none" stroke="#1e3a8a" stroke-width="5" stroke-linecap="round"/>
+            <!-- Core Highlight -->
+            <circle cx="140" cy="120" r="12" fill="#0d9488" opacity="0.85"/>
+            <text x="95" y="85" font-size="10" fill="#0d9488" font-weight="bold">BRACE DEEP CORE WALL</text>
+        </svg>`
+    };
+
     const activationExercises = [
-        { name: "Dynamic Mobility Loop", desc: "10 reps chest openers & leg swings to lubricate sockets.", photoUrl: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop", caption: "📐 MOBILITY DIAGRAM: Arm swings and chest openers to prepare upper body joints." },
-        { name: "Couch Stretch", desc: "1 Min/side. Forced holds to turn off tight hip flexors.", photoUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop", caption: "📐 STRETCH DIAGRAM: Keep torso upright and squeeze rear glute to open tight hip flexors." },
-        { name: "Dead-Bugs", desc: "3 Sets x 10/side. Flatten lower back completely to floor.", photoUrl: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop", caption: "📐 CORE DIAGRAM: Press lumbar spine flat against floor while extending opposing limbs." },
-        { name: "Glute Bridges", desc: "2 Sets x 12. Drive heels, squeeze glutes to counter APT.", photoUrl: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop", caption: "📐 GLUTE DIAGRAM: Lift toes slightly, drive through heels, squeeze glutes at top peak." },
-        { name: "RKC Plank Hold", desc: "3 Sets x 20–30s. Squeeze glutes hard, drag elbows down toward toes.", photoUrl: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?q=80&w=800&auto=format&fit=crop", caption: "📐 PLANK DIAGRAM: Maximum core & glute contraction with pelvic tuck." }
+        { name: "Dynamic Mobility Loop", desc: "10 reps chest openers & leg swings to lubricate sockets.", svgKey: "generic_core", caption: "📐 MOBILITY DIAGRAM: Arm swings and chest openers to prepare upper body joints." },
+        { name: "Couch Stretch", desc: "1 Min/side. Forced holds to turn off tight hip flexors.", svgKey: "generic_core", caption: "📐 STRETCH DIAGRAM: Keep torso upright and squeeze rear glute to open tight hip flexors." },
+        { name: "Dead-Bugs", desc: "3 Sets x 10/side. Flatten lower back completely to floor.", svgKey: "generic_core", caption: "📐 CORE DIAGRAM: Press lumbar spine flat against floor while extending opposing limbs." },
+        { name: "Glute Bridges", desc: "2 Sets x 12. Drive heels, squeeze glutes to counter APT.", svgKey: "glute_bridge", caption: "📐 GLUTE DIAGRAM: Lift toes slightly, drive through heels, squeeze glutes at top peak." },
+        { name: "RKC Plank Hold", desc: "3 Sets x 20–30s. Squeeze glutes hard, drag elbows down toward toes.", svgKey: "generic_core", caption: "📐 PLANK DIAGRAM: Maximum core & glute contraction with pelvic tuck." }
     ];
 
     const commonPrepCard = {
@@ -846,33 +943,33 @@
 
     const workoutData = {
         "UPPER A": [
-            { id: "ex_mcp", name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase.", mainYt: "https://www.youtube.com/shorts/QSCLE820K9k", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU", photoUrl: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Machine Chest Press - Handles aligned with mid-chest.", altPhotoUrl: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Flat Dumbbell Bench Press - Keep wrist over elbows." },
-            { id: "ex_msp", name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints.", mainYt: "https://www.youtube.com/shorts/PM1hB_2xNBU", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY", photoUrl: "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Seated Machine Shoulder Press - Back flat against pad.", altPhotoUrl: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Seated Dumbbell Shoulder Press - Press straight overhead." },
-            { id: "ex_lpd", name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: DB Rows)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets.", mainYt: "https://www.youtube.com/shorts/bNmvKpJSWKM", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4", photoUrl: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Lat Pulldown Machine - Drive elbows down towards ribs.", altPhotoUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Single-Arm Dumbbell Row - Pull dumbbell toward hip." },
-            { id: "ex_clr", name: "Cable Lateral Raise", eq: "Cable Station (Backup: 8kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework.", mainYt: "https://www.youtube.com/shorts/xrBcuPNTxLg", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs", photoUrl: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop", caption: "📐 CABLE DIAGRAM: Cable Lateral Raise - Lead with elbow for side delt focus.", altPhotoUrl: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Standing Dumbbell Lateral Raise - Slight forward lean." },
-            { id: "ex_ctp", name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Press)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension.", mainYt: "https://www.youtube.com/shorts/1FjkhpZsaxc", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM", photoUrl: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop", caption: "📐 CABLE DIAGRAM: Cable Tricep Pushdown - Elbows locked at torso sides.", altPhotoUrl: "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Standing/Seated Dumbbell Overhead Tricep Extension." }
+            { id: "ex_mcp", name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase.", mainYt: "https://www.youtube.com/shorts/QSCLE820K9k", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU", svgKey: "bench_press", caption: "📐 MACHINE DIAGRAM: Machine Chest Press - Handles aligned with mid-chest.", altSvgKey: "bench_press", altCaption: "📐 FREE WEIGHT DIAGRAM: Flat Dumbbell Bench Press - Keep wrist over elbows." },
+            { id: "ex_msp", name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints.", mainYt: "https://www.youtube.com/shorts/PM1hB_2xNBU", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY", svgKey: "pulldown", caption: "📐 MACHINE DIAGRAM: Seated Machine Shoulder Press - Back flat against pad.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Seated Dumbbell Shoulder Press - Press straight overhead." },
+            { id: "ex_lpd", name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: DB Rows)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets.", mainYt: "https://www.youtube.com/shorts/bNmvKpJSWKM", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4", svgKey: "pulldown", caption: "📐 MACHINE DIAGRAM: Lat Pulldown Machine - Drive elbows down towards ribs.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Single-Arm Dumbbell Row - Pull dumbbell toward hip." },
+            { id: "ex_clr", name: "Cable Lateral Raise", eq: "Cable Station (Backup: 8kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework.", mainYt: "https://www.youtube.com/shorts/xrBcuPNTxLg", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs", svgKey: "pulldown", caption: "📐 CABLE DIAGRAM: Cable Lateral Raise - Lead with elbow for side delt focus.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Standing Dumbbell Lateral Raise - Slight forward lean." },
+            { id: "ex_ctp", name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Press)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension.", mainYt: "https://www.youtube.com/shorts/1FjkhpZsaxc", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM", svgKey: "pulldown", caption: "📐 CABLE DIAGRAM: Cable Tricep Pushdown - Elbows locked at torso sides.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Standing/Seated Dumbbell Overhead Tricep Extension." }
         ],
         "LOWER A": [
-            { id: "ex_slp", name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI", photoUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Seated Leg Press - Prevent lower back rounding.", altPhotoUrl: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Dumbbell Goblet Squat - Hold weight vertical at chest." },
-            { id: "ex_gmk", name: "Glute Machine", eq: "Glute Kickback (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back.", mainYt: "https://www.youtube.com/shorts/3fBptAH0Rnw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw", photoUrl: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Glute Machine Kickback - Isolate glute squeeze at extension.", altPhotoUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop", altCaption: "📐 BODYWEIGHT DIAGRAM: Single-Leg Glute Bridge - Heel drive into floor." },
-            { id: "ex_lem", name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: DB Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds.", mainYt: "https://www.youtube.com/shorts/uM86QE59Tgc", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs", photoUrl: "https://images.unsplash.com/photo-1434682881908-b43d0467b798?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Leg Extension Machine - Full knee extension with pause.", altPhotoUrl: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Walking Dumbbell Lunges - Upright posture & 90° knee angle." },
-            { id: "ex_abm", name: "Abdominal Machine", eq: "Ab Machine (Backup: Long Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep.", mainYt: "https://www.youtube.com/shorts/mnRhbUB3Fjs", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s", photoUrl: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Abdominal Machine Crunch - Flex stomach ribs down.", altPhotoUrl: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop", altCaption: "📐 BODYWEIGHT DIAGRAM: Forearm Plank - Rigid straight line spine hold." },
-            { id: "ex_dsp", name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT.", mainYt: "https://www.youtube.com/results?search_query=Doorway+Chest+Stretch", altYt: "https://www.youtube.com/results?search_query=Posture+Squats+APT", photoUrl: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop", caption: "📐 STRETCH DIAGRAM: Doorway Chest Stretch - Opens tight anterior shoulders.", altPhotoUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop", altCaption: "📐 POSTURE DIAGRAM: Posture Squat - Forward pelvic tuck to reset APT." }
+            { id: "ex_slp", name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI", svgKey: "squat_press", caption: "📐 MACHINE DIAGRAM: Seated Leg Press - Prevent lower back rounding.", altSvgKey: "squat_press", altCaption: "📐 FREE WEIGHT DIAGRAM: Dumbbell Goblet Squat - Hold weight vertical at chest." },
+            { id: "ex_gmk", name: "Glute Machine", eq: "Glute Kickback (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back.", mainYt: "https://www.youtube.com/shorts/3fBptAH0Rnw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw", svgKey: "glute_bridge", caption: "📐 MACHINE DIAGRAM: Glute Machine Kickback - Isolate glute squeeze at extension.", altSvgKey: "glute_bridge", altCaption: "📐 BODYWEIGHT DIAGRAM: Single-Leg Glute Bridge - Heel drive into floor." },
+            { id: "ex_lem", name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: DB Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds.", mainYt: "https://www.youtube.com/shorts/uM86QE59Tgc", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs", svgKey: "squat_press", caption: "📐 MACHINE DIAGRAM: Leg Extension Machine - Full knee extension with pause.", altSvgKey: "squat_press", altCaption: "📐 FREE WEIGHT DIAGRAM: Walking Dumbbell Lunges - Upright posture & 90° knee angle." },
+            { id: "ex_abm", name: "Abdominal Machine", eq: "Ab Machine (Backup: Long Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep.", mainYt: "https://www.youtube.com/shorts/mnRhbUB3Fjs", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s", svgKey: "generic_core", caption: "📐 MACHINE DIAGRAM: Abdominal Machine Crunch - Flex stomach ribs down.", altSvgKey: "generic_core", altCaption: "📐 BODYWEIGHT DIAGRAM: Forearm Plank - Rigid straight line spine hold." },
+            { id: "ex_dsp", name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT.", mainYt: "https://www.youtube.com/results?search_query=Doorway+Chest+Stretch", altYt: "https://www.youtube.com/results?search_query=Posture+Squats+APT", svgKey: "generic_core", caption: "📐 STRETCH DIAGRAM: Doorway Chest Stretch - Opens tight anterior shoulders.", altSvgKey: "squat_press", altCaption: "📐 POSTURE DIAGRAM: Posture Squat - Forward pelvic tuck to reset APT." }
         ],
         "UPPER B": [
-            { id: "ex_hcp", name: "HS Chest Press", eq: "Hammer Strength (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size.", mainYt: "https://www.youtube.com/watch?v=xACdhd6HPMA", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ", photoUrl: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Hammer Strength Incline Press - Focus on upper chest shelf.", altPhotoUrl: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Incline Dumbbell Bench Press - Set bench at 30°." },
-            { id: "ex_srm", name: "Seated Row Machine", eq: "Seated Row (Backup: Single-Arm DB Rows)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction.", mainYt: "https://www.youtube.com/shorts/TXPefiUFMvw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw", photoUrl: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Seated Cable Row - Retract shoulder blades at peak.", altPhotoUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Single-Arm Dumbbell Row - Knee & hand supported on bench." },
-            { id: "ex_dpp", name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullovers)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth.", mainYt: "https://www.youtube.com/shorts/Sq28yhhKxJ8", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4", photoUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop", caption: "📐 CABLE DIAGRAM: Dual Pulley Lat Pulldown - Independent arm movement.", altPhotoUrl: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Dumbbell Pullover - Across-bench upper back stretch." },
-            { id: "ex_rdm", name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: DB Rear Delt Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders.", mainYt: "https://www.youtube.com/shorts/7tgx6QHB0-A", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo", photoUrl: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Pec Deck Rear Delt Fly - Reverse seating for posterior delts.", altPhotoUrl: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Bent-Over Dumbbell Rear Delt Fly - Reverse chest fly." },
-            { id: "ex_bcm", name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Regular DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase.", mainYt: "https://www.youtube.com/shorts/XFAYzZgcbSc", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w", photoUrl: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Preacher Biceps Curl Machine - Locked upper arm positioning.", altPhotoUrl: "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Standing Dumbbell Bicep Curls - Supinate wrists at peak." },
-            { id: "ex_tem", name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: Light DB Kickbacks)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension.", mainYt: "https://www.youtube.com/shorts/oy_AZhjxcMs", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8", photoUrl: "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Seated Triceps Extension Machine - Full lockout extension.", altPhotoUrl: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Dumbbell Tricep Kickbacks - Torso parallel to ground." }
+            { id: "ex_hcp", name: "HS Chest Press", eq: "Hammer Strength (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size.", mainYt: "https://www.youtube.com/watch?v=xACdhd6HPMA", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ", svgKey: "bench_press", caption: "📐 MACHINE DIAGRAM: Hammer Strength Incline Press - Focus on upper chest shelf.", altSvgKey: "bench_press", altCaption: "📐 FREE WEIGHT DIAGRAM: Incline Dumbbell Bench Press - Set bench at 30°." },
+            { id: "ex_srm", name: "Seated Row Machine", eq: "Seated Row (Backup: Single-Arm DB Rows)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction.", mainYt: "https://www.youtube.com/shorts/TXPefiUFMvw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw", svgKey: "pulldown", caption: "📐 MACHINE DIAGRAM: Seated Cable Row - Retract shoulder blades at peak.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Single-Arm Dumbbell Row - Knee & hand supported on bench." },
+            { id: "ex_dpp", name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullovers)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth.", mainYt: "https://www.youtube.com/shorts/Sq28yhhKxJ8", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4", svgKey: "pulldown", caption: "📐 CABLE DIAGRAM: Dual Pulley Lat Pulldown - Independent arm movement.", altSvgKey: "bench_press", altCaption: "📐 FREE WEIGHT DIAGRAM: Dumbbell Pullover - Across-bench upper back stretch." },
+            { id: "ex_rdm", name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: DB Rear Delt Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders.", mainYt: "https://www.youtube.com/shorts/7tgx6QHB0-A", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo", svgKey: "pulldown", caption: "📐 MACHINE DIAGRAM: Pec Deck Rear Delt Fly - Reverse seating for posterior delts.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Bent-Over Dumbbell Rear Delt Fly - Reverse chest fly." },
+            { id: "ex_bcm", name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Regular DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase.", mainYt: "https://www.youtube.com/shorts/XFAYzZgcbSc", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w", svgKey: "pulldown", caption: "📐 MACHINE DIAGRAM: Preacher Biceps Curl Machine - Locked upper arm positioning.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Standing Dumbbell Bicep Curls - Supinate wrists at peak." },
+            { id: "ex_tem", name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: Light DB Kickbacks)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension.", mainYt: "https://www.youtube.com/shorts/oy_AZhjxcMs", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8", svgKey: "pulldown", caption: "📐 MACHINE DIAGRAM: Seated Triceps Extension Machine - Full lockout extension.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Dumbbell Tricep Kickbacks - Torso parallel to ground." }
         ],
         "LOWER B": [
-            { id: "ex_lph", name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL Holds)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8", photoUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Leg Press (High Foot Placement) - Glute & hamstring bias.", altPhotoUrl: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Dumbbell Romanian Deadlift (RDL) - Hinge at hips." },
-            { id: "ex_ham", name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Floor Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width.", mainYt: "https://www.youtube.com/shorts/tu4o4quPv2k", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells", photoUrl: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Seated Hip Abduction Machine - Strengthen gluteus medius.", altPhotoUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop", altCaption: "📐 BODYWEIGHT DIAGRAM: Floor Side Clamshells - Side-lying hip opening." },
-            { id: "ex_dpr", name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Regular DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely.", mainYt: "https://www.youtube.com/shorts/d_T8I-t1E_g", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8", photoUrl: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=800&auto=format&fit=crop", caption: "📐 CABLE DIAGRAM: Low Cable Row - Pull handles toward waistline.", altPhotoUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Two-Arm Dumbbell Bent-Over Row - Hinge torso to 45°." },
-            { id: "ex_trm", name: "Torso Machine", eq: "Torso Rotation (Backup: DB Woodchoppers)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum.", mainYt: "https://www.youtube.com/shorts/6aAQcnoVCns", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok", photoUrl: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?q=80&w=800&auto=format&fit=crop", caption: "📐 MACHINE DIAGRAM: Torso Rotation Machine - Controlled oblique rotation.", altPhotoUrl: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop", altCaption: "📐 FREE WEIGHT DIAGRAM: Standing Dumbbell Woodchopper - Diagonal core twist." },
-            { id: "ex_lsc", name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain.", mainYt: "https://www.youtube.com/shorts/kOUgceEh_zM", altYt: "https://www.youtube.com/shorts/kOUgceEh_zM", photoUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop", caption: "📐 STRETCH DIAGRAM: Side Lat Stretch - Lengthen lateral thoracic fascia.", altPhotoUrl: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop", altCaption: "📐 STRETCH DIAGRAM: Child's Pose - Decompress lumbar spine & glutes." }
+            { id: "ex_lph", name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL Holds)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8", svgKey: "squat_press", caption: "📐 MACHINE DIAGRAM: Leg Press (High Foot Placement) - Glute & hamstring bias.", altSvgKey: "squat_press", altCaption: "📐 FREE WEIGHT DIAGRAM: Dumbbell Romanian Deadlift (RDL) - Hinge at hips." },
+            { id: "ex_ham", name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Floor Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width.", mainYt: "https://www.youtube.com/shorts/tu4o4quPv2k", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells", svgKey: "glute_bridge", caption: "📐 MACHINE DIAGRAM: Seated Hip Abduction Machine - Strengthen gluteus medius.", altSvgKey: "glute_bridge", altCaption: "📐 BODYWEIGHT DIAGRAM: Floor Side Clamshells - Side-lying hip opening." },
+            { id: "ex_dpr", name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Regular DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely.", mainYt: "https://www.youtube.com/shorts/d_T8I-t1E_g", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8", svgKey: "pulldown", caption: "📐 CABLE DIAGRAM: Low Cable Row - Pull handles toward waistline.", altSvgKey: "pulldown", altCaption: "📐 FREE WEIGHT DIAGRAM: Two-Arm Dumbbell Bent-Over Row - Hinge torso to 45°." },
+            { id: "ex_trm", name: "Torso Machine", eq: "Torso Rotation (Backup: DB Woodchoppers)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum.", mainYt: "https://www.youtube.com/shorts/6aAQcnoVCns", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok", svgKey: "generic_core", caption: "📐 MACHINE DIAGRAM: Torso Rotation Machine - Controlled oblique rotation.", altSvgKey: "generic_core", altCaption: "📐 FREE WEIGHT DIAGRAM: Standing Dumbbell Woodchopper - Diagonal core twist." },
+            { id: "ex_lsc", name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain.", mainYt: "https://www.youtube.com/shorts/kOUgceEh_zM", altYt: "https://www.youtube.com/shorts/kOUgceEh_zM", svgKey: "generic_core", caption: "📐 STRETCH DIAGRAM: Side Lat Stretch - Lengthen lateral thoracic fascia.", altSvgKey: "generic_core", altCaption: "📐 STRETCH DIAGRAM: Child's Pose - Decompress lumbar spine & glutes." }
         ]
     };
 
@@ -884,9 +981,9 @@
         if (moduleId === 'history') renderHistoryPage();
     }
 
-    function openModal(title, photoUrl, caption) {
+    function openModalSVG(title, svgKey, caption) {
         document.getElementById('modal-title').innerText = title;
-        document.getElementById('modal-img').src = photoUrl;
+        document.getElementById('svg-box').innerHTML = svgTemplates[svgKey] || svgTemplates['generic_core'];
         document.getElementById('modal-caption').innerText = caption;
         document.getElementById('image-modal').classList.add('active');
     }
@@ -916,7 +1013,7 @@
                     <div class="checklist-title-row">
                         <strong>${item.name}</strong>
                         <a class="yt-badge" href="${ytURL}" target="_blank">🎬 VIDEO</a>
-                        <span class="yt-badge photo-badge" onclick="openModal('${item.name.replace(/'/g, "\'")}', '${item.photoUrl}', '${item.caption.replace(/'/g, "\'")}')">🖼️ PHOTO</span>
+                        <span class="yt-badge photo-badge" onclick="openModalSVG('${item.name.replace(/'/g, "\'")}', '${item.svgKey}', '${item.caption.replace(/'/g, "\'")}')">📐 DIAGRAM</span>
                     </div>
                     <p>${item.desc}</p>
                 </div>
@@ -1121,11 +1218,11 @@
             let badgeBlock = '';
             if (row.mainYt) badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🎬 VIDEO</a>`;
             if (row.altYt) badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ VIDEO</a>`;
-            if (row.photoUrl) {
-                badgeBlock += `<span class="yt-badge photo-badge" onclick="openModal('${row.name.replace(/'/g, "\'")} (Machine/Primary)', '${row.photoUrl}', '${row.caption.replace(/'/g, "\'")}')">🖼️ PHOTO 1</span>`;
+            if (row.svgKey) {
+                badgeBlock += `<span class="yt-badge photo-badge" onclick="openModalSVG('${row.name.replace(/'/g, "\'")} (Machine/Primary)', '${row.svgKey}', '${row.caption.replace(/'/g, "\'")}')">📐 DIAGRAM 1</span>`;
             }
-            if (row.altPhotoUrl) {
-                badgeBlock += `<span class="yt-badge alt-photo-badge" onclick="openModal('${row.name.replace(/'/g, "\'")} (Free Weight/Backup)', '${row.altPhotoUrl}', '${row.altCaption.replace(/'/g, "\'")}')">🖼️ PHOTO 2</span>`;
+            if (row.altSvgKey) {
+                badgeBlock += `<span class="yt-badge alt-photo-badge" onclick="openModalSVG('${row.name.replace(/'/g, "\'")} (Free Weight/Backup)', '${row.altSvgKey}', '${row.altCaption.replace(/'/g, "\'")}')">📐 DIAGRAM 2</span>`;
             }
 
             const last = getLastBaseline(row.id);
