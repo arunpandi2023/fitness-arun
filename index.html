@@ -269,14 +269,21 @@
             border-collapse: collapse;
             font-size: 0.82rem;
             text-align: left;
-            min-width: 480px;
+            table-layout: fixed;
+            min-width: 540px;
         }
 
+        table.diet-table th:nth-child(1), table.diet-table td:nth-child(1) { width: 16%; }
+        table.diet-table th:nth-child(2), table.diet-table td:nth-child(2) { width: 16%; }
+        table.diet-table th:nth-child(3), table.diet-table td:nth-child(3) { width: 40%; }
+        table.diet-table th:nth-child(4), table.diet-table td:nth-child(4) { width: 28%; }
+
         table.diet-table th, table.diet-table td {
-            padding: 10px 12px;
+            padding: 10px 10px;
             border-bottom: 1px solid var(--border-clean);
             vertical-align: top;
             line-height: 1.4;
+            word-wrap: break-word;
         }
 
         table.diet-table th {
@@ -293,13 +300,11 @@
         .time-col {
             font-weight: 700;
             color: var(--varsity-navy);
-            white-space: nowrap;
         }
 
         .focus-col {
             font-weight: 600;
             color: var(--athletic-teal);
-            white-space: nowrap;
         }
 
         .list-cell {
@@ -309,7 +314,7 @@
 
         .list-cell li {
             position: relative;
-            padding-left: 12px;
+            padding-left: 10px;
             margin-bottom: 4px;
         }
 
@@ -789,7 +794,7 @@
 
 ### 1. APPLICATION SPECIFICATIONS & ARCHITECTURE
 - Single-File Structure: All HTML, CSS, and JS must reside in one file.
-- UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables.
+- UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with explicit column widths to prioritize content readability (Meal/Protocol 40%, Macros 28%, Time 16%, Focus 16%).
 - Persistence (Storage):
   - SessionStorage for Warmup/Posture checklist items.
   - LocalStorage ('arun_master_workout_history') for logging exercise sets (Weight/Reps), retaining historical baselines per exercise, and allowing editing/deletion of logs.
@@ -808,7 +813,7 @@ Must include two top reference cards:
    - Cat. B (Low Calorie / High Fiber): Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Jar 2).
    - Cat. C (Hydration & Recovery): Orange, Pomegranate, Dragon Fruit (100g max on Rest Days).
 
-Must render 4 tabbed tables with bulleted items in "Meal / Protocol" and "Target Macros & Kcal":
+Must render 4 tabbed tables with bulleted items in "Meal / Protocol" and "Target Macros & Kcal" with column width allocation prioritizing Meal/Protocol (40%) and Macros (28%):
 
 * Tab 1: 16:8 Fasting (Mid-Day Split)
   - 8:00 PM – 11:30 AM (Fasting Zone): Plain water, black coffee, or green tea | Fasted morning walk || 0g P / 0g C / 0g F (0 kcal)
