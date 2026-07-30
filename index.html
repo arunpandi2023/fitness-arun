@@ -220,7 +220,7 @@
             border: 1px solid var(--border-clean);
             padding: 12px 14px;
             border-radius: 12px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             border-left: 4px solid var(--athletic-teal);
             display: flex;
             flex-direction: column;
@@ -238,10 +238,10 @@
         }
 
         .diet-time {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             color: var(--athletic-teal);
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.5px;
         }
 
@@ -249,10 +249,78 @@
         .diet-card.fruit-guide .diet-time { color: var(--soft-emerald); }
 
         .diet-macros {
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             color: var(--text-main);
             font-weight: 400;
             line-height: 1.4;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-clean);
+            background: rgba(255, 255, 255, 0.9);
+            margin-top: 10px;
+        }
+
+        table.diet-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            text-align: left;
+            min-width: 480px;
+        }
+
+        table.diet-table th, table.diet-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-clean);
+            vertical-align: top;
+            line-height: 1.4;
+        }
+
+        table.diet-table th {
+            background: rgba(30, 58, 138, 0.06);
+            color: var(--varsity-navy);
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        table.diet-table tr:last-child td { border-bottom: none; }
+
+        .time-col {
+            font-weight: 700;
+            color: var(--varsity-navy);
+            white-space: nowrap;
+        }
+
+        .focus-col {
+            font-weight: 600;
+            color: var(--athletic-teal);
+            white-space: nowrap;
+        }
+
+        .list-cell {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .list-cell li {
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 4px;
+        }
+
+        .list-cell li:last-child { margin-bottom: 0; }
+
+        .list-cell li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--athletic-teal);
+            font-weight: bold;
         }
 
         .workout-card {
@@ -597,7 +665,7 @@
     <!-- DIET Section -->
     <section id="mod-diet" class="module-active">
         <div class="section-header">
-            <h2>🥗 CHRONOLOGICAL DIET SPLITS</h2>
+            <h2>🥗 CHRONOLOGICAL DIET TABLES</h2>
         </div>
         <div class="tab-row">
             <button class="tab-btn diet-t active" onclick="switchDiet('fasting', this)">16:8 Fasting (Mid-Day)</button>
@@ -700,34 +768,34 @@
         desc: "• <strong>Cat. A (Fast Carbs - Pre/Post Gym):</strong> Banana, Mango, Grapes (80g–100g max).<br>• <strong>Cat. B (Low Calorie / High Fiber):</strong> Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Jar 2).<br>• <strong>Cat. C (Hydration & Recovery):</strong> Orange, Pomegranate, Dragon Fruit (100g max on Rest Days)."
     };
 
-    const dietData = {
+    const dietTableData = {
         fasting: [
-            { label: "1. Fasting Zone (8:00 PM - 11:30 AM Next Day)", desc: "16-Hour Digestive Reset: Plain water, black coffee, or unsweetened green tea only. Morning walk done fasted." },
-            { label: "2. Pre-Workout Fast-Break (11:30 AM)", desc: "25g P / 20g C / 0g F: 1 scoop Whey Protein + 5g Creatine Monohydrate + 100g Cat. A Fruit (Banana) or 80g Boiled Potato (180 kcal)" },
-            { label: "3. Post-Workout Lunch (1:15 PM) [CORE REFUEL]", desc: "40g P / 35g C / 12g F: 150g Paneer/Tofu/Chicken + 3/4 cup cooked Legumes (Chana/Rajma) OR 1/2 cup Rice + ACV Vinaigrette Salad + Fish Oil (450 kcal)" },
-            { label: "4. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Cold Jar 2 base (Greek Yogurt + soaked Chia/Flax/Pumpkin seeds) + optional 100g Cat. B Fruit (250 kcal)" },
-            { label: "5. Light Dinner (7:30 PM)", desc: "20g P / 15g C / 14g F: 2 Whole Eggs + Jar 1 Nuts + 1-2 cups Steamed Veggies (Broccoli/Spinach) (290 kcal)" },
-            { label: "6. Night Closing Cap (8:00 PM)", desc: "8g P / 12g C / 2.5g F: 1 cup (250ml) Warm Low-Fat Cow Milk + 1/4 tsp Turmeric + pinch Black Pepper + 1 tsp Palm Jaggery/Honey + Vit D3+K2 (125 kcal)" }
+            { time: "8:00 PM – 11:30 AM", focus: "Fasting Zone", items: ["Plain water, black coffee, or green tea", "Fasted morning walk"], macros: ["Protein: 0g", "Carbs: 0g", "Fats: 0g", "<strong>Total: 0 kcal</strong>"] },
+            { time: "11:30 AM", focus: "Pre-Workout", items: ["1 scoop Whey Protein", "5g Creatine Monohydrate", "100g Cat. A Fruit (Banana) OR 80g Boiled Potato"], macros: ["Protein: 25g", "Carbs: 20g", "Fats: 0g", "<strong>Total: 180 kcal</strong>"] },
+            { time: "1:15 PM", focus: "Post-Workout Lunch", items: ["150g Paneer / Tofu / Chicken", "3/4 cup cooked Chana or Rajma (OR 1/2 cup Rice)", "ACV Vinaigrette Salad", "Fish Oil Supplement"], macros: ["Protein: 40g", "Carbs: 35g", "Fats: 12g", "<strong>Total: 450 kcal</strong>"] },
+            { time: "4:30 PM", focus: "Afternoon Snack", items: ["Cold Jar 2 base (Greek Yogurt + Seeds)", "Optional: 100g Cat. B Fruit"], macros: ["Protein: 22g", "Carbs: 15g", "Fats: 14g", "<strong>Total: 250 kcal</strong>"] },
+            { time: "7:30 PM", focus: "Light Dinner", items: ["2 Whole Eggs", "Jar 1 Nuts (Almonds & Walnuts)", "1–2 cups Steamed Veggies (Broccoli/Spinach)"], macros: ["Protein: 20g", "Carbs: 15g", "Fats: 14g", "<strong>Total: 290 kcal</strong>"] },
+            { time: "8:00 PM", focus: "Night Cap", items: ["250ml Warm Low-Fat Milk", "1/4 tsp Turmeric + pinch Black Pepper", "1 tsp Palm Jaggery or Honey", "Vitamin D3 + K2"], macros: ["Protein: 8g", "Carbs: 12g", "Fats: 2.5g", "<strong>Total: 125 kcal</strong>"] }
         ],
         morning: [
-            { label: "1. Pre-workout (7:00 AM)", desc: "25g P / 24g C / 1g F: 1 scoop Whey Protein + 5g Creatine + 100g Cat. A Fruit (Banana/Grapes) (205 kcal)" },
-            { label: "2. Post-workout / Breakfast (9:00 AM)", desc: "22g P / 35g C / 14g F: 2 Whole Eggs + Jar 1 base (Oats + 100ml Soy Milk) + 1 cup Veggies (380 kcal)" },
-            { label: "3. Lunch (1:00 PM) [LEGUME / RICE SWAP]", desc: "38g P / 32g C / 12g F: 150g Paneer/Tofu/Chicken + 3/4 cup cooked Chana/Rajma or Rice + ACV Salad (390 kcal)" },
-            { label: "4. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Jar 2 base eaten cold + Optional 100g Cat. B Fruit (250 kcal)" },
-            { label: "5. Dinner & Night Cap (8:00 PM - 8:30 PM)", desc: "45g P / 25g C / 12g F: 150g Baked Salmon/Chicken/Tofu + 70g Boiled Potato + Salad + 1 cup Warm Turmeric Milk with 1 tsp Palm Jaggery (485 kcal)" }
+            { time: "7:00 AM", focus: "Pre-Workout", items: ["1 scoop Whey Protein", "5g Creatine Monohydrate", "100g Cat. A Fruit (Banana / Grapes)"], macros: ["Protein: 25g", "Carbs: 24g", "Fats: 1g", "<strong>Total: 205 kcal</strong>"] },
+            { time: "9:00 AM", focus: "Post-Workout / Breakfast", items: ["2 Whole Eggs", "Jar 1 base (Oats + 100ml Soy Milk)", "1 cup Veggies"], macros: ["Protein: 22g", "Carbs: 35g", "Fats: 14g", "<strong>Total: 380 kcal</strong>"] },
+            { time: "1:00 PM", focus: "Lunch", items: ["150g Paneer / Tofu / Chicken", "3/4 cup cooked Chana or Rajma (OR Rice)", "ACV Salad"], macros: ["Protein: 38g", "Carbs: 32g", "Fats: 12g", "<strong>Total: 390 kcal</strong>"] },
+            { time: "4:30 PM", focus: "Afternoon Snack", items: ["Cold Jar 2 base (Greek Yogurt + Seeds)", "Optional: 100g Cat. B Fruit"], macros: ["Protein: 22g", "Carbs: 15g", "Fats: 14g", "<strong>Total: 250 kcal</strong>"] },
+            { time: "8:00 PM", focus: "Dinner & Night Cap", items: ["150g Baked Salmon / Chicken / Tofu", "70g Boiled Potato", "Green Salad", "1 cup Warm Turmeric Milk w/ Jaggery"], macros: ["Protein: 45g", "Carbs: 25g", "Fats: 12g", "<strong>Total: 485 kcal</strong>"] }
         ],
         evening: [
-            { label: "1. Breakfast (8:30 AM)", desc: "22g P / 35g C / 14g F: 2 Whole Eggs + Jar 1 base + 100g Cat. B Fruit (380 kcal)" },
-            { label: "2. Lunch (1:00 PM) [LEGUME SWAP]", desc: "38g P / 32g C / 12g F: 150g Paneer/Tofu/Chicken + 3/4 cup cooked Chana or Rajma + Green Salad (395 kcal)" },
-            { label: "3. Late Afternoon Snack (4:30 PM)", desc: "22g P / 15g C / 14g F: Jar 2 base eaten cold (250 kcal)" },
-            { label: "4. Pre-workout (6:00 PM)", desc: "25g P / 30g C / 1g F: 1 scoop Whey + 5g Creatine + 120g Boiled Potato or Sweet Potato (230 kcal)" },
-            { label: "5. Post-workout / Dinner (8:45 PM)", desc: "45g P / 25g C / 12g F: 150g Pan-Seared Salmon/Chicken + 70g Boiled Potato + Salad + Warm Turmeric Milk (485 kcal)" }
+            { time: "8:30 AM", focus: "Breakfast", items: ["2 Whole Eggs", "Jar 1 base (Oats + Soy Milk)", "100g Cat. B Fruit"], macros: ["Protein: 22g", "Carbs: 35g", "Fats: 14g", "<strong>Total: 380 kcal</strong>"] },
+            { time: "1:00 PM", focus: "Lunch", items: ["150g Paneer / Tofu / Chicken", "3/4 cup cooked Chana or Rajma", "Green Salad"], macros: ["Protein: 38g", "Carbs: 32g", "Fats: 12g", "<strong>Total: 395 kcal</strong>"] },
+            { time: "4:30 PM", focus: "Afternoon Snack", items: ["Cold Jar 2 base (Greek Yogurt + Seeds)"], macros: ["Protein: 22g", "Carbs: 15g", "Fats: 14g", "<strong>Total: 250 kcal</strong>"] },
+            { time: "6:00 PM", focus: "Pre-Workout", items: ["1 scoop Whey Protein", "5g Creatine Monohydrate", "120g Boiled Potato or Sweet Potato"], macros: ["Protein: 25g", "Carbs: 30g", "Fats: 1g", "<strong>Total: 230 kcal</strong>"] },
+            { time: "8:45 PM", focus: "Post-Workout / Dinner", items: ["150g Pan-Seared Salmon / Chicken", "70g Boiled Potato", "Green Salad", "Warm Turmeric Milk"], macros: ["Protein: 45g", "Carbs: 25g", "Fats: 12g", "<strong>Total: 485 kcal</strong>"] }
         ],
         restday: [
-            { label: "1. Breakfast (8:30 AM)", desc: "22g P / 35g C / 14g F: 2 Whole Eggs + Jar 1 base + 100g Cat. B/C Fruit (380 kcal)" },
-            { label: "2. Lunch (1:00 PM) [LEGUME SWAP]", desc: "38g P / 32g C / 12g F: 150g Paneer/Tofu/Chicken + 3/4 cup cooked Chana or Rajma + Veggies (390 kcal)" },
-            { label: "3. Late Afternoon Snack (4:30 PM)", desc: "47g P / 15g C / 15g F: 1 scoop Whey Protein in Jar 2 base + 5g Creatine in water (375 kcal)" },
-            { label: "4. Dinner & Night Cap (8:00 PM)", desc: "45g P / 25g C / 12g F: 150g Salmon/Chicken/Tofu + 70g Potato + Salad + Warm Turmeric Milk with 1 tsp Palm Jaggery (485 kcal)" }
+            { time: "8:30 AM", focus: "Breakfast", items: ["2 Whole Eggs", "Jar 1 base (Oats + Soy Milk)", "100g Cat. B/C Fruit"], macros: ["Protein: 22g", "Carbs: 35g", "Fats: 14g", "<strong>Total: 380 kcal</strong>"] },
+            { time: "1:00 PM", focus: "Lunch", items: ["150g Paneer / Tofu / Chicken", "3/4 cup cooked Chana or Rajma", "Steamed Veggies"], macros: ["Protein: 38g", "Carbs: 32g", "Fats: 12g", "<strong>Total: 390 kcal</strong>"] },
+            { time: "4:30 PM", focus: "Afternoon Snack", items: ["1 scoop Whey Protein (mixed into Jar 2 base)", "5g Creatine Monohydrate (in water)"], macros: ["Protein: 47g", "Carbs: 15g", "Fats: 15g", "<strong>Total: 375 kcal</strong>"] },
+            { time: "8:00 PM", focus: "Dinner & Night Cap", items: ["150g Salmon / Chicken / Tofu", "70g Boiled Potato", "Green Salad", "Warm Turmeric Milk w/ Jaggery"], macros: ["Protein: 45g", "Carbs: 25g", "Fats: 12g", "<strong>Total: 485 kcal</strong>"] }
         ]
     };
 
@@ -830,16 +898,44 @@
             <div class="diet-macros">${fruitLegendCard.desc}</div>
         `;
         display.appendChild(fruitDiv);
+
+        const tableContainer = document.createElement('div');
+        tableContainer.className = 'table-container';
         
-        dietData[slot].forEach(meal => {
-            const div = document.createElement('div');
-            div.className = 'diet-card';
-            div.innerHTML = `
-                <div class="diet-time">${meal.label}</div>
-                <div class="diet-macros">${meal.desc}</div>
+        let tableHTML = `
+            <table class="diet-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Focus</th>
+                        <th>Meal / Protocol</th>
+                        <th>Target Macros & Kcal</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        dietTableData[slot].forEach(row => {
+            const itemsList = row.items.map(i => `<li>${i}</li>`).join('');
+            const macrosList = row.macros.map(m => `<li>${m}</li>`).join('');
+            
+            tableHTML += `
+                <tr>
+                    <td class="time-col">${row.time}</td>
+                    <td class="focus-col">${row.focus}</td>
+                    <td><ul class="list-cell">${itemsList}</ul></td>
+                    <td><ul class="list-cell">${macrosList}</ul></td>
+                </tr>
             `;
-            display.appendChild(div);
         });
+
+        tableHTML += `
+                </tbody>
+            </table>
+        `;
+
+        tableContainer.innerHTML = tableHTML;
+        display.appendChild(tableContainer);
     }
 
     function initWorkoutTabs() {
