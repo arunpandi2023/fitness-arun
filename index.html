@@ -215,59 +215,6 @@
             font-weight: 600;
         }
 
-        .diet-card {
-            background: rgba(248, 250, 252, 0.8);
-            border: 1px solid var(--border-clean);
-            padding: 12px 14px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border-left: 4px solid var(--athletic-teal);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .diet-card.highlight-prep {
-            border-left-color: var(--varsity-navy);
-            background: rgba(30, 58, 138, 0.04);
-        }
-
-        .diet-card.fruit-guide {
-            border-left-color: var(--soft-emerald);
-            background: rgba(16, 185, 129, 0.04);
-        }
-
-        .diet-time {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            color: var(--athletic-teal);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .diet-card.highlight-prep .diet-time { color: var(--varsity-navy); }
-        .diet-card.fruit-guide .diet-time { color: var(--soft-emerald); }
-
-        .diet-macros {
-            font-size: 0.83rem;
-            color: var(--text-main);
-            font-weight: 400;
-            line-height: 1.45;
-        }
-
-        .ref-card-list {
-            padding-left: 14px;
-            margin-top: 2px;
-        }
-
-        .ref-card-list li {
-            margin-bottom: 4px;
-        }
-
-        .ref-card-list li:last-child {
-            margin-bottom: 0;
-        }
-
         .table-container {
             width: 100%;
             overflow-x: auto;
@@ -275,6 +222,7 @@
             border: 1px solid var(--border-clean);
             background: rgba(255, 255, 255, 0.9);
             margin-top: 10px;
+            margin-bottom: 14px;
         }
 
         table.diet-table {
@@ -286,10 +234,13 @@
             min-width: 540px;
         }
 
-        table.diet-table th:nth-child(1), table.diet-table td:nth-child(1) { width: 16%; }
-        table.diet-table th:nth-child(2), table.diet-table td:nth-child(2) { width: 16%; }
-        table.diet-table th:nth-child(3), table.diet-table td:nth-child(3) { width: 40%; }
-        table.diet-table th:nth-child(4), table.diet-table td:nth-child(4) { width: 28%; }
+        table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 30%; }
+        table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 70%; }
+
+        table.diet-table:not(.ref-table) th:nth-child(1), table.diet-table:not(.ref-table) td:nth-child(1) { width: 16%; }
+        table.diet-table:not(.ref-table) th:nth-child(2), table.diet-table:not(.ref-table) td:nth-child(2) { width: 16%; }
+        table.diet-table:not(.ref-table) th:nth-child(3), table.diet-table:not(.ref-table) td:nth-child(3) { width: 40%; }
+        table.diet-table:not(.ref-table) th:nth-child(4), table.diet-table:not(.ref-table) td:nth-child(4) { width: 28%; }
 
         table.diet-table th, table.diet-table td {
             padding: 10px 10px;
@@ -306,6 +257,11 @@
             font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+
+        table.diet-table.fruit-ref-table th {
+            background: rgba(16, 185, 129, 0.08);
+            color: #065f46;
         }
 
         table.diet-table tr:last-child td { border-bottom: none; }
@@ -817,12 +773,12 @@
 ### 2. MODULE BREAKDOWN & CONTENT DATA
 
 #### A. MODULE 1: DIET (CHRONOLOGICAL TABLES)
-Must include two top reference cards:
-1. Overnight Soaking Prep (Every Night Routine):
+Must include two top reference tables:
+1. Overnight Soaking Prep Reference Table (Every Night Routine):
    - Water-Soaking Jar (Every Night): 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin seeds + 5 Almonds + 2 Whole Walnuts (4 halves) soaked in 80–100ml WATER overnight.
    - Office Snack Protocol: Mix entire soaked seeds & nuts jar into 200g Greek Yogurt at 4:30 PM snack time!
    - Non-Fasting Oats Jar (Morning / Evening / Rest Days): 1/2 cup Oats + 100ml Unsweetened Soy Milk for breakfast.
-2. Fruit Category Reference Guide:
+2. Fruit Category Reference Table:
    - Cat. A (Fast Carbs - Pre/Post Gym): Banana, Mango, Grapes (80g–100g max).
    - Cat. B (Low Calorie / High Fiber): Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Snack).
    - Cat. C (Hydration & Recovery): Orange, Pomegranate, Dragon Fruit (100g max on Rest Days).
@@ -903,27 +859,17 @@ Renders saved session records from LocalStorage into card displays showing Date,
         { name: "RKC Plank Hold", desc: "3 Sets x 20–30s. Squeeze glutes hard, drag elbows down toward toes." }
     ];
 
-    const commonPrepCard = {
-        label: " OverNight Soaking Prep (Every Night Routine)",
-        desc: `
-            <ul class="ref-card-list">
-                <li><strong>Water-Soaking Jar (Every Night):</strong> 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin seeds + 5 Almonds + 2 Whole Walnuts (4 halves) soaked in 80–100ml WATER overnight.</li>
-                <li><strong>Office Snack Protocol:</strong> Mix entire soaked seeds & nuts jar into 200g Greek Yogurt at 4:30 PM snack time!</li>
-                <li><strong>Non-Fasting Oats Jar (Morning / Evening / Rest Days):</strong> 1/2 cup Oats + 100ml Unsweetened Soy Milk for breakfast.</li>
-            </ul>
-        `
-    };
+    const prepTableRows = [
+        { component: "Water-Soaking Jar (Every Night)", detail: "1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin seeds + 5 Almonds + 2 Whole Walnuts (4 halves) soaked in 80–100ml WATER overnight." },
+        { component: "Office Snack Protocol", detail: "Mix entire soaked seeds & nuts jar into 200g Greek Yogurt at 4:30 PM snack time!" },
+        { component: "Non-Fasting Oats Jar (Morning / Evening / Rest)", detail: "1/2 cup Oats + 100ml Unsweetened Soy Milk for breakfast." }
+    ];
 
-    const fruitLegendCard = {
-        label: "🍇 Fruit Category Reference Guide",
-        desc: `
-            <ul class="ref-card-list">
-                <li><strong>Cat. A (Fast Carbs - Pre/Post Gym):</strong> Banana, Mango, Grapes (80g–100g max).</li>
-                <li><strong>Cat. B (Low Calorie / High Fiber):</strong> Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Snack).</li>
-                <li><strong>Cat. C (Hydration & Recovery):</strong> Orange, Pomegranate, Dragon Fruit (100g max on Rest Days).</li>
-            </ul>
-        `
-    };
+    const fruitTableRows = [
+        { category: "Cat. A (Fast Carbs - Pre/Post Gym)", detail: "Banana, Mango, Grapes (80g–100g max)." },
+        { category: "Cat. B (Low Calorie / High Fiber)", detail: "Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Snack)." },
+        { category: "Cat. C (Hydration & Recovery)", detail: "Orange, Pomegranate, Dragon Fruit (100g max on Rest Days)." }
+    ];
 
     const dietTableData = {
         fasting: [
@@ -1039,23 +985,56 @@ Renders saved session records from LocalStorage into card displays showing Date,
         
         const display = document.getElementById('diet-display');
         display.innerHTML = '';
-        
-        const prepDiv = document.createElement('div');
-        prepDiv.className = 'diet-card highlight-prep';
-        prepDiv.innerHTML = `
-            <div class="diet-time">${commonPrepCard.label}</div>
-            <div class="diet-macros">${commonPrepCard.desc}</div>
-        `;
-        display.appendChild(prepDiv);
 
-        const fruitDiv = document.createElement('div');
-        fruitDiv.className = 'diet-card fruit-guide';
-        fruitDiv.innerHTML = `
-            <div class="diet-time">${fruitLegendCard.label}</div>
-            <div class="diet-macros">${fruitLegendCard.desc}</div>
+        // 1. Overnight Soaking Prep Table
+        const prepContainer = document.createElement('div');
+        prepContainer.className = 'table-container';
+        let prepHTML = `
+            <table class="diet-table ref-table">
+                <thead>
+                    <tr>
+                        <th colspan="2">OverNight Soaking Prep (Every Night Routine)</th>
+                    </tr>
+                </thead>
+                <tbody>
         `;
-        display.appendChild(fruitDiv);
+        prepTableRows.forEach(r => {
+            prepHTML += `
+                <tr>
+                    <td class="focus-col">${r.component}</td>
+                    <td>${r.detail}</td>
+                </tr>
+            `;
+        });
+        prepHTML += `</tbody></table>`;
+        prepContainer.innerHTML = prepHTML;
+        display.appendChild(prepContainer);
 
+        // 2. Fruit Category Reference Table
+        const fruitContainer = document.createElement('div');
+        fruitContainer.className = 'table-container';
+        let fruitHTML = `
+            <table class="diet-table ref-table fruit-ref-table">
+                <thead>
+                    <tr>
+                        <th colspan="2">🍇 Fruit Category Reference Guide</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+        fruitTableRows.forEach(r => {
+            fruitHTML += `
+                <tr>
+                    <td class="focus-col" style="color:#0d9488;">${r.category}</td>
+                    <td>${r.detail}</td>
+                </tr>
+            `;
+        });
+        fruitHTML += `</tbody></table>`;
+        fruitContainer.innerHTML = fruitHTML;
+        display.appendChild(fruitContainer);
+
+        // 3. Main Schedule Table
         const tableContainer = document.createElement('div');
         tableContainer.className = 'table-container';
         
