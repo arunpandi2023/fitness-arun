@@ -224,7 +224,7 @@
             border-left: 4px solid var(--athletic-teal);
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 6px;
         }
 
         .diet-card.highlight-prep {
@@ -238,7 +238,7 @@
         }
 
         .diet-time {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             text-transform: uppercase;
             color: var(--athletic-teal);
             font-weight: 700;
@@ -249,10 +249,23 @@
         .diet-card.fruit-guide .diet-time { color: var(--soft-emerald); }
 
         .diet-macros {
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             color: var(--text-main);
             font-weight: 400;
-            line-height: 1.4;
+            line-height: 1.45;
+        }
+
+        .ref-card-list {
+            padding-left: 14px;
+            margin-top: 2px;
+        }
+
+        .ref-card-list li {
+            margin-bottom: 4px;
+        }
+
+        .ref-card-list li:last-child {
+            margin-bottom: 0;
         }
 
         .table-container {
@@ -805,10 +818,10 @@
 
 #### A. MODULE 1: DIET (CHRONOLOGICAL TABLES)
 Must include two top reference cards:
-1. Overnight Soaking Prep (Unified Daily Jar):
-   - Soaking Container (Every Night): 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin Seeds + 5 Almonds + 2 Whole Walnuts (4 halves) soaked in 80–100ml WATER overnight.
-   - Prep Protocol: Mix entire soaked seeds + nuts jar into 200g Greek Yogurt at 4:30 PM office snack time!
-   - Non-Fasting Breakfast Jar (Morning/Evening/Rest Days Only): 1/2 cup Oats + 100ml Unsweetened Soy Milk.
+1. Overnight Soaking Prep (Every Night Routine):
+   - Water-Soaking Jar (Every Night): 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin seeds + 5 Almonds + 2 Whole Walnuts (4 halves) soaked in 80–100ml WATER overnight.
+   - Office Snack Protocol: Mix entire soaked seeds & nuts jar into 200g Greek Yogurt at 4:30 PM snack time!
+   - Non-Fasting Oats Jar (Morning / Evening / Rest Days): 1/2 cup Oats + 100ml Unsweetened Soy Milk for breakfast.
 2. Fruit Category Reference Guide:
    - Cat. A (Fast Carbs - Pre/Post Gym): Banana, Mango, Grapes (80g–100g max).
    - Cat. B (Low Calorie / High Fiber): Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Snack).
@@ -891,13 +904,25 @@ Renders saved session records from LocalStorage into card displays showing Date,
     ];
 
     const commonPrepCard = {
-        label: "0. Overnight Soaking Prep (Every Night Routine)",
-        desc: "<strong>Water-Soaking Jar (Every Night):</strong> 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin seeds + 5 Almonds + 2 Whole Walnuts (4 halves) soaked in 80–100ml WATER overnight.<br><strong>Office Protocol:</strong> Mix entire soaked seeds & nuts jar into 200g Greek Yogurt at 4:30 PM snack time!<br><em>Note (Non-Fasting Days Only): Prepare 1/2 cup Oats + 100ml Unsweetened Soy Milk for breakfast.</em>"
+        label: " OverNight Soaking Prep (Every Night Routine)",
+        desc: `
+            <ul class="ref-card-list">
+                <li><strong>Water-Soaking Jar (Every Night):</strong> 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin seeds + 5 Almonds + 2 Whole Walnuts (4 halves) soaked in 80–100ml WATER overnight.</li>
+                <li><strong>Office Snack Protocol:</strong> Mix entire soaked seeds & nuts jar into 200g Greek Yogurt at 4:30 PM snack time!</li>
+                <li><strong>Non-Fasting Oats Jar (Morning / Evening / Rest Days):</strong> 1/2 cup Oats + 100ml Unsweetened Soy Milk for breakfast.</li>
+            </ul>
+        `
     };
 
     const fruitLegendCard = {
         label: "🍇 Fruit Category Reference Guide",
-        desc: "• <strong>Cat. A (Fast Carbs - Pre/Post Gym):</strong> Banana, Mango, Grapes (80g–100g max).<br>• <strong>Cat. B (Low Calorie / High Fiber):</strong> Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Snack).<br>• <strong>Cat. C (Hydration & Recovery):</strong> Orange, Pomegranate, Dragon Fruit (100g max on Rest Days)."
+        desc: `
+            <ul class="ref-card-list">
+                <li><strong>Cat. A (Fast Carbs - Pre/Post Gym):</strong> Banana, Mango, Grapes (80g–100g max).</li>
+                <li><strong>Cat. B (Low Calorie / High Fiber):</strong> Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Snack).</li>
+                <li><strong>Cat. C (Hydration & Recovery):</strong> Orange, Pomegranate, Dragon Fruit (100g max on Rest Days).</li>
+            </ul>
+        `
     };
 
     const dietTableData = {
