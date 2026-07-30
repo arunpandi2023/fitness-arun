@@ -266,6 +266,46 @@
 
         table.diet-table tr:last-child td { border-bottom: none; }
 
+        /* Responsive Mobile Fix for Reference Tables */
+        @media (max-width: 600px) {
+            .table-container.ref-container {
+                overflow-x: visible;
+            }
+
+            table.diet-table.ref-table {
+                min-width: 100% !important;
+                table-layout: auto;
+            }
+
+            table.diet-table.ref-table th {
+                display: block;
+                width: 100% !important;
+            }
+
+            table.diet-table.ref-table tr {
+                display: flex;
+                flex-direction: column;
+                padding: 8px 0;
+                border-bottom: 1px solid var(--border-clean);
+            }
+
+            table.diet-table.ref-table tr:last-child {
+                border-bottom: none;
+            }
+
+            table.diet-table.ref-table td {
+                display: block;
+                width: 100% !important;
+                padding: 2px 10px;
+                border-bottom: none;
+            }
+
+            table.diet-table.ref-table td.focus-col {
+                font-weight: 700;
+                padding-bottom: 4px;
+            }
+        }
+
         .time-col {
             font-weight: 700;
             color: var(--varsity-navy);
@@ -763,7 +803,7 @@
 
 ### 1. APPLICATION SPECIFICATIONS & ARCHITECTURE
 - Single-File Structure: All HTML, CSS, and JS must reside in one file.
-- UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with explicit column widths to prioritize content readability (Meal/Protocol 40%, Macros 28%, Time 16%, Focus 16%).
+- UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with explicit column widths to prioritize content readability (Meal/Protocol 40%, Macros 28%, Time 16%, Focus 16%). Reference tables stack on mobile view for optimal readability.
 - Persistence (Storage):
   - SessionStorage for Warmup/Posture checklist items.
   - LocalStorage ('arun_master_workout_history') for logging exercise sets (Weight/Reps), retaining historical baselines per exercise, and allowing editing/deletion of logs.
@@ -988,7 +1028,7 @@ Renders saved session records from LocalStorage into card displays showing Date,
 
         // 1. Overnight Soaking Prep Table
         const prepContainer = document.createElement('div');
-        prepContainer.className = 'table-container';
+        prepContainer.className = 'table-container ref-container';
         let prepHTML = `
             <table class="diet-table ref-table">
                 <thead>
@@ -1012,7 +1052,7 @@ Renders saved session records from LocalStorage into card displays showing Date,
 
         // 2. Fruit Category Reference Table
         const fruitContainer = document.createElement('div');
-        fruitContainer.className = 'table-container';
+        fruitContainer.className = 'table-container ref-container';
         let fruitHTML = `
             <table class="diet-table ref-table fruit-ref-table">
                 <thead>
