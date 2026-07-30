@@ -77,7 +77,7 @@
 
         .module-router {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             gap: 4px;
             margin-bottom: 16px;
         }
@@ -88,7 +88,7 @@
             border: 1px solid var(--border-clean);
             padding: 10px 2px;
             border-radius: 10px;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.3px;
@@ -602,6 +602,19 @@
             cursor: pointer;
         }
 
+        .copy-prompt-btn {
+            background: var(--athletic-teal);
+            color: #ffffff;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.2);
+        }
+
         .supp-table-container {
             width: 100%;
             overflow-x: auto;
@@ -647,6 +660,21 @@
 
         .badge-status.yes { background: rgba(13, 148, 136, 0.1); color: var(--athletic-teal); }
         .badge-status.opt { background: rgba(71, 85, 105, 0.1); color: var(--text-muted); }
+
+        .prompt-container {
+            background: #0f172a;
+            color: #f8fafc;
+            border-radius: 12px;
+            padding: 14px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid var(--border-clean);
+        }
     </style>
 </head>
 <body>
@@ -660,6 +688,7 @@
         <button class="module-btn" onclick="routeModule('workout', this)">Workout</button>
         <button class="module-btn" onclick="routeModule('supplements', this)">Supps</button>
         <button class="module-btn" onclick="routeModule('history', this)">History</button>
+        <button class="module-btn" onclick="routeModule('prompt', this)">Prompt</button>
     </div>
 
     <!-- DIET Section -->
@@ -746,6 +775,103 @@
             <button class="mini-reset-btn" onclick="clearAllHistory()">Clear All</button>
         </div>
         <div id="history-display"></div>
+    </section>
+
+    <!-- PROMPT Section -->
+    <section id="mod-prompt">
+        <div class="section-header">
+            <h2>📋 MASTER PROMPT</h2>
+            <button class="copy-prompt-btn" onclick="copyMasterPrompt()">📋 COPY PROMPT</button>
+        </div>
+        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer. Maintain and update an interactive single-file HTML application titled "Arun's Fitness Guide" with embedded CSS and JavaScript.
+
+---
+
+### 1. APPLICATION SPECIFICATIONS & ARCHITECTURE
+- Single-File Structure: All HTML, CSS, and JS must reside in one file.
+- UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables.
+- Persistence (Storage):
+  - SessionStorage for Warmup/Posture checklist items.
+  - LocalStorage ('arun_master_workout_history') for logging exercise sets (Weight/Reps), retaining historical baselines per exercise, and allowing editing/deletion of logs.
+
+---
+
+### 2. MODULE BREAKDOWN & CONTENT DATA
+
+#### A. MODULE 1: DIET (CHRONOLOGICAL TABLES)
+Must include two top reference cards:
+1. Overnight Soaking Prep:
+   - Jar 1 (Oats): 1/2 cup Oats + 100ml Unsweetened Soy Milk + 5 Almonds + 2 Whole Walnuts (4 halves).
+   - Jar 2 (Snack): 200g Greek Yogurt + 1 tbsp Chia + 1 tbsp Flax + 10g Pumpkin Seeds.
+2. Fruit Category Reference Guide:
+   - Cat. A (Fast Carbs - Pre/Post Gym): Banana, Mango, Grapes (80g–100g max).
+   - Cat. B (Low Calorie / High Fiber): Strawberries, Blueberries, Guava, Apple, Pears (100g–150g in Jar 2).
+   - Cat. C (Hydration & Recovery): Orange, Pomegranate, Dragon Fruit (100g max on Rest Days).
+
+Must render 4 tabbed tables with bulleted items in "Meal / Protocol" and "Target Macros & Kcal":
+
+* Tab 1: 16:8 Fasting (Mid-Day Split)
+  - 8:00 PM – 11:30 AM (Fasting Zone): Plain water, black coffee, or green tea | Fasted morning walk || 0g P / 0g C / 0g F (0 kcal)
+  - 11:30 AM (Pre-Workout): 1 scoop Whey Protein | 5g Creatine Monohydrate | 100g Cat. A Fruit (Banana) OR 80g Boiled Potato || 25g P / 20g C / 0g F (180 kcal)
+  - 1:15 PM (Post-Workout Lunch): 150g Paneer / Tofu / Chicken | 3/4 cup cooked Chana or Rajma (OR 1/2 cup Rice) | ACV Vinaigrette Salad | Fish Oil Supplement || 40g P / 35g C / 12g F (450 kcal)
+  - 4:30 PM (Afternoon Snack): Cold Jar 2 base (Greek Yogurt + Seeds) | Optional: 100g Cat. B Fruit || 22g P / 15g C / 14g F (250 kcal)
+  - 7:30 PM (Light Dinner): 2 Whole Eggs | Jar 1 Nuts (Almonds & Walnuts) | 1–2 cups Steamed Veggies (Broccoli/Spinach) || 20g P / 15g C / 14g F (290 kcal)
+  - 8:00 PM (Night Cap): 250ml Warm Low-Fat Milk | 1/4 tsp Turmeric + pinch Black Pepper | 1 tsp Palm Jaggery or Honey | Vitamin D3 + K2 || 8g P / 12g C / 2.5g F (125 kcal)
+
+* Tab 2: Morning Workout Split
+  - 7:00 AM (Pre-Workout): 1 scoop Whey | 5g Creatine | 100g Cat. A Fruit || 25g P / 24g C / 1g F (205 kcal)
+  - 9:00 AM (Post-Workout / Breakfast): 2 Whole Eggs | Jar 1 base (Oats + Soy Milk) | 1 cup Veggies || 22g P / 35g C / 14g F (380 kcal)
+  - 1:00 PM (Lunch): 150g Paneer/Tofu/Chicken | 3/4 cup Chana or Rajma (OR Rice) | ACV Salad || 38g P / 32g C / 12g F (390 kcal)
+  - 4:30 PM (Afternoon Snack): Cold Jar 2 base | Optional 100g Cat. B Fruit || 22g P / 15g C / 14g F (250 kcal)
+  - 8:00 PM (Dinner & Night Cap): 150g Baked Salmon/Chicken/Tofu | 70g Boiled Potato | Green Salad | 1 cup Warm Turmeric Milk w/ Jaggery || 45g P / 25g C / 12g F (485 kcal)
+
+* Tab 3: Evening Workout Split
+  - 8:30 AM (Breakfast): 2 Whole Eggs | Jar 1 base | 100g Cat. B Fruit || 22g P / 35g C / 14g F (380 kcal)
+  - 1:00 PM (Lunch): 150g Paneer/Tofu/Chicken | 3/4 cup Chana or Rajma | Green Salad || 38g P / 32g C / 12g F (395 kcal)
+  - 4:30 PM (Afternoon Snack): Cold Jar 2 base || 22g P / 15g C / 14g F (250 kcal)
+  - 6:00 PM (Pre-Workout): 1 scoop Whey | 5g Creatine | 120g Boiled/Sweet Potato || 25g P / 30g C / 1g F (230 kcal)
+  - 8:45 PM (Post-Workout / Dinner): 150g Pan-Seared Salmon/Chicken | 70g Boiled Potato | Green Salad | Warm Turmeric Milk || 45g P / 25g C / 12g F (485 kcal)
+
+* Tab 4: Rest Day Split
+  - 8:30 AM (Breakfast): 2 Whole Eggs | Jar 1 base | 100g Cat. B/C Fruit || 22g P / 35g C / 14g F (380 kcal)
+  - 1:00 PM (Lunch): 150g Paneer/Tofu/Chicken | 3/4 cup Chana or Rajma | Steamed Veggies || 38g P / 32g C / 12g F (390 kcal)
+  - 4:30 PM (Afternoon Snack): 1 scoop Whey mixed into Jar 2 base | 5g Creatine in water || 47g P / 15g C / 15g F (375 kcal)
+  - 8:00 PM (Dinner & Night Cap): 150g Salmon/Chicken/Tofu | 70g Boiled Potato | Green Salad | Warm Turmeric Milk w/ Jaggery || 45g P / 25g C / 12g F (485 kcal)
+
+---
+
+#### B. MODULE 2: WARMUP & POSTURE CHECKLIST
+Includes persistent checkboxes and direct YouTube video links:
+1. Dynamic Mobility Loop (10 reps chest openers & leg swings)
+2. Couch Stretch (1 Min/side to release hip flexors)
+3. Dead-Bugs (3 Sets x 10/side, flatten lower back)
+4. Glute Bridges (2 Sets x 12, counter Anterior Pelvic Tilt / APT)
+5. RKC Plank Hold (3 Sets x 20–30s, drag elbows to toes)
+
+---
+
+#### C. MODULE 3: WORKOUT (4-DAY UPPER / LOWER ROUTINE)
+Every exercise includes: Setup Equipment (with Backup Option), Target Muscle, Target Volume, Rest Time, Form Technique Guide, Direct YouTube links (Primary & Backup), and an interactive 3-Set Matrix Logger (Set 1, Set 2, Set 3) that loads baseline weights/reps.
+
+* UPPER A: Machine Chest Press, HS MTS Shoulder Press, Lat Pulldown Machine, Cable Lateral Raise, Cable Tricep Push Down.
+* LOWER A (APT Focus): Seated Leg Press, Glute Machine, Leg Extension Machine, Abdominal Machine, Doorway Stretch & Posture Squats.
+* UPPER B: HS Chest Press, Seated Row Machine, Dual Pulley Pulldown, Row / Rear Deltoid Machine, Biceps Curl Machine, Triceps Extension Machine.
+* LOWER B (APT Focus): Seated Leg Press (High Feet), Hip Abduction Machine, Dual Pulley Row OR Low Row, Torso Machine, Lat Stretch & Child's Pose.
+
+---
+
+#### D. MODULE 4: SUPPLEMENTS FRAMEWORK
+Master table summarizing daily intake timing:
+- Whey Protein (1 Scoop: 11:30 AM Pre-gym or 4:30 PM Rest/Evening)
+- Creatine Monohydrate (5g Daily: 11:30 AM with pre-workout carbs or 4:30 PM Rest days)
+- Fish Oil / Omega-3 (1,000–2,000mg EPA+DHA: with high-protein lunch)
+- Vitamin D3 + K2 (2,000–5,000 IU Daily: with warm turmeric milk at night)
+- Multivitamin (1 Pill Daily: Optional insurance policy)
+
+---
+
+#### E. MODULE 5: WORKOUT HISTORY
+Renders saved session records from LocalStorage into card displays showing Date, Exercise Name, and Set 1-3 results (Weight × Reps). Allows inline editing of past set values and deletion of single entries or full memory reset.</div>
     </section>
 </div>
 
@@ -1073,6 +1199,15 @@
             localStorage.removeItem('arun_master_workout_history');
             renderHistoryPage();
         }
+    }
+
+    function copyMasterPrompt() {
+        const textToCopy = document.getElementById('prompt-content').innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert('📋 Master Prompt copied to clipboard!');
+        }).catch(err => {
+            alert('Failed to copy. Please manually copy the text.');
+        });
     }
 
     function triggerWorkoutView(dayKey, element) {
