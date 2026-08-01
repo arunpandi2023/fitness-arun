@@ -727,7 +727,7 @@
 <body>
 
 <div class="container">
-    <h1>⚡ Arun's Fitness Guide</h1>
+    <h1>⚡ Arun's Fitness Guide (6-Month Cut Phase)</h1>
 
     <div class="module-router">
         <button class="module-btn active" onclick="routeModule('diet', this)">Diet</button>
@@ -741,7 +741,7 @@
     <!-- DIET Section -->
     <section id="mod-diet" class="module-active">
         <div class="section-header">
-            <h2>🥗 CHRONOLOGICAL DIET TABLES</h2>
+            <h2>🥗 CHRONOLOGICAL DIET TABLES (DEFICIT FOCUS)</h2>
         </div>
         <div class="tab-row">
             <button class="tab-btn diet-t active" onclick="switchDiet('fasting', this)">16:8 Fasting (Mid-Day)</button>
@@ -788,17 +788,17 @@
                     <tr>
                         <td><strong>Whey Protein</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td><strong>1 Scoop Daily:</strong> 11:30 AM Pre-gym for Fasting/Mid-day split, or 4:30 PM for Rest/Evening slots.</td>
+                        <td><strong>1 Scoop Daily:</strong> 11:30 AM Pre-gym for Fasting/Mid-day split, or 4:30 PM for Rest/Evening slots. Essential for muscle retention during your 6-month cut.</td>
                     </tr>
                     <tr>
                         <td><strong>Creatine Monohydrate</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td><strong>5g Daily:</strong> Take alongside 11:30 AM pre-workout whey + carbs on training days. Take at 4:30 PM on rest days.</td>
+                        <td><strong>5g Daily:</strong> Take alongside 11:30 AM pre-workout whey + carbs on training days. Take at 4:30 PM on rest days. Maintains cell volume and strength.</td>
                     </tr>
                     <tr>
                         <td><strong>Fish Oil (Omega-3)</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td><strong>1,000mg–2,000mg EPA+DHA:</strong> Take with heavy post-workout lunch for optimal joint recovery & fat absorption.</td>
+                        <td><strong>1,000mg–2,000mg EPA+DHA:</strong> Take with heavy post-workout lunch for joint support and metabolic optimization.</td>
                     </tr>
                     <tr>
                         <td><strong>Vitamin D3 + K2</strong></td>
@@ -808,7 +808,7 @@
                     <tr>
                         <td><strong>Multivitamin</strong></td>
                         <td><span class="badge-status opt">OPT</span></td>
-                        <td><strong>1 Pill Daily:</strong> Optional trace mineral insurance policy during a caloric deficit.</td>
+                        <td><strong>1 Pill Daily:</strong> Optional micronutrient insurance policy during a 6-month caloric deficit.</td>
                     </tr>
                 </tbody>
             </table>
@@ -830,7 +830,7 @@
             <h2>📋 MASTER PROMPT</h2>
             <button class="copy-prompt-btn" onclick="copyMasterPrompt()">📋 COPY PROMPT</button>
         </div>
-        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer. Maintain and update an interactive single-file HTML application titled "Arun's Fitness Guide" with embedded CSS and JavaScript.
+        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer. Maintain and update an interactive single-file HTML application titled "Arun's Fitness Guide" with embedded CSS and JavaScript. Optimized for a structured 6-month fat loss and posture correction phase.
 
 ---
 
@@ -845,7 +845,7 @@
 
 ### 2. MODULE BREAKDOWN & CONTENT DATA
 
-#### A. MODULE 1: DIET (CHRONOLOGICAL TABLES)
+#### A. MODULE 1: DIET (CHRONOLOGICAL TABLES - 6-MONTH CUT FOCUS)
 Must include four top reference tables:
 1. Overnight Soaking Prep Reference Table (Daily Jar Routine):
    - Daily Base (Every Night): 1 tbsp Chia + 1 tbsp Flax (crushed) in 80–100ml WATER + rotate one nut/seed combo on separate lines:
@@ -1420,7 +1420,7 @@ Renders saved session records from LocalStorage into card displays showing Date,
                         <div class="input-group"><input type="number" id="in_${row.id}_s3_r" placeholder="${p3r}"><span class="input-unit">reps</span></div>
                     </div>
 
-                    <div class="logger-actions">
+        <div class="logger-actions">
                         <button class="save-log-btn" onclick="saveExerciseLog('${row.id}', '${row.name.replace(/'/g, "\\'")}')">💾 SAVE SETS</button>
                     </div>
                 </div>
