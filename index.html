@@ -237,14 +237,14 @@
             min-width: 540px;
         }
 
-        /* Enforced strict column widths: Col 1 narrow (15%), Col 2 wide (85%) */
-        table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 15%; }
-        table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 85%; }
+        /* Balanced reference widths: Col 1 comfortable (30%), Col 2 wide (70%) */
+        table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 30%; }
+        table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 70%; }
 
         /* Optimized main schedule widths: Time/Focus/Macros narrow, Meal/Protocol wide */
-        table.diet-table:not(.ref-table) th:nth-child(1), table.diet-table:not(.ref-table) td:nth-child(1) { width: 14%; }
-        table.diet-table:not(.ref-table) th:nth-child(2), table.diet-table:not(.ref-table) td:nth-child(2) { width: 14%; }
-        table.diet-table:not(.ref-table) th:nth-child(3), table.diet-table:not(.ref-table) td:nth-child(3) { width: 48%; }
+        table.diet-table:not(.ref-table) th:nth-child(1), table.diet-table:not(.ref-table) td:nth-child(1) { width: 15%; }
+        table.diet-table:not(.ref-table) th:nth-child(2), table.diet-table:not(.ref-table) td:nth-child(2) { width: 15%; }
+        table.diet-table:not(.ref-table) th:nth-child(3), table.diet-table:not(.ref-table) td:nth-child(3) { width: 46%; }
         table.diet-table:not(.ref-table) th:nth-child(4), table.diet-table:not(.ref-table) td:nth-child(4) { width: 24%; }
 
         table.diet-table th, table.diet-table td {
@@ -355,6 +355,7 @@
         .time-col {
             font-weight: 700;
             color: var(--varsity-navy);
+            white-space: nowrap; /* Keeps times like 11:30 AM on a single line */
         }
 
         .focus-col {
@@ -880,8 +881,8 @@
 ### 1. APPLICATION SPECIFICATIONS & ARCHITECTURE
 - Single-File Structure: All HTML, CSS, and JS must reside in one file.
 - UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with optimized explicit column widths:
-  - Reference Tables: Column 1 narrow (15%), Column 2 wide (85%) for maximum readability (with distinct component and detail headers).
-  - Main Chronological Diet Tables: Time (14%), Focus (14%), Meal / Protocol (48%), Target Macros & Kcal (24%).
+  - Reference Tables: Column 1 comfortable (30%), Column 2 wide (70%) for balanced readability.
+  - Main Chronological Diet Tables: Time (15% with single-line `white-space: nowrap`), Focus (15%), Meal / Protocol (46%), Target Macros & Kcal (24%).
   - Reference tables stack cleanly on mobile view for optimal readability.
 - Persistence (Storage):
   - SessionStorage for Warmup/Posture checklist items.
@@ -892,7 +893,7 @@
 ### 2. MODULE BREAKDOWN & CONTENT DATA
 
 #### A. MODULE 1: DIET (CHRONOLOGICAL TABLES - TAMIL MILLETS INTEGRATED & WHEY AT 4:30 PM)
-Must include top reference tables with optimized wide-text formatting:
+Must include top reference tables with optimized balanced-text formatting:
 1. Overnight Soaking Prep Reference Table (Daily Jar Routine):
    - Daily Base (Every Night): 1 tbsp Chia + 1 tbsp Flax (crushed) in 80–100ml WATER + rotate one nut/seed combo on separate lines:
      • Combo A: 5 Almonds + 2 Walnuts
