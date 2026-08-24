@@ -237,13 +237,15 @@
             min-width: 540px;
         }
 
-        table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 30%; }
-        table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 70%; }
+        /* Optimized reference widths: Col 1 narrower, Col 2 wide */
+        table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 22%; }
+        table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 78%; }
 
-        table.diet-table:not(.ref-table) th:nth-child(1), table.diet-table:not(.ref-table) td:nth-child(1) { width: 16%; }
-        table.diet-table:not(.ref-table) th:nth-child(2), table.diet-table:not(.ref-table) td:nth-child(2) { width: 16%; }
-        table.diet-table:not(.ref-table) th:nth-child(3), table.diet-table:not(.ref-table) td:nth-child(3) { width: 40%; }
-        table.diet-table:not(.ref-table) th:nth-child(4), table.diet-table:not(.ref-table) td:nth-child(4) { width: 28%; }
+        /* Optimized main schedule widths: Time/Focus/Macros narrow, Meal/Protocol wide */
+        table.diet-table:not(.ref-table) th:nth-child(1), table.diet-table:not(.ref-table) td:nth-child(1) { width: 14%; }
+        table.diet-table:not(.ref-table) th:nth-child(2), table.diet-table:not(.ref-table) td:nth-child(2) { width: 14%; }
+        table.diet-table:not(.ref-table) th:nth-child(3), table.diet-table:not(.ref-table) td:nth-child(3) { width: 48%; }
+        table.diet-table:not(.ref-table) th:nth-child(4), table.diet-table:not(.ref-table) td:nth-child(4) { width: 24%; }
 
         table.diet-table th, table.diet-table td {
             padding: 10px 10px;
@@ -799,27 +801,57 @@
                     <tr>
                         <td><strong>Whey Protein</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td><strong>1 Scoop Daily:</strong> 11:30 AM Pre-gym for Fasting/Mid-day split, or 4:30 PM for Rest/Evening slots. Essential for muscle retention during your 6-month cut.</td>
+                        <td>
+                            <ul class="list-cell">
+                                <li><strong>Dosage:</strong> 1 Scoop Daily</li>
+                                <li><strong>Timing:</strong> 4:30 PM post-workout snack slot</li>
+                                <li><strong>Purpose:</strong> Essential for muscle retention during your 6-month cut</li>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Creatine Monohydrate</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td><strong>5g Daily:</strong> Take alongside 11:30 AM pre-workout whey + carbs on training days. Take at 4:30 PM on rest days. Maintains cell volume and strength.</td>
+                        <td>
+                            <ul class="list-cell">
+                                <li><strong>Dosage:</strong> 5g Daily</li>
+                                <li><strong>Timing:</strong> 11:30 AM (or 6:00 PM evening) pre-workout window on training days; 4:30 PM on rest days</li>
+                                <li><strong>Purpose:</strong> Maintains cell volume, muscle fullness, and strength output</li>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Fish Oil (Omega-3)</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td><strong>1,000mg–2,000mg EPA+DHA:</strong> Take with heavy post-workout lunch for joint support and metabolic optimization.</td>
+                        <td>
+                            <ul class="list-cell">
+                                <li><strong>Dosage:</strong> 1,000mg–2,000mg EPA+DHA</li>
+                                <li><strong>Timing:</strong> Taken with heavy post-workout lunch</li>
+                                <li><strong>Purpose:</strong> Joint support and metabolic optimization</li>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Vitamin D3 + K2</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td><strong>2,000–5,000 IU Daily:</strong> Take with your nightly warm turmeric milk (lipids ensure maximum absorption).</td>
+                        <td>
+                            <ul class="list-cell">
+                                <li><strong>Dosage:</strong> 2,000–5,000 IU Daily</li>
+                                <li><strong>Timing:</strong> Nightly warm turmeric milk cap</li>
+                                <li><strong>Purpose:</strong> Dietary lipids ensure maximum absorption for bone and immune health</li>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Multivitamin</strong></td>
                         <td><span class="badge-status opt">OPT</span></td>
-                        <td><strong>1 Pill Daily:</strong> Optional micronutrient insurance policy during a 6-month caloric deficit.</td>
+                        <td>
+                            <ul class="list-cell">
+                                <li><strong>Dosage:</strong> 1 Pill Daily</li>
+                                <li><strong>Timing:</strong> With afternoon snack</li>
+                                <li><strong>Purpose:</strong> Micronutrient insurance policy during a 6-month caloric deficit</li>
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -847,7 +879,10 @@
 
 ### 1. APPLICATION SPECIFICATIONS & ARCHITECTURE
 - Single-File Structure: All HTML, CSS, and JS must reside in one file.
-- UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with explicit column widths to prioritize content readability (Meal/Protocol 40%, Macros 28%, Time 16%, Focus 16%). Reference tables stack on mobile view for optimal readability.
+- UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with optimized explicit column widths:
+  - Reference Tables: Column 1 (22%), Column 2 (78%).
+  - Main Chronological Diet Tables: Time (14%), Focus (14%), Meal / Protocol (48%), Target Macros & Kcal (24%).
+  - Reference tables stack cleanly on mobile view for optimal readability.
 - Persistence (Storage):
   - SessionStorage for Warmup/Posture checklist items.
   - LocalStorage ('arun_master_workout_history') for logging exercise sets (Weight/Reps), retaining historical baselines per exercise, and allowing editing/deletion of logs.
@@ -856,20 +891,18 @@
 
 ### 2. MODULE BREAKDOWN & CONTENT DATA
 
-#### A. MODULE 1: DIET (CHRONOLOGICAL TABLES - TAMIL MILLETS INTEGRATED & CUT FOCUS)
-Must include top reference tables including Tamil Millets Guide:
+#### A. MODULE 1: DIET (CHRONOLOGICAL TABLES - TAMIL MILLETS INTEGRATED & WHEY AT 4:30 PM)
+Must include top reference tables with optimized wide-text formatting:
 1. Overnight Soaking Prep Reference Table (Daily Jar Routine):
    - Daily Base (Every Night): 1 tbsp Chia + 1 tbsp Flax (crushed) in 80–100ml WATER + rotate one nut/seed combo on separate lines:
      • Combo A: 5 Almonds + 2 Walnuts
      • Combo B: 12 Raw Peanuts + 10g Pumpkin Seeds
      • Combo C: 5 Cashews + 1 tsp Sunflower Seeds
-   - Office Snack Protocol: Mix your chosen rotated overnight jar into 200g Greek Yogurt at 4:30 PM snack time!
-   - Non-Fasting Oats Jar (Morning / Evening / Rest Days): 1/2 cup Oats + 100ml Unsweetened Soy Milk for breakfast.
+   - Office Snack Protocol: Mix your chosen rotated overnight jar into 200g Greek Yogurt at 4:30 PM snack time along with 1 scoop Whey Protein!
 2. Pre-Workout Fuel & Hydration Alternatives Table:
-   - Carbs (20g–30g Fast-Acting): <span class="supp-tag">Kelvaragu (Ragi) Malt</span> OR <span class="fruit-tag">1 Ripe Banana</span> OR 80g Boiled Potato / Sweet Potato.
-   - Protein: <span class="supp-tag">1 Scoop Whey Protein Isolate/Concentrate</span>.
+   - Carbs (20g–30g Fast-Acting): <span class="grain-tag">Kelvaragu (Ragi) Malt</span> OR <span class="fruit-tag">1 Ripe Banana</span> OR 80g Boiled Potato / Sweet Potato.
+   - Strength Amplification: <span class="supp-tag">5g Creatine Monohydrate</span> (taken pre-workout with carbs and water).
    - Hydration & Pump: 400ml–500ml Water + 1/4 tsp Salt OR 250ml Pure Coconut Water.
-   - Strength Amplification: <span class="supp-tag">5g Creatine Monohydrate</span>.
 3. Fruit Category Reference Table:
    - Cat. A (Fast Carbs - Pre/Post Gym): <span class="fruit-tag">Banana, Mango, Grapes</span> (80g–100g max).
    - Cat. B (Low Calorie / High Fiber): <span class="fruit-tag">Strawberries, Blueberries, Guava, Apple, Pears</span> (100g–150g in Snack).
@@ -887,25 +920,25 @@ Must render 4 tabbed tables with bulleted items in "Meal / Protocol" (with [VEG]
 
 * Tab 1: 16:8 Fasting (Mid-Day Split)
   - 8:00 PM – 11:30 AM (Fasting Zone): Plain water, black coffee, or green tea | Fasted morning walk || Protein: 0g / Carbs: 0g / Fats: 0g / Fiber: 0g (0 kcal)
-  - 11:30 AM (Pre-Workout Ignition): <span class="supp-tag">1 scoop Whey Protein</span> | <span class="supp-tag">5g Creatine</span> | <span class="grain-tag">Kelvaragu (Ragi) Malt</span> OR <span class="fruit-tag">1 Ripe Banana</span> OR 80g Boiled Potato | 400ml Water w/ Salt || Protein: 25g / Carbs: 20–25g / Fats: 0g / Fiber: 4g (185 kcal)
+  - 11:30 AM (Pre-Workout Ignition): <span class="supp-tag">5g Creatine Monohydrate</span> | <span class="grain-tag">Kelvaragu (Ragi) Malt</span> OR <span class="fruit-tag">1 Ripe Banana</span> OR 80g Boiled Potato | 400ml Water w/ Salt || Protein: 0g / Carbs: 20–25g / Fats: 0g / Fiber: 4g (95 kcal)
   - 1:15 PM (Post-Workout Lunch): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Paneer/Tofu/Chicken | 1/2 cup cooked <span class="grain-tag">Thinai / Varagu / Saamai / Kuthiraivaali</span> (Minor Millets) | <span class="diet-badge badge-veg">[VEG]</span> ACV Salad | <span class="supp-tag">Fish Oil</span> || Protein: 40g / Carbs: 34g / Fats: 12g / Fiber: 10g (440 kcal)
-  - 4:30 PM (Afternoon Snack): 200g Greek Yogurt mixed with water-soaked Rotational Seeds & Nuts Jar | Optional: <span class="fruit-tag">100g Cat. B Fruit</span> || Protein: 26g / Carbs: 18g / Fats: 22g / Fiber: 10g (380 kcal)
+  - 4:30 PM (Post-Workout / Afternoon Snack): <span class="supp-tag">1 scoop Whey Protein</span> | 200g Greek Yogurt mixed with water-soaked Rotational Seeds & Nuts Jar | Optional: <span class="fruit-tag">100g Cat. B Fruit</span> || Protein: 51g / Carbs: 18g / Fats: 22g / Fiber: 10g (510 kcal)
   - 7:30 PM (High-Protein Light Dinner): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 2 Whole Eggs + 70g Chicken Breast (or Paneer) | 2 <span class="grain-tag">Solam (Sorghum) Rotis</span> | <span class="diet-badge badge-veg">[VEG]</span> 1–2 cups Steamed Veggies || Protein: 33g / Carbs: 18g / Fats: 11g / Fiber: 6g (295 kcal)
   - 8:00 PM (Night Cap): 250ml Warm Low-Fat Cow Milk OR Unsweetened Soy Milk | Turmeric & Pepper | Jaggery | <span class="supp-tag">Vitamin D3 + K2</span> || Protein: 8g / Carbs: 12g / Fats: 2.5g / Fiber: 0g (125 kcal)
 
 * Tab 2: Morning Workout Split
-  - 7:00 AM (Pre-Workout): <span class="supp-tag">1 scoop Whey</span> | <span class="supp-tag">5g Creatine</span> | <span class="grain-tag">Kelvaragu Malt</span> OR <span class="fruit-tag">1 Banana</span> | Water w/ Salt || Protein: 25g / Carbs: 22g / Fats: 1g / Fiber: 4g (195 kcal)
+  - 7:00 AM (Pre-Workout): <span class="supp-tag">5g Creatine</span> | <span class="grain-tag">Kelvaragu Malt</span> OR <span class="fruit-tag">1 Banana</span> | Water w/ Salt || Protein: 0g / Carbs: 22g / Fats: 1g / Fiber: 4g (100 kcal)
   - 9:00 AM (Post-Workout / Breakfast): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 2 Whole Eggs | <span class="grain-tag">Ragi Dosa or Oats Base</span> | <span class="diet-badge badge-veg">[VEG]</span> <span class="fruit-tag">1 cup Veggies</span> || Protein: 22g / Carbs: 32g / Fats: 14g / Fiber: 7g (370 kcal)
   - 1:00 PM (Lunch): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Paneer/Tofu/Chicken | 1/2 cup cooked <span class="grain-tag">Minor Millets (Thinai/Saamai)</span> | <span class="diet-badge badge-veg">[VEG]</span> ACV Salad || Protein: 38g / Carbs: 30g / Fats: 12g / Fiber: 10g (380 kcal)
-  - 4:30 PM (Afternoon Snack): 200g Greek Yogurt mixed with Rotational Seeds & Nuts Jar | Optional <span class="fruit-tag">100g Cat. B Fruit</span> || Protein: 26g / Carbs: 18g / Fats: 22g / Fiber: 10g (380 kcal)
+  - 4:30 PM (Afternoon Snack): <span class="supp-tag">1 scoop Whey</span> | 200g Greek Yogurt mixed with Rotational Seeds & Nuts Jar | Optional <span class="fruit-tag">100g Cat. B Fruit</span> || Protein: 51g / Carbs: 18g / Fats: 22g / Fiber: 10g (510 kcal)
   - 8:00 PM (Dinner & Night Cap): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Baked Salmon/Chicken/Tofu | 2 <span class="grain-tag">Solam Rotis</span> | <span class="diet-badge badge-veg">[VEG]</span> Green Salad | Warm Turmeric Milk w/ Jaggery || Protein: 45g / Carbs: 30g / Fats: 12g / Fiber: 6g (495 kcal)
 
 * Tab 3: Evening Workout Split
   - 8:30 AM (Breakfast): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 2 Whole Eggs | <span class="grain-tag">Kambu / Ragi Dosa</span> | <span class="fruit-tag">100g Cat. B Fruit</span> || Protein: 22g / Carbs: 32g / Fats: 14g / Fiber: 7g (370 kcal)
   - 1:00 PM (Lunch): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Paneer/Tofu/Chicken | 1/2 cup <span class="grain-tag">Minor Millets (Varagu/Kuthiraivaali)</span> | <span class="diet-badge badge-veg">[VEG]</span> ACV Salad || Protein: 38g / Carbs: 30g / Fats: 12g / Fiber: 10g (385 kcal)
-  - 4:30 PM (Afternoon Snack): 200g Greek Yogurt mixed with Rotational Seeds & Nuts Jar || Protein: 26g / Carbs: 18g / Fats: 22g / Fiber: 8g (380 kcal)
-  - 6:00 PM (Pre-Workout Ignition): <span class="supp-tag">1 scoop Whey</span> | <span class="supp-tag">5g Creatine</span> | <span class="grain-tag">Kelvaragu Malt</span> OR 120g Boiled Potato | Water w/ Salt || Protein: 25g / Carbs: 28g / Fats: 1g / Fiber: 4g (220 kcal)
-  - 8:45 PM (Post-Workout / Dinner): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Pan-Seared Salmon/Chicken | 2 <span class="grain-tag">Solam Rotis</span> | <span class="diet-badge badge-veg">[VEG]</span> Green Salad | Warm Turmeric Milk || Protein: 45g / Carbs: 30g / Fats: 12g / Fiber: 6g (495 kcal)
+  - 4:30 PM (Post-Workout / Snack): <span class="supp-tag">1 scoop Whey</span> | 200g Greek Yogurt mixed with Rotational Seeds & Nuts Jar || Protein: 51g / Carbs: 18g / Fats: 22g / Fiber: 8g (510 kcal)
+  - 6:00 PM (Pre-Workout Ignition): <span class="supp-tag">5g Creatine</span> | <span class="grain-tag">Kelvaragu Malt</span> OR 120g Boiled Potato | Water w/ Salt || Protein: 0g / Carbs: 28g / Fats: 1g / Fiber: 4g (125 kcal)
+  - 8:45 PM (Dinner): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Pan-Seared Salmon/Chicken | 2 <span class="grain-tag">Solam Rotis</span> | <span class="diet-badge badge-veg">[VEG]</span> Green Salad | Warm Turmeric Milk || Protein: 45g / Carbs: 30g / Fats: 12g / Fiber: 6g (495 kcal)
 
 * Tab 4: Rest Day Split
   - 8:30 AM (Breakfast): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 2 Whole Eggs | <span class="grain-tag">Ragi Dosa / Oats Base</span> | <span class="fruit-tag">100g Cat. B/C Fruit</span> || Protein: 22g / Carbs: 32g / Fats: 14g / Fiber: 7g (370 kcal)
@@ -936,9 +969,9 @@ Every exercise includes: Setup Equipment (with Backup Option), Target Muscle, Ta
 ---
 
 #### D. MODULE 4: SUPPLEMENTS FRAMEWORK
-Master table summarizing daily intake timing:
-- Whey Protein (1 Scoop: 11:30 AM Pre-gym or 4:30 PM Rest/Evening)
-- Creatine Monohydrate (5g Daily: 11:30 AM with pre-workout carbs or 4:30 PM Rest days)
+Master table with structured line-by-line protocol breakdown:
+- Whey Protein (1 Scoop Daily at 4:30 PM post-workout snack slot for muscle retention)
+- Creatine Monohydrate (5g Daily: Pre-workout window on training days or 4:30 PM on rest days)
 - Fish Oil / Omega-3 (1,000–2,000mg EPA+DHA: with high-protein lunch)
 - Vitamin D3 + K2 (2,000–5,000 IU Daily: with warm turmeric milk at night)
 - Multivitamin (1 Pill Daily: Optional insurance policy)
@@ -961,14 +994,13 @@ Renders saved session records from LocalStorage into card displays showing Date,
 
     const prepTableRows = [
         { component: "Daily Jar Base (Every Night)", detail: "1 tbsp Chia + 1 tbsp Flax (crushed) in 80–100ml WATER + rotate one nut/seed combo:<br>• <b style='color:#1e3a8a;'>Combo A:</b> 5 Almonds + 2 Walnuts<br>• <b style='color:#1e3a8a;'>Combo B:</b> 12 Raw Peanuts + 10g Pumpkin Seeds<br>• <b style='color:#1e3a8a;'>Combo C:</b> 5 Cashews + 1 tsp Sunflower Seeds" },
-        { component: "Office Snack Protocol", detail: "Mix your chosen rotated overnight jar into 200g Greek Yogurt at 4:30 PM!" }
+        { component: "Office Snack Protocol", detail: "Mix your chosen rotated overnight jar into 200g Greek Yogurt at 4:30 PM along with <span class='supp-tag'>1 scoop Whey Protein</span>!" }
     ];
 
     const preworkoutFuelRows = [
-        { component: "Fast-Acting Carbs (20g–30g)", detail: "<span class='supp-tag'>Kelvaragu (Ragi) Malt</span> OR <span class='fruit-tag'>1 Ripe Banana</span> OR 80g Boiled Potato / Sweet Potato." },
-        { component: "Fast Protein (25g)", detail: "<span class='supp-tag'>1 Scoop Whey Protein Isolate / Concentrate</span>." },
-        { component: "Hydration & Pump Matrix", detail: "400ml–500ml Water + 1/4 tsp Sea Salt OR 250ml Pure Coconut Water." },
-        { component: "Strength & Cell Volumizer", detail: "<span class='supp-tag'>5g Creatine Monohydrate</span> (taken along with fast carbs & water)." }
+        { component: "Fast-Acting Carbs (20g–30g)", detail: "<span class='grain-tag'>Kelvaragu (Ragi) Malt</span> OR <span class='fruit-tag'>1 Ripe Banana</span> OR 80g Boiled Potato / Sweet Potato." },
+        { component: "Strength & Cell Volumizer", detail: "<span class='supp-tag'>5g Creatine Monohydrate</span> (taken pre-workout with carbs and water)." },
+        { component: "Hydration & Pump Matrix", detail: "400ml–500ml Water + 1/4 tsp Sea Salt OR 250ml Pure Coconut Water." }
     ];
 
     const fruitTableRows = [
@@ -992,25 +1024,25 @@ Renders saved session records from LocalStorage into card displays showing Date,
     const dietTableData = {
         fasting: [
             { time: "8:00 PM – 11:30 AM", focus: "Fasting Zone", items: ["Plain water, black coffee, or green tea", "Fasted morning walk"], macros: ["Protein: 0g", "Carbs: 0g", "Fats: 0g", "Fiber: 0g", "<strong>Total: 0 kcal</strong>"] },
-            { time: "11:30 AM", focus: "Pre-Workout Ignition", items: ["<span class='supp-tag'>1 scoop Whey Protein</span>", "<span class='supp-tag'>5g Creatine Monohydrate</span>", "<span class='grain-tag'>Kelvaragu (Ragi) Malt</span> OR <span class='fruit-tag'>1 Ripe Banana</span> OR 80g Boiled Potato", "400ml Water w/ 1/4 tsp Salt OR 250ml Coconut Water"], macros: ["Protein: 25g", "Carbs: 20–25g", "Fats: 0g", "Fiber: 4g", "<strong>Total: 185 kcal</strong>"] },
+            { time: "11:30 AM", focus: "Pre-Workout Ignition", items: ["<span class='supp-tag'>5g Creatine Monohydrate</span>", "<span class='grain-tag'>Kelvaragu (Ragi) Malt</span> OR <span class='fruit-tag'>1 Ripe Banana</span> OR 80g Boiled Potato", "400ml Water w/ 1/4 tsp Salt OR 250ml Coconut Water"], macros: ["Protein: 0g", "Carbs: 20–25g", "Fats: 0g", "Fiber: 4g", "<strong>Total: 95 kcal</strong>"] },
             { time: "1:15 PM", focus: "Post-Workout Lunch", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 150g Paneer / Tofu / Chicken", "1/2 cup cooked <span class='grain-tag'>Thinai / Varagu / Saamai / Kuthiraivaali</span> (Minor Millets)", "<span class='diet-badge badge-veg'>[VEG]</span> ACV Salad w/ Cucumbers, Tomatoes & Onions", "<span class='supp-tag'>Fish Oil Supplement</span>"], macros: ["Protein: 40g", "Carbs: 34g", "Fats: 12g", "Fiber: 10g", "<strong>Total: 440 kcal</strong>"] },
-            { time: "4:30 PM", focus: "Afternoon Snack", items: ["200g Greek Yogurt mixed with water-soaked Rotational Seeds & Nuts Jar (Combo A, B, or C)", "Optional: <span class='fruit-tag'>100g Cat. B Fruit</span>"], macros: ["Protein: 26g", "Carbs: 18g", "Fats: 22g", "Fiber: 10g", "<strong>Total: 380 kcal</strong>"] },
+            { time: "4:30 PM", focus: "Post-Workout / Snack", items: ["<span class='supp-tag'>1 scoop Whey Protein</span>", "200g Greek Yogurt mixed with water-soaked Rotational Seeds & Nuts Jar (Combo A, B, or C)", "Optional: <span class='fruit-tag'>100g Cat. B Fruit</span>"], macros: ["Protein: 51g", "Carbs: 18g", "Fats: 22g", "Fiber: 10g", "<strong>Total: 510 kcal</strong>"] },
             { time: "7:30 PM", focus: "High-Protein Light Dinner", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 2 Whole Eggs + 70g Chicken Breast (or Paneer)", "2 <span class='grain-tag'>Solam (Sorghum) Rotis</span>", "<span class='diet-badge badge-veg'>[VEG]</span> 1–2 cups Steamed Veggies (Broccoli/Spinach)"], macros: ["Protein: 33g", "Carbs: 18g", "Fats: 11g", "Fiber: 6g", "<strong>Total: 295 kcal</strong>"] },
             { time: "8:00 PM", focus: "Night Cap", items: ["250ml Warm Low-Fat Milk OR Unsweetened Soy Milk", "1/4 tsp Turmeric + pinch Black Pepper", "1 tsp Palm Jaggery or Honey", "<span class='supp-tag'>Vitamin D3 + K2</span>"], macros: ["Protein: 8g", "Carbs: 12g", "Fats: 2.5g", "Fiber: 0g", "<strong>Total: 125 kcal</strong>"] }
         ],
         morning: [
-            { time: "7:00 AM", focus: "Pre-Workout Ignition", items: ["<span class='supp-tag'>1 scoop Whey Protein</span>", "<span class='supp-tag'>5g Creatine Monohydrate</span>", "<span class='grain-tag'>Kelvaragu Malt</span> OR <span class='fruit-tag'>1 Ripe Banana</span>", "400ml Water w/ 1/4 tsp Salt OR 250ml Coconut Water"], macros: ["Protein: 25g", "Carbs: 22g", "Fats: 1g", "Fiber: 4g", "<strong>Total: 195 kcal</strong>"] },
+            { time: "7:00 AM", focus: "Pre-Workout Ignition", items: ["<span class='supp-tag'>5g Creatine Monohydrate</span>", "<span class='grain-tag'>Kelvaragu Malt</span> OR <span class='fruit-tag'>1 Ripe Banana</span>", "400ml Water w/ 1/4 tsp Salt OR 250ml Coconut Water"], macros: ["Protein: 0g", "Carbs: 22g", "Fats: 1g", "Fiber: 4g", "<strong>Total: 100 kcal</strong>"] },
             { time: "9:00 AM", focus: "Post-Workout / Breakfast", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 2 Whole Eggs", "<span class='grain-tag'>Ragi Dosa or Oats Base</span> (1/2 cup Oats/Ragi + 100ml Soy Milk)", "<span class='diet-badge badge-veg'>[VEG]</span> <span class='fruit-tag'>1 cup Veggies</span>"], macros: ["Protein: 22g", "Carbs: 32g", "Fats: 14g", "Fiber: 7g", "<strong>Total: 370 kcal</strong>"] },
             { time: "1:00 PM", focus: "Lunch", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 150g Paneer / Tofu / Chicken", "1/2 cup cooked <span class='grain-tag'>Minor Millets (Thinai/Saamai)</span>", "<span class='diet-badge badge-veg'>[VEG]</span> ACV Salad w/ Cucumbers, Tomatoes & Onions"], macros: ["Protein: 38g", "Carbs: 30g", "Fats: 12g", "Fiber: 10g", "<strong>Total: 380 kcal</strong>"] },
-            { time: "4:30 PM", focus: "Afternoon Snack", items: ["200g Greek Yogurt mixed with water-soaked Rotational Seeds & Nuts Jar (Combo A, B, or C)", "Optional: <span class='fruit-tag'>100g Cat. B Fruit</span>"], macros: ["Protein: 26g", "Carbs: 18g", "Fats: 22g", "Fiber: 10g", "<strong>Total: 380 kcal</strong>"] },
+            { time: "4:30 PM", focus: "Afternoon Snack", items: ["<span class='supp-tag'>1 scoop Whey Protein</span>", "200g Greek Yogurt mixed with Rotational Seeds & Nuts Jar (Combo A, B, or C)", "Optional: <span class='fruit-tag'>100g Cat. B Fruit</span>"], macros: ["Protein: 51g", "Carbs: 18g", "Fats: 22g", "Fiber: 10g", "<strong>Total: 510 kcal</strong>"] },
             { time: "8:00 PM", focus: "Dinner & Night Cap", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 150g Baked Salmon / Chicken / Tofu", "2 <span class='grain-tag'>Solam Rotis</span>", "<span class='diet-badge badge-veg'>[VEG]</span> Green Salad", "1 cup Warm Turmeric Milk (Cow/Soy) w/ Jaggery"], macros: ["Protein: 45g", "Carbs: 30g", "Fats: 12g", "Fiber: 6g", "<strong>Total: 495 kcal</strong>"] }
         ],
         evening: [
             { time: "8:30 AM", focus: "Breakfast", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 2 Whole Eggs", "<span class='grain-tag'>Kambu / Ragi Dosa or Oats Base</span>", "<span class='fruit-tag'>100g Cat. B Fruit</span>"], macros: ["Protein: 22g", "Carbs: 32g", "Fats: 14g", "Fiber: 7g", "<strong>Total: 370 kcal</strong>"] },
             { time: "1:00 PM", focus: "Lunch", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 150g Paneer / Tofu / Chicken", "1/2 cup cooked <span class='grain-tag'>Minor Millets (Varagu/Kuthiraivaali)</span>", "<span class='diet-badge badge-veg'>[VEG]</span> ACV Salad w/ Cucumbers, Tomatoes & Onions"], macros: ["Protein: 38g", "Carbs: 30g", "Fats: 12g", "Fiber: 10g", "<strong>Total: 385 kcal</strong>"] },
-            { time: "4:30 PM", focus: "Afternoon Snack", items: ["200g Greek Yogurt mixed with water-soaked Rotational Seeds & Nuts Jar (Combo A, B, or C)"], macros: ["Protein: 26g", "Carbs: 18g", "Fats: 22g", "Fiber: 8g", "<strong>Total: 380 kcal</strong>"] },
-            { time: "6:00 PM", focus: "Pre-Workout Ignition", items: ["<span class='supp-tag'>1 scoop Whey Protein</span>", "<span class='supp-tag'>5g Creatine Monohydrate</span>", "<span class='grain-tag'>Kelvaragu Malt</span> OR 120g Boiled Potato / Sweet Potato OR <span class='fruit-tag'>1 Banana</span>", "400ml Water w/ 1/4 tsp Salt OR 250ml Coconut Water"], macros: ["Protein: 25g", "Carbs: 28g", "Fats: 1g", "Fiber: 4g", "<strong>Total: 220 kcal</strong>"] },
-            { time: "8:45 PM", focus: "Post-Workout / Dinner", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 150g Pan-Seared Salmon / Chicken", "2 <span class='grain-tag'>Solam Rotis</span>", "<span class='diet-badge badge-veg'>[VEG]</span> Green Salad", "Warm Turmeric Milk (Cow/Soy)"], macros: ["Protein: 45g", "Carbs: 30g", "Fats: 12g", "Fiber: 6g", "<strong>Total: 495 kcal</strong>"] }
+            { time: "4:30 PM", focus: "Post-Workout / Snack", items: ["<span class='supp-tag'>1 scoop Whey Protein</span>", "200g Greek Yogurt mixed with Rotational Seeds & Nuts Jar (Combo A, B, or C)"], macros: ["Protein: 51g", "Carbs: 18g", "Fats: 22g", "Fiber: 8g", "<strong>Total: 510 kcal</strong>"] },
+            { time: "6:00 PM", focus: "Pre-Workout Ignition", items: ["<span class='supp-tag'>5g Creatine Monohydrate</span>", "<span class='grain-tag'>Kelvaragu Malt</span> OR 120g Boiled Potato / Sweet Potato OR <span class='fruit-tag'>1 Banana</span>", "400ml Water w/ 1/4 tsp Salt OR 250ml Coconut Water"], macros: ["Protein: 0g", "Carbs: 28g", "Fats: 1g", "Fiber: 4g", "<strong>Total: 125 kcal</strong>"] },
+            { time: "8:45 PM", focus: "Dinner", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 150g Pan-Seared Salmon / Chicken", "2 <span class='grain-tag'>Solam Rotis</span>", "<span class='diet-badge badge-veg'>[VEG]</span> Green Salad", "Warm Turmeric Milk (Cow/Soy)"], macros: ["Protein: 45g", "Carbs: 30g", "Fats: 12g", "Fiber: 6g", "<strong>Total: 495 kcal</strong>"] }
         ],
         restday: [
             { time: "8:30 AM", focus: "Breakfast", items: ["<span class='diet-badge badge-nonveg'>[NON-VEG]</span> 2 Whole Eggs", "<span class='grain-tag'>Ragi Dosa or Oats Base</span>", "<span class='fruit-tag'>100g Cat. B/C Fruit</span>"], macros: ["Protein: 22g", "Carbs: 32g", "Fats: 14g", "Fiber: 7g", "<strong>Total: 370 kcal</strong>"] },
