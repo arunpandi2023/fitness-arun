@@ -237,7 +237,7 @@
             min-width: 540px;
         }
 
-        /* Highly optimized reference widths: Col 1 narrow (15%), Col 2 wide (85%) */
+        /* Enforced strict column widths: Col 1 narrow (15%), Col 2 wide (85%) */
         table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 15%; }
         table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 85%; }
 
@@ -880,7 +880,7 @@
 ### 1. APPLICATION SPECIFICATIONS & ARCHITECTURE
 - Single-File Structure: All HTML, CSS, and JS must reside in one file.
 - UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with optimized explicit column widths:
-  - Reference Tables: Column 1 narrow (15%), Column 2 wide (85%) for maximum readability.
+  - Reference Tables: Column 1 narrow (15%), Column 2 wide (85%) for maximum readability (with distinct component and detail headers).
   - Main Chronological Diet Tables: Time (14%), Focus (14%), Meal / Protocol (48%), Target Macros & Kcal (24%).
   - Reference tables stack cleanly on mobile view for optimal readability.
 - Persistence (Storage):
@@ -1143,7 +1143,8 @@ Renders saved session records from LocalStorage into card displays showing Date,
             <table class="diet-table ref-table">
                 <thead>
                     <tr>
-                        <th colspan="2">OverNight Soaking Prep (Daily Jar Routine)</th>
+                        <th>OverNight Soaking Prep (Daily Jar Routine)</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1167,7 +1168,8 @@ Renders saved session records from LocalStorage into card displays showing Date,
             <table class="diet-table ref-table">
                 <thead>
                     <tr>
-                        <th colspan="2" style="color:#1e3a8a; background:rgba(30, 58, 138, 0.08);">⚡ Pre-Workout Fuel & Hydration Alternatives</th>
+                        <th style="color:#1e3a8a; background:rgba(30, 58, 138, 0.08);">⚡ Pre-Workout Fuel & Hydration Alternatives</th>
+                        <th style="color:#1e3a8a; background:rgba(30, 58, 138, 0.08);">Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1191,7 +1193,8 @@ Renders saved session records from LocalStorage into card displays showing Date,
             <table class="diet-table ref-table fruit-ref-table">
                 <thead>
                     <tr>
-                        <th colspan="2">🍇 Fruit Category Reference Guide</th>
+                        <th>🍇 Fruit Category Reference Guide</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1215,7 +1218,8 @@ Renders saved session records from LocalStorage into card displays showing Date,
             <table class="diet-table ref-table millet-ref-table">
                 <thead>
                     <tr>
-                        <th colspan="2">🌾 Tamil Millets & Ancient Grains Reference Guide</th>
+                        <th>🌾 Tamil Millets & Ancient Grains Reference Guide</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1239,7 +1243,8 @@ Renders saved session records from LocalStorage into card displays showing Date,
             <table class="diet-table ref-table" style="background: rgba(13, 148, 136, 0.04);">
                 <thead>
                     <tr>
-                        <th colspan="2" style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">💧 Daily Hydration Strategy (3.5L – 4.5L)</th>
+                        <th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">💧 Daily Hydration Strategy (3.5L – 4.5L)</th>
+                        <th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">Details</th>
                     </tr>
                 </thead>
                 <tbody>
