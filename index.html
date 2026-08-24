@@ -237,9 +237,9 @@
             min-width: 540px;
         }
 
-        /* Optimized reference widths: Col 1 narrower, Col 2 wide */
-        table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 22%; }
-        table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 78%; }
+        /* Highly optimized reference widths: Col 1 narrow (15%), Col 2 wide (85%) */
+        table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 15%; }
+        table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 85%; }
 
         /* Optimized main schedule widths: Time/Focus/Macros narrow, Meal/Protocol wide */
         table.diet-table:not(.ref-table) th:nth-child(1), table.diet-table:not(.ref-table) td:nth-child(1) { width: 14%; }
@@ -880,7 +880,7 @@
 ### 1. APPLICATION SPECIFICATIONS & ARCHITECTURE
 - Single-File Structure: All HTML, CSS, and JS must reside in one file.
 - UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with optimized explicit column widths:
-  - Reference Tables: Column 1 (22%), Column 2 (78%).
+  - Reference Tables: Column 1 narrow (15%), Column 2 wide (85%) for maximum readability.
   - Main Chronological Diet Tables: Time (14%), Focus (14%), Meal / Protocol (48%), Target Macros & Kcal (24%).
   - Reference tables stack cleanly on mobile view for optimal readability.
 - Persistence (Storage):
