@@ -599,7 +599,7 @@
             <h2>📋 MASTER PROMPT</h2>
             <button class="copy-prompt-btn" onclick="copyMasterPrompt()">📋 COPY PROMPT</button>
         </div>
-        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer maintaining Arun's Fitness Guide app with gym/home tabs and scaled home weights (5kg/8kg + bench).</div>
+        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer maintaining Arun's Fitness Guide app with gym/home tabs, namespaced [GYM]/[HOME] history tracking, and scaled home weights (5kg/8kg + bench).</div>
     </section>
 </div>
 
@@ -674,64 +674,64 @@
 
     const workoutData = {
         "UPPER A": [
-            { id: "ex_mcp", name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase.", mainYt: "https://www.youtube.com/shorts/QSCLE820K9k", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU" },
-            { id: "ex_msp", name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints.", mainYt: "https://www.youtube.com/shorts/PM1hB_2xNBU", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY" },
-            { id: "ex_lpd", name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: DB Rows)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets.", mainYt: "https://www.youtube.com/shorts/bNmvKpJSWKM", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4" },
-            { id: "ex_clr", name: "Cable Lateral Raise", eq: "Cable Station (Backup: 8kg DB Raise)", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework.", mainYt: "https://www.youtube.com/shorts/xrBcuPNTxLg", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs" },
-            { id: "ex_ctp", name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Press)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension.", mainYt: "https://www.youtube.com/shorts/1FjkhpZsaxc", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM" }
+            { id: "ex_mcp", name: "Machine Chest Press", eq: "MTS Machine (Backup: DB Bench Press - 8kg each)", target: "Mid/Lower Pectorals", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Line handles with mid-chest. Focus on a strict 3-second lowering negative phase.", mainYt: "https://www.youtube.com/shorts/QSCLE820K9k", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU" },
+            { id: "ex_msp", name: "HS MTS Shoulder Press", eq: "MTS Machine (Backup: Seated DB Press - 5kg/8kg each)", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Keep lower back flat against pad. Stop elbows at 90° angle to protect joints.", mainYt: "https://www.youtube.com/shorts/PM1hB_2xNBU", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY" },
+            { id: "ex_lpd", name: "Lat Pulldown Machine", eq: "Lat Pulldown (Backup: Bench Single-Arm DB Row - 8kg)", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 10–12 Reps", rest: "90s", guide: "Lean back 10°. Pull bar down by driving elbows down to your back pockets.", mainYt: "https://www.youtube.com/shorts/bNmvKpJSWKM", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4" },
+            { id: "ex_clr", name: "Cable Lateral Raise", eq: "Cable Station (Backup: DB Lateral Raise - 5kg max)", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 12–15 Reps", rest: "60s", guide: "Lean torso slightly forward. Raise arm out to side to widen upper width framework.", mainYt: "https://www.youtube.com/shorts/xrBcuPNTxLg", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs" },
+            { id: "ex_ctp", name: "Cable Tricep Push Down", eq: "Cable Station (Backup: DB Overhead Ext - 8kg two-hand / 5kg single)", target: "Triceps Brachii", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock elbows tight against ribs. Squeeze hard at the bottom extension.", mainYt: "https://www.youtube.com/shorts/1FjkhpZsaxc", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM" }
         ],
         "LOWER A": [
-            { id: "ex_slp", name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI" },
-            { id: "ex_gmk", name: "Glute Machine", eq: "Glute Kickback (Backup: Single Glute Bridge)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back.", mainYt: "https://www.youtube.com/shorts/3fBptAH0Rnw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw" },
-            { id: "ex_lem", name: "Leg Extension Machine", eq: "Leg Extension Machine (Backup: DB Lunges)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds.", mainYt: "https://www.youtube.com/shorts/uM86QE59Tgc", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs" },
-            { id: "ex_abm", name: "Abdominal Machine", eq: "Ab Machine (Backup: Long Forearm Plank)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep.", mainYt: "https://www.youtube.com/shorts/mnRhbUB3Fjs", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s" },
+            { id: "ex_slp", name: "Seated Leg Press", eq: "Leg Press Machine (Backup: Goblet Squat - 8kg vertical)", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 10–12 Reps", rest: "120s", guide: "Stop platform before lower back/tailbone rolls off pad to protect spine.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI" },
+            { id: "ex_gmk", name: "Glute Machine", eq: "Glute Kickback (Backup: Single-Leg Glute Bridge + 8kg)", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 12 Reps/leg", rest: "60s", guide: "Kick back under absolute control. Do not swing or hyper-extend lower back.", mainYt: "https://www.youtube.com/shorts/3fBptAH0Rnw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw" },
+            { id: "ex_lem", name: "Leg Extension Machine", eq: "Leg Extension (Backup: Bulgarian Split Squat - Bodyweight / 5kg hand)", target: "Quadriceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Extend smoothly, pause at top, lower over 3 full seconds.", mainYt: "https://www.youtube.com/shorts/uM86QE59Tgc", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs" },
+            { id: "ex_abm", name: "Abdominal Machine", eq: "Ab Machine (Backup: Weighted Floor Crunch/Dead-Bug - 5kg)", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Crunch down using stomach wall, not arms. Exhale fully on every rep.", mainYt: "https://www.youtube.com/shorts/mnRhbUB3Fjs", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s" },
             { id: "ex_dsp", name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT.", mainYt: "https://www.youtube.com/results?search_query=Doorway+Chest+Stretch", altYt: "https://www.youtube.com/results?search_query=Posture+Squats+APT" }
         ],
         "UPPER B": [
-            { id: "ex_hcp", name: "HS Chest Press", eq: "Hammer Strength (Backup: Incline DB Press)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size.", mainYt: "https://www.youtube.com/watch?v=xACdhd6HPMA", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ" },
-            { id: "ex_srm", name: "Seated Row Machine", eq: "Seated Row (Backup: Single-Arm DB Rows)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction.", mainYt: "https://www.youtube.com/shorts/TXPefiUFMvw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw" },
-            { id: "ex_dpp", name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullovers)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth.", mainYt: "https://www.youtube.com/shorts/Sq28yhhKxJ8", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4" },
-            { id: "ex_rdm", name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: DB Rear Delt Fly)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders.", mainYt: "https://www.youtube.com/shorts/7tgx6QHB0-A", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo" },
-            { id: "ex_bcm", name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Regular DB Curls)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase.", mainYt: "https://www.youtube.com/shorts/XFAYzZgcbSc", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w" },
-            { id: "ex_tem", name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: Light DB Kickbacks)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension.", mainYt: "https://www.youtube.com/shorts/oy_AZhjxcMs", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8" }
+            { id: "ex_hcp", name: "HS Chest Press", eq: "Hammer Strength (Backup: Flat/Incline DB Press - 8kg each)", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Target upper chest frame to balance out visual waist size.", mainYt: "https://www.youtube.com/watch?v=xACdhd6HPMA", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ" },
+            { id: "ex_srm", name: "Seated Row Machine", eq: "Seated Row (Backup: Chest-Supported DB Row - 8kg each)", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 10 Reps", rest: "90s", guide: "Sit tall. Pinch shoulder blades back completely at the end contraction.", mainYt: "https://www.youtube.com/shorts/TXPefiUFMvw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw" },
+            { id: "ex_dpp", name: "Dual Pulley Pulldown", eq: "Cable Station (Backup: DB Pullover - 8kg both hands)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles down simultaneously. Independent cables ensure balanced growth.", mainYt: "https://www.youtube.com/shorts/Sq28yhhKxJ8", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4" },
+            { id: "ex_rdm", name: "Row / Rear Deltoid Machine", eq: "Rear Delt Machine (Backup: Bent-Over Rear Delt Fly - 5kg)", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Face pad. Fly arms out in wide arc using the back of your shoulders.", mainYt: "https://www.youtube.com/shorts/7tgx6QHB0-A", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo" },
+            { id: "ex_bcm", name: "Biceps Curl Machine", eq: "Biceps Machine (Backup: Incline/Standing DB Curl - 5kg/8kg)", target: "Biceps Isolation", vol: "3 Sets x 10–12 Reps", rest: "60s", guide: "Keep upper arms stationary. Count '3, 2, 1' slowly on every lowering phase.", mainYt: "https://www.youtube.com/shorts/XFAYzZgcbSc", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w" },
+            { id: "ex_tem", name: "Triceps Extension Machine", eq: "Triceps Machine (Backup: DB Skullcrushers - 5kg each)", target: "Triceps Isolation", vol: "3 Sets x 12 Reps", rest: "60s", guide: "Lock out the arms fully straight at the bottom extension.", mainYt: "https://www.youtube.com/shorts/oy_AZhjxcMs", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8" }
         ],
         "LOWER B": [
-            { id: "ex_lph", name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL Holds)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8" },
-            { id: "ex_ham", name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Floor Clamshells)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width.", mainYt: "https://www.youtube.com/shorts/tu4o4quPv2k", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells" },
-            { id: "ex_dpr", name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Regular DB Rows)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely.", mainYt: "https://www.youtube.com/shorts/d_T8I-t1E_g", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8" },
-            { id: "ex_trm", name: "Torso Machine", eq: "Torso Rotation (Backup: DB Woodchoppers)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum.", mainYt: "https://www.youtube.com/shorts/6aAQcnoVCns", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok" },
+            { id: "ex_lph", name: "Seated Leg Press (High Feet)", eq: "Leg Press Machine (Backup: DB RDL - 8kg each / 16kg total)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 12 Reps", rest: "120s", guide: "Placing feet high shifts load off knees and straight onto glutes and hamstrings.", mainYt: "https://www.youtube.com/shorts/BnacvXdaxq8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8" },
+            { id: "ex_ham", name: "Hip Abduction Machine", eq: "Abduction Machine (Backup: Side Clamshells / Fire Hydrant)", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Sit flush against backrest. Pause 2 seconds at maximum outer width.", mainYt: "https://www.youtube.com/shorts/tu4o4quPv2k", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells" },
+            { id: "ex_dpr", name: "Dual Pulley Row OR Low Row", eq: "Cable Station (Backup: Single-Arm DB Row - 8kg)", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 12 Reps", rest: "90s", guide: "Pull handles low, grazing stomach sides. Keep your core braced completely.", mainYt: "https://www.youtube.com/shorts/d_T8I-t1E_g", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8" },
+            { id: "ex_trm", name: "Torso Machine", eq: "Torso Rotation (Backup: Standing DB Woodchoppers - 5kg/8kg)", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 12 Reps/side", rest: "60s", guide: "Smooth, highly controlled rotation. Do not use twisting momentum.", mainYt: "https://www.youtube.com/shorts/6aAQcnoVCns", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok" },
             { id: "ex_lsc", name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain.", mainYt: "https://www.youtube.com/shorts/kOUgceEh_zM", altYt: "https://www.youtube.com/shorts/kOUgceEh_zM" }
         ]
     };
 
     const homeWorkoutData = {
         "UPPER A (HOME)": [
-            { id: "home_mcp", name: "DB Floor Press / Incline Bench Press", eq: "Bench + 8kg DBs (16kg total)", target: "Mid/Lower Pectorals", vol: "3 Sets x 15–20 Reps", rest: "90s", guide: "Pause elbows on floor for 1s or slow 3-sec bench negative.", mainYt: "https://www.youtube.com/shorts/mTaiQemkEpU", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU" },
-            { id: "home_msp", name: "Seated DB Overhead Press", eq: "5kg or 8kg DBs", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 12–15 Reps", rest: "90s", guide: "Strict vertical push, 2s pause at bottom, zero leg drive.", mainYt: "https://www.youtube.com/shorts/k6tzKisR3NY", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY" },
-            { id: "home_lpd", name: "Single-Arm DB Row (Bench Supported)", eq: "8kg DB", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 15 Reps/side", rest: "90s", guide: "Brace hand/knee on bench. Pull elbow to hip pocket with 2s squeeze.", mainYt: "https://www.youtube.com/shorts/vu_YDt9nGv4", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4" },
-            { id: "home_clr", name: "DB Lateral Raise", eq: "5kg DBs max", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 15–20 Reps", rest: "60s", guide: "Slight forward lean, strict control, zero momentum swing.", mainYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs" },
-            { id: "home_ctp", name: "DB Overhead Tricep Extension", eq: "8kg (two hands) or 5kg (single)", target: "Triceps Brachii", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Deep stretch behind head, lock elbows pointing up.", mainYt: "https://www.youtube.com/shorts/b_r_LW4HEcM", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM" }
+            { id: "home_mcp", name: "DB Floor Press / Incline Bench Press", eq: "Bench + 8kg DBs (16kg total)", target: "Mid/Lower Pectorals", vol: "3 Sets x 15–20 Reps", rest: "90s", guide: "Pause elbows on floor for 1s or slow 3-sec bench negative.", mainYt: "https://www.youtube.com/shorts/mTaiQemkEpU", altYt: "https://www.youtube.com/results?search_query=dumbbell+floor+press+form" },
+            { id: "home_msp", name: "Seated DB Overhead Press", eq: "5kg or 8kg DBs", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 12–15 Reps", rest: "90s", guide: "Strict vertical push, 2s pause at bottom, zero leg drive.", mainYt: "https://www.youtube.com/shorts/k6tzKisR3NY", altYt: "https://www.youtube.com/results?search_query=seated+dumbbell+overhead+press+form" },
+            { id: "home_lpd", name: "Single-Arm DB Row (Bench Supported)", eq: "8kg DB", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 15 Reps/side", rest: "90s", guide: "Brace hand/knee on bench. Pull elbow to hip pocket with 2s squeeze.", mainYt: "https://www.youtube.com/shorts/vu_YDt9nGv4", altYt: "https://www.youtube.com/results?search_query=single+arm+dumbbell+row+bench+form" },
+            { id: "home_clr", name: "DB Lateral Raise", eq: "5kg DBs max", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 15–20 Reps", rest: "60s", guide: "Slight forward lean, strict control, zero momentum swing.", mainYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs", altYt: "https://www.youtube.com/results?search_query=dumbbell+lateral+raise+form" },
+            { id: "home_ctp", name: "DB Overhead Tricep Extension", eq: "8kg (two hands) or 5kg (single)", target: "Triceps Brachii", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Deep stretch behind head, lock elbows pointing up.", mainYt: "https://www.youtube.com/shorts/b_r_LW4HEcM", altYt: "https://www.youtube.com/results?search_query=overhead+dumbbell+tricep+extension+form" }
         ],
         "LOWER A (HOME APT)": [
-            { id: "home_slp", name: "Goblet Squat (Held Vertically)", eq: "8kg DB", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 15–20 Reps", rest: "120s", guide: "3-sec descent, optional small heel lift for lumbar comfort.", mainYt: "https://www.youtube.com/shorts/lRYBbchqxtI", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI" },
-            { id: "home_gmk", name: "Single-Leg Floor Glute Bridge (+8kg)", eq: "Bodyweight + 8kg on crease", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 15 Reps/leg", rest: "60s", guide: "Drive working heel hard, 2s hard contraction at top.", mainYt: "https://www.youtube.com/shorts/n1IZ168x2Bw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw" },
-            { id: "home_lem", name: "Bulgarian Split Squat (Rear Foot Elevated)", eq: "Bodyweight or 5kg per hand", target: "Quadriceps Isolation", vol: "3 Sets x 10–12 Reps/leg", rest: "60s", guide: "Rear foot on bench, upright torso, load quads completely.", mainYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs" },
-            { id: "home_abm", name: "Weighted Floor Crunch / Dead-Bug", eq: "5kg held chest/overhead", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15–20 Reps", rest: "60s", guide: "Glues lower back flat into floor throughout set.", mainYt: "https://www.youtube.com/shorts/F-C0CzNK22s", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s" },
+            { id: "home_slp", name: "Goblet Squat (Held Vertically)", eq: "8kg DB", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 15–20 Reps", rest: "120s", guide: "3-sec descent, optional small heel lift for lumbar comfort.", mainYt: "https://www.youtube.com/shorts/lRYBbchqxtI", altYt: "https://www.youtube.com/results?search_query=dumbbell+goblet+squat+form" },
+            { id: "home_gmk", name: "Single-Leg Floor Glute Bridge (+8kg)", eq: "Bodyweight + 8kg on crease", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 15 Reps/leg", rest: "60s", guide: "Drive working heel hard, 2s hard contraction at top.", mainYt: "https://www.youtube.com/shorts/n1IZ168x2Bw", altYt: "https://www.youtube.com/results?search_query=single+leg+glute+bridge+form" },
+            { id: "home_lem", name: "Bulgarian Split Squat (Rear Foot Elevated)", eq: "Bodyweight or 5kg per hand", target: "Quadriceps Isolation", vol: "3 Sets x 10–12 Reps/leg", rest: "60s", guide: "Rear foot on bench, upright torso, load quads completely.", mainYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs", altYt: "https://www.youtube.com/results?search_query=bulgarian+split+squat+form" },
+            { id: "home_abm", name: "Weighted Floor Crunch / Dead-Bug", eq: "5kg held chest/overhead", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15–20 Reps", rest: "60s", guide: "Glues lower back flat into floor throughout set.", mainYt: "https://www.youtube.com/shorts/F-C0CzNK22s", altYt: "https://www.youtube.com/results?search_query=dead+bug+core+exercise+form" },
             { id: "home_dsp", name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT.", mainYt: "https://www.youtube.com/results?search_query=Doorway+Chest+Stretch", altYt: "https://www.youtube.com/results?search_query=Posture+Squats+APT" }
         ],
         "UPPER B (HOME)": [
-            { id: "home_hcp", name: "Flat / Incline DB Press", eq: "8kg each DBs", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Maximize deep stretch at bottom of range.", mainYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ" },
-            { id: "home_srm", name: "Chest-Supported DB Row (Incline Bench)", eq: "8kg each DBs", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Chest pinned to incline bench facing down, zero lower back cheating.", mainYt: "https://www.youtube.com/shorts/yHqqGd0tXcw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw" },
-            { id: "home_dpp", name: "DB Pullover (Lying on Bench)", eq: "8kg (held with both hands)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Control sweep back behind head to expand ribcage/lats.", mainYt: "https://www.youtube.com/shorts/Datv2L6t3-4", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4" },
-            { id: "home_rdm", name: "Bent-Over DB Rear Delt Fly", eq: "5kg each DBs", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 15–20 Reps", rest: "60s", guide: "Horizontal sweep, squeeze upper back rear delts.", mainYt: "https://www.youtube.com/shorts/LsT-bR_zxLo", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo" },
-            { id: "home_bcm", name: "Incline DB Curl (45° Bench)", eq: "5kg or 8kg", target: "Biceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s",grade: "Strict 3-sec negative stretch at bottom.", mainYt: "https://www.youtube.com/shorts/_aoad2yuP5w", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w" },
-            { id: "home_tem", name: "DB Skullcrushers (Flat Bench)", eq: "5kg each DBs", target: "Triceps Isolation", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Lower DBs toward ears, upper arm vertical.", mainYt: "https://www.youtube.com/shorts/MlI2HzCzjv8", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8" }
+            { id: "home_hcp", name: "Flat / Incline DB Press", eq: "8kg each DBs", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Maximize deep stretch at bottom of range.", mainYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ", altYt: "https://www.youtube.com/results?search_query=dumbbell+bench+press+form" },
+            { id: "home_srm", name: "Chest-Supported DB Row (Incline Bench)", eq: "8kg each DBs", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Chest pinned to incline bench facing down, zero lower back cheating.", mainYt: "https://www.youtube.com/shorts/yHqqGd0tXcw", altYt: "https://www.youtube.com/results?search_query=chest+supported+dumbbell+row+form" },
+            { id: "home_dpp", name: "DB Pullover (Lying on Bench)", eq: "8kg (held with both hands)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Control sweep back behind head to expand ribcage/lats.", mainYt: "https://www.youtube.com/shorts/Datv2L6t3-4", altYt: "https://www.youtube.com/results?search_query=dumbbell+pullover+bench+form" },
+            { id: "home_rdm", name: "Bent-Over DB Rear Delt Fly", eq: "5kg each DBs", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 15–20 Reps", rest: "60s", guide: "Horizontal sweep, squeeze upper back rear delts.", mainYt: "https://www.youtube.com/shorts/LsT-bR_zxLo", altYt: "https://www.youtube.com/results?search_query=bent+over+dumbbell+rear+delt+fly+form" },
+            { id: "home_bcm", name: "Incline DB Curl (45° Bench)", eq: "5kg or 8kg", target: "Biceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s", guide: "Strict 3-sec negative stretch at bottom.", mainYt: "https://www.youtube.com/shorts/_aoad2yuP5w", altYt: "https://www.youtube.com/results?search_query=incline+dumbbell+curl+form" },
+            { id: "home_tem", name: "DB Skullcrushers (Flat Bench)", eq: "5kg each DBs", target: "Triceps Isolation", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Lower DBs toward ears, upper arm vertical.", mainYt: "https://www.youtube.com/shorts/MlI2HzCzjv8", altYt: "https://www.youtube.com/results?search_query=dumbbell+skull+crushers+form" }
         ],
         "LOWER B (HOME APT)": [
-            { id: "home_lph", name: "DB Romanian Deadlift (RDL)", eq: "8kg each DBs (16kg total)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 15–20 Reps", rest: "120s", guide: "Hips back to stretch hamstrings, flat neutral lumbar spine.", mainYt: "https://www.youtube.com/shorts/cjRSNsvqpd8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8" },
-            { id: "home_ham", name: "Side-Lying Clamshells / Fire Hydrants", eq: "Bodyweight / Band", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 20 Reps/side", rest: "60s", guide: "Keep hips stacked, pause 2s at peak elevation.", mainYt: "https://www.youtube.com/results?search_query=Floor+Clamshells", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells" },
-            { id: "home_dpr", name: "Single-Arm Unsupported/Supported DB Row", eq: "8kg DB", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 15 Reps/side", rest: "90s", guide: "Alternate sides, strict bracing core.", mainYt: "https://www.youtube.com/shorts/WkFX6_GxAs8", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8" },
-            { id: "home_trm", name: "Standing DB Woodchoppers", eq: "5kg or 8kg plate/DB", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 15 Reps/side", rest: "60s", guide: "Controlled rotational torque, protect spine.", mainYt: "https://www.youtube.com/shorts/kfgSLKvUtok", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok" },
+            { id: "home_lph", name: "DB Romanian Deadlift (RDL)", eq: "8kg each DBs (16kg total)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 15–20 Reps", rest: "120s", guide: "Hips back to stretch hamstrings, flat neutral lumbar spine.", mainYt: "https://www.youtube.com/shorts/cjRSNsvqpd8", altYt: "https://www.youtube.com/results?search_query=dumbbell+romanian+deadlift+form" },
+            { id: "home_ham", name: "Side-Lying Clamshells / Fire Hydrants", eq: "Bodyweight / Band", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 20 Reps/side", rest: "60s", guide: "Keep hips stacked, pause 2s at peak elevation.", mainYt: "https://www.youtube.com/results?search_query=Floor+Clamshells", altYt: "https://www.youtube.com/results?search_query=fire+hydrants+glute+exercise" },
+            { id: "home_dpr", name: "Single-Arm Unsupported/Supported DB Row", eq: "8kg DB", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 15 Reps/side", rest: "90s", guide: "Alternate sides, strict bracing core.", mainYt: "https://www.youtube.com/shorts/WkFX6_GxAs8", altYt: "https://www.youtube.com/results?search_query=single+arm+dumbbell+row+unsupported" },
+            { id: "home_trm", name: "Standing DB Woodchoppers", eq: "5kg or 8kg plate/DB", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 15 Reps/side", rest: "60s", guide: "Controlled rotational torque, protect spine.", mainYt: "https://www.youtube.com/shorts/kfgSLKvUtok", altYt: "https://www.youtube.com/results?search_query=standing+dumbbell+woodchopper+form" },
             { id: "home_lsc", name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain.", mainYt: "https://www.youtube.com/shorts/kOUgceEh_zM", altYt: "https://www.youtube.com/shorts/kOUgceEh_zM" }
         ]
     };
@@ -849,9 +849,9 @@
             const btn = document.createElement('button');
             btn.className = 'tab-btn workout-t';
             btn.innerText = targetDay;
-            btn.onclick = (e) => triggerWorkoutView(targetDay, e.target, 'workout-display', workoutData);
+            btn.onclick = (e) => triggerWorkoutView(targetDay, e.target, 'workout-display', workoutData, '[GYM] ');
             tabWrapper.appendChild(btn);
-            if(index === 0) triggerWorkoutView(targetDay, btn, 'workout-display', workoutData);
+            if(index === 0) triggerWorkoutView(targetDay, btn, 'workout-display', workoutData, '[GYM] ');
             index++;
         }
     }
@@ -864,9 +864,9 @@
             const btn = document.createElement('button');
             btn.className = 'tab-btn homeworkout-t';
             btn.innerText = targetDay;
-            btn.onclick = (e) => triggerWorkoutView(targetDay, e.target, 'home-workout-display', homeWorkoutData);
+            btn.onclick = (e) => triggerWorkoutView(targetDay, e.target, 'home-workout-display', homeWorkoutData, '[HOME] ');
             tabWrapper.appendChild(btn);
-            if(index === 0) triggerWorkoutView(targetDay, btn, 'home-workout-display', homeWorkoutData);
+            if(index === 0) triggerWorkoutView(targetDay, btn, 'home-workout-display', homeWorkoutData, '[HOME] ');
             index++;
         }
     }
@@ -883,7 +883,8 @@
         return raw ? JSON.parse(raw) : [];
     }
 
-    function saveExerciseLog(exId, exName) {
+    function saveExerciseLog(exId, exName, prefixTag) {
+        const fullName = (prefixTag || '') + exName;
         const s1w = document.getElementById(`in_${exId}_s1_w`).value || document.getElementById(`in_${exId}_s1_w`).placeholder;
         const s1r = document.getElementById(`in_${exId}_s1_r`).value || document.getElementById(`in_${exId}_s1_r`).placeholder;
         const s2w = document.getElementById(`in_${exId}_s2_w`).value || document.getElementById(`in_${exId}_s2_w`).placeholder;
@@ -894,7 +895,7 @@
         const newEntry = {
             logId: 'log_' + Date.now(),
             exId: exId,
-            name: exName,
+            name: fullName,
             date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
             s1: { w: s1w, r: s1r },
             s2: { w: s2w, r: s2r },
@@ -1001,7 +1002,7 @@
         });
     }
 
-    function triggerWorkoutView(dayKey, element, targetContainerId, sourceMap) {
+    function triggerWorkoutView(dayKey, element, targetContainerId, sourceMap, prefixTag) {
         const btnSelector = targetContainerId === 'workout-display' ? '.workout-t' : '.homeworkout-t';
         document.querySelectorAll(btnSelector).forEach(b => b.classList.remove('active'));
         element.classList.add('active');
@@ -1012,7 +1013,7 @@
         sourceMap[dayKey].forEach(row => {
             let badgeBlock = '';
             if (row.mainYt) badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🎬 VIDEO</a>`;
-            if (row.altYt) badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ VIDEO</a>`;
+            if (row.altYt) badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ ALT</a>`;
 
             const last = getLastBaseline(row.id);
             const p1w = last ? last.s1.w : "0";
@@ -1053,7 +1054,7 @@
                         <span class="set-label">Set 2</span>
                         <div class="input-group"><input type="number" id="in_${row.id}_s2_w" placeholder="${p2w}"><span class="input-unit">kg</span></div>
                         <div class="input-group"><input type="number" id="in_${row.id}_s2_r" placeholder="${p2r}"><span class="input-unit">reps</span></div>
-                    </div>
+                        </div>
 
                     <div class="set-row">
                         <span class="set-label">Set 3</span>
@@ -1062,7 +1063,7 @@
                     </div>
 
                     <div class="logger-actions">
-                        <button class="save-log-btn" onclick="saveExerciseLog('${row.id}', '${row.name.replace(/'/g, "\\'")}')">💾 SAVE SETS</button>
+                        <button class="save-log-btn" onclick="saveExerciseLog('${row.id}', '${row.name.replace(/'/g, "\\'")}', '${prefixTag}')">💾 SAVE SETS</button>
                     </div>
                 </div>
             `;
