@@ -80,8 +80,8 @@
 
         .module-router {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 4px;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
             margin-bottom: 16px;
         }
 
@@ -89,12 +89,12 @@
             background: rgba(255, 255, 255, 0.7);
             color: var(--text-muted);
             border: 1px solid var(--border-clean);
-            padding: 10px 2px;
+            padding: 9px 2px;
             border-radius: 10px;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -116,7 +116,7 @@
         }
 
         h2 {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.8px;
@@ -237,11 +237,9 @@
             min-width: 540px;
         }
 
-        /* Balanced reference widths: Col 1 comfortable (30%), Col 2 wide (70%) */
         table.diet-table.ref-table th:nth-child(1), table.diet-table.ref-table td:nth-child(1) { width: 30%; }
         table.diet-table.ref-table th:nth-child(2), table.diet-table.ref-table td:nth-child(2) { width: 70%; }
 
-        /* Optimized main schedule widths: Time/Focus/Macros narrow, Meal/Protocol wide */
         table.diet-table:not(.ref-table) th:nth-child(1), table.diet-table:not(.ref-table) td:nth-child(1) { width: 15%; }
         table.diet-table:not(.ref-table) th:nth-child(2), table.diet-table:not(.ref-table) td:nth-child(2) { width: 15%; }
         table.diet-table:not(.ref-table) th:nth-child(3), table.diet-table:not(.ref-table) td:nth-child(3) { width: 46%; }
@@ -276,21 +274,9 @@
 
         table.diet-table tr:last-child td { border-bottom: none; }
 
-        /* Highlight classes & Dietary indicators */
-        .fruit-tag {
-            color: var(--fruit-color);
-            font-weight: 600;
-        }
-
-        .supp-tag {
-            color: var(--supp-color);
-            font-weight: 600;
-        }
-
-        .grain-tag {
-            color: var(--grain-color);
-            font-weight: 600;
-        }
+        .fruit-tag { color: var(--fruit-color); font-weight: 600; }
+        .supp-tag { color: var(--supp-color); font-weight: 600; }
+        .grain-tag { color: var(--grain-color); font-weight: 600; }
 
         .diet-badge {
             font-size: 0.65rem;
@@ -312,77 +298,23 @@
             border: 1px solid rgba(220, 38, 38, 0.25);
         }
 
-        /* Responsive Mobile Fix for Reference Tables */
         @media (max-width: 600px) {
-            .table-container.ref-container {
-                overflow-x: visible;
-            }
-
-            table.diet-table.ref-table {
-                min-width: 100% !important;
-                table-layout: auto;
-            }
-
-            table.diet-table.ref-table th {
-                display: block;
-                width: 100% !important;
-            }
-
-            table.diet-table.ref-table tr {
-                display: flex;
-                flex-direction: column;
-                padding: 8px 0;
-                border-bottom: 1px solid var(--border-clean);
-            }
-
-            table.diet-table.ref-table tr:last-child {
-                border-bottom: none;
-            }
-
-            table.diet-table.ref-table td {
-                display: block;
-                width: 100% !important;
-                padding: 2px 10px;
-                border-bottom: none;
-            }
-
-            table.diet-table.ref-table td.focus-col {
-                font-weight: 700;
-                padding-bottom: 4px;
-            }
+            .table-container.ref-container { overflow-x: visible; }
+            table.diet-table.ref-table { min-width: 100% !important; table-layout: auto; }
+            table.diet-table.ref-table th { display: block; width: 100% !important; }
+            table.diet-table.ref-table tr { display: flex; flex-direction: column; padding: 8px 0; border-bottom: 1px solid var(--border-clean); }
+            table.diet-table.ref-table tr:last-child { border-bottom: none; }
+            table.diet-table.ref-table td { display: block; width: 100% !important; padding: 2px 10px; border-bottom: none; }
+            table.diet-table.ref-table td.focus-col { font-weight: 700; padding-bottom: 4px; }
         }
 
-        .time-col {
-            font-weight: 700;
-            color: var(--varsity-navy);
-            white-space: nowrap; /* Keeps times like 11:30 AM on a single line */
-        }
+        .time-col { font-weight: 700; color: var(--varsity-navy); white-space: nowrap; }
+        .focus-col { font-weight: 600; color: var(--athletic-teal); }
 
-        .focus-col {
-            font-weight: 600;
-            color: var(--athletic-teal);
-        }
-
-        .list-cell {
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .list-cell li {
-            position: relative;
-            padding-left: 10px;
-            margin-bottom: 4px;
-        }
-
+        .list-cell { padding-left: 0; list-style: none; }
+        .list-cell li { position: relative; padding-left: 10px; margin-bottom: 4px; }
         .list-cell li:last-child { margin-bottom: 0; }
-
-        .list-cell li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--athletic-teal);
-            font-weight: bold;
-        }
+        .list-cell li::before { content: "•"; position: absolute; left: 0; color: var(--athletic-teal); font-weight: bold; }
 
         .workout-card {
             background: rgba(248, 250, 252, 0.8);
@@ -401,17 +333,8 @@
             border-bottom: 1px solid var(--border-clean);
         }
 
-        .ex-name {
-            font-size: 0.95rem;
-            color: var(--varsity-navy);
-            font-weight: 600;
-        }
-
-        .badge-group {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-        }
+        .ex-name { font-size: 0.95rem; color: var(--varsity-navy); font-weight: 600; }
+        .badge-group { display: flex; gap: 4px; flex-wrap: wrap; }
 
         .yt-badge {
             background: rgba(220, 38, 38, 0.06);
@@ -435,40 +358,11 @@
             border: 1px solid rgba(71, 85, 105, 0.15);
         }
 
-        .meta-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .meta-cell {
-            font-size: 0.85rem;
-            color: var(--text-main);
-            font-weight: 400;
-        }
-
-        .meta-cell span {
-            display: block;
-            color: var(--text-muted);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-        }
-
-        .meta-cell strong {
-            color: var(--text-main);
-            font-weight: 500;
-        }
-
-        .backup-text {
-            color: #94a3b8;
-            font-size: 0.78rem;
-            font-weight: 400;
-            display: block;
-            margin-top: 2px;
-        }
+        .meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .meta-cell { font-size: 0.85rem; color: var(--text-main); font-weight: 400; }
+        .meta-cell span { display: block; color: var(--text-muted); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+        .meta-cell strong { color: var(--text-main); font-weight: 500; }
+        .backup-text { color: #94a3b8; font-size: 0.78rem; font-weight: 400; display: block; margin-top: 2px; }
 
         .guide-box {
             font-size: 0.8rem;
@@ -508,11 +402,7 @@
             margin-bottom: 6px;
         }
 
-        .set-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
+        .set-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
 
         .input-group {
             display: flex;
@@ -534,18 +424,8 @@
             background: transparent;
         }
 
-        .input-group input::placeholder {
-            color: #94a3b8;
-            font-weight: 400;
-        }
-
-        .input-unit {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-left: 2px;
-        }
+        .input-group input::placeholder { color: #94a3b8; font-weight: 400; }
+        .input-unit { font-size: 0.65rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; margin-left: 2px; }
 
         .logger-actions {
             display: flex;
@@ -586,155 +466,32 @@
             border-bottom: 1px solid var(--border-clean);
         }
 
-        .history-title {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--varsity-navy);
-        }
+        .history-title { font-size: 0.88rem; font-weight: 700; color: var(--varsity-navy); }
+        .history-date { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+        .history-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px; }
+        .history-set-box { background: #ffffff; border: 1px solid var(--border-clean); border-radius: 6px; padding: 4px; text-align: center; font-size: 0.75rem; }
+        .history-set-box span { display: block; font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+        .history-actions { display: flex; justify-content: flex-end; gap: 6px; }
 
-        .history-date {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
+        .edit-hist-btn { background: transparent; border: 1px solid var(--border-clean); color: var(--varsity-navy); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; cursor: pointer; }
+        .delete-hist-btn { background: transparent; border: 1px solid rgba(239, 68, 68, 0.2); color: var(--danger-btn); padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; cursor: pointer; }
+        .mini-reset-btn { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(239, 68, 68, 0.2); color: var(--danger-btn); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; cursor: pointer; }
+        .copy-prompt-btn { background: var(--athletic-teal); color: #ffffff; border: none; padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(13, 148, 136, 0.2); }
 
-        .history-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-
-        .history-set-box {
-            background: #ffffff;
-            border: 1px solid var(--border-clean);
-            border-radius: 6px;
-            padding: 4px;
-            text-align: center;
-            font-size: 0.75rem;
-        }
-
-        .history-set-box span {
-            display: block;
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .history-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 6px;
-        }
-
-        .edit-hist-btn {
-            background: transparent;
-            border: 1px solid var(--border-clean);
-            color: var(--varsity-navy);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .delete-hist-btn {
-            background: transparent;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: var(--danger-btn);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .mini-reset-btn {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: var(--danger-btn);
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .copy-prompt-btn {
-            background: var(--athletic-teal);
-            color: #ffffff;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.2);
-        }
-
-        .supp-table-container {
-            width: 100%;
-            overflow-x: auto;
-            border-radius: 8px;
-            border: 1px solid var(--border-clean);
-            background: rgba(248, 250, 252, 0.6);
-        }
-
-        table.supp-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            text-align: left;
-            min-width: 450px;
-        }
-
-        table.supp-table th, table.supp-table td {
-            padding: 10px 12px;
-            border-bottom: 1px solid var(--border-clean);
-            vertical-align: top;
-            line-height: 1.35;
-        }
-
-        table.supp-table th {
-            background: rgba(30, 58, 138, 0.05);
-            color: var(--varsity-navy);
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
+        .supp-table-container { width: 100%; overflow-x: auto; border-radius: 8px; border: 1px solid var(--border-clean); background: rgba(248, 250, 252, 0.6); }
+        table.supp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; min-width: 450px; }
+        table.supp-table th, table.supp-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-clean); vertical-align: top; line-height: 1.35; }
+        table.supp-table th { background: rgba(30, 58, 138, 0.05); color: var(--varsity-navy); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
         table.supp-table tr:last-child td { border-bottom: none; }
 
-        .badge-status {
-            display: inline-block;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
+        .badge-status { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
         .badge-status.yes { background: rgba(13, 148, 136, 0.1); color: var(--athletic-teal); }
         .badge-status.opt { background: rgba(71, 85, 105, 0.1); color: var(--text-muted); }
 
         .prompt-container {
-            background: #0f172a;
-            color: #f8fafc;
-            border-radius: 12px;
-            padding: 14px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            line-height: 1.5;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            max-height: 500px;
-            overflow-y: auto;
-            border: 1px solid var(--border-clean);
+            background: #0f172a; color: #f8fafc; border-radius: 12px; padding: 14px;
+            font-family: monospace; font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+            word-wrap: break-word; max-height: 500px; overflow-y: auto; border: 1px solid var(--border-clean);
         }
     </style>
 </head>
@@ -746,7 +503,8 @@
     <div class="module-router">
         <button class="module-btn active" onclick="routeModule('diet', this)">Diet</button>
         <button class="module-btn" onclick="routeModule('warmup', this)">Warmup</button>
-        <button class="module-btn" onclick="routeModule('workout', this)">Workout</button>
+        <button class="module-btn" onclick="routeModule('workout', this)">Gym</button>
+        <button class="module-btn" onclick="routeModule('homeworkout', this)">Home 4-Day</button>
         <button class="module-btn" onclick="routeModule('supplements', this)">Supps</button>
         <button class="module-btn" onclick="routeModule('history', this)">History</button>
         <button class="module-btn" onclick="routeModule('prompt', this)">Prompt</button>
@@ -754,9 +512,7 @@
 
     <!-- DIET Section -->
     <section id="mod-diet" class="module-active">
-        <div class="section-header">
-            <h2>🥗 CHRONOLOGICAL DIET TABLES</h2>
-        </div>
+        <div class="section-header"><h2>🥗 CHRONOLOGICAL DIET TABLES</h2></div>
         <div class="tab-row">
             <button class="tab-btn diet-t active" onclick="switchDiet('fasting', this)">16:8 Fasting (Mid-Day)</button>
             <button class="tab-btn diet-t" onclick="switchDiet('morning', this)">Morning Split</button>
@@ -775,84 +531,53 @@
         <div id="checklist-container"></div>
     </section>
 
-    <!-- WORKOUT Section -->
+    <!-- WORKOUT Section (Gym) -->
     <section id="mod-workout">
-        <div class="section-header">
-            <h2>🏋️‍♂️ 4-DAY UPPER / LOWER ROUTINE</h2>
-        </div>
+        <div class="section-header"><h2>🏋️‍♂️ 4-DAY UPPER / LOWER ROUTINE (GYM)</h2></div>
         <div class="tab-row" id="workout-tabs"></div>
         <div id="workout-display"></div>
     </section>
 
+    <!-- HOME WORKOUT Section -->
+    <section id="mod-homeworkout">
+        <div class="section-header"><h2>🏠 HOME 4-DAY ROUTINE (5/8kg + BENCH)</h2></div>
+        <div class="tab-row" id="home-workout-tabs"></div>
+        <div id="home-workout-display"></div>
+    </section>
+
     <!-- SUPPLEMENTS Section -->
     <section id="mod-supplements">
-        <div class="section-header">
-            <h2>💊 MASTER SUPPLEMENT FRAMEWORK</h2>
-        </div>
+        <div class="section-header"><h2>💊 MASTER SUPPLEMENT FRAMEWORK</h2></div>
         <div class="supp-table-container">
             <table class="supp-table">
                 <thead>
-                    <tr>
-                        <th>Supplement</th>
-                        <th>Status</th>
-                        <th>Protocol / Target Coverage</th>
-                    </tr>
+                    <tr><th>Supplement</th><th>Status</th><th>Protocol / Target Coverage</th></tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>Whey Protein</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td>
-                            <ul class="list-cell">
-                                <li><strong>Dosage:</strong> 1 Scoop Daily</li>
-                                <li><strong>Timing:</strong> 4:30 PM post-workout snack slot</li>
-                                <li><strong>Purpose:</strong> Essential for muscle retention during your 6-month cut</li>
-                            </ul>
-                        </td>
+                        <td><ul class="list-cell"><li><strong>Dosage:</strong> 1 Scoop Daily</li><li><strong>Timing:</strong> 4:30 PM post-workout snack slot</li><li><strong>Purpose:</strong> Essential for muscle retention during your 6-month cut</li></ul></td>
                     </tr>
                     <tr>
                         <td><strong>Creatine Monohydrate</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td>
-                            <ul class="list-cell">
-                                <li><strong>Dosage:</strong> 5g Daily</li>
-                                <li><strong>Timing:</strong> 11:30 AM (or 6:00 PM evening) pre-workout window on training days; 4:30 PM on rest days</li>
-                                <li><strong>Purpose:</strong> Maintains cell volume, muscle fullness, and strength output</li>
-                            </ul>
-                        </td>
+                        <td><ul class="list-cell"><li><strong>Dosage:</strong> 5g Daily</li><li><strong>Timing:</strong> Pre-workout window on training days; 4:30 PM on rest days</li><li><strong>Purpose:</strong> Maintains cell volume, muscle fullness, and strength output</li></ul></td>
                     </tr>
                     <tr>
                         <td><strong>Fish Oil (Omega-3)</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td>
-                            <ul class="list-cell">
-                                <li><strong>Dosage:</strong> 1,000mg–2,000mg EPA+DHA</li>
-                                <li><strong>Timing:</strong> Taken with heavy post-workout lunch</li>
-                                <li><strong>Purpose:</strong> Joint support and metabolic optimization</li>
-                            </ul>
-                        </td>
+                        <td><ul class="list-cell"><li><strong>Dosage:</strong> 1,000mg–2,000mg EPA+DHA</li><li><strong>Timing:</strong> Taken with heavy post-workout lunch</li><li><strong>Purpose:</strong> Joint support and metabolic optimization</li></ul></td>
                     </tr>
                     <tr>
                         <td><strong>Vitamin D3 + K2</strong></td>
                         <td><span class="badge-status yes">YES</span></td>
-                        <td>
-                            <ul class="list-cell">
-                                <li><strong>Dosage:</strong> 2,000–5,000 IU Daily</li>
-                                <li><strong>Timing:</strong> Nightly warm turmeric milk cap</li>
-                                <li><strong>Purpose:</strong> Dietary lipids ensure maximum absorption for bone and immune health</li>
-                            </ul>
-                        </td>
+                        <td><ul class="list-cell"><li><strong>Dosage:</strong> 2,000–5,000 IU Daily</li><li><strong>Timing:</strong> Nightly warm turmeric milk cap</li><li><strong>Purpose:</strong> Dietary lipids ensure maximum absorption for bone and immune health</li></ul></td>
                     </tr>
                     <tr>
                         <td><strong>Multivitamin</strong></td>
                         <td><span class="badge-status opt">OPT</span></td>
-                        <td>
-                            <ul class="list-cell">
-                                <li><strong>Dosage:</strong> 1 Pill Daily</li>
-                                <li><strong>Timing:</strong> With afternoon snack</li>
-                                <li><strong>Purpose:</strong> Micronutrient insurance policy during a 6-month caloric deficit</li>
-                            </ul>
-                        </td>
+                        <td><ul class="list-cell"><li><strong>Dosage:</strong> 1 Pill Daily</li><li><strong>Timing:</strong> With afternoon snack</li><li><strong>Purpose:</strong> Micronutrient insurance policy during a 6-month caloric deficit</li></ul></td>
                     </tr>
                 </tbody>
             </table>
@@ -874,113 +599,7 @@
             <h2>📋 MASTER PROMPT</h2>
             <button class="copy-prompt-btn" onclick="copyMasterPrompt()">📋 COPY PROMPT</button>
         </div>
-        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer. Maintain and update an interactive single-file HTML application titled "Arun's Fitness Guide" with embedded CSS and JavaScript. Optimized for a structured 6-month fat loss phase integrating traditional Tamil millets (Kelvaragu, Kambu, Solam, Thinai, Varagu, Saamai, Kuthiraivaali, Karuppu Kavuni, and Ulundhu).
-
----
-
-### 1. APPLICATION SPECIFICATIONS & ARCHITECTURE
-- Single-File Structure: All HTML, CSS, and JS must reside in one file.
-- UI Design System: Clean modern glassmorphism UI, mobile-responsive layout, CSS grid/flexbox, clean typography, custom tab switches, and responsive tables with optimized explicit column widths:
-  - Reference Tables: Column 1 comfortable (30%), Column 2 wide (70%) for balanced readability.
-  - Main Chronological Diet Tables: Time (15% with single-line `white-space: nowrap`), Focus (15%), Meal / Protocol (46%), Target Macros & Kcal (24%).
-  - Reference tables stack cleanly on mobile view for optimal readability.
-- Persistence (Storage):
-  - SessionStorage for Warmup/Posture checklist items.
-  - LocalStorage ('arun_master_workout_history') for logging exercise sets (Weight/Reps), retaining historical baselines per exercise, and allowing editing/deletion of logs.
-
----
-
-### 2. MODULE BREAKDOWN & CONTENT DATA
-
-#### A. MODULE 1: DIET (CHRONOLOGICAL TABLES - TAMIL MILLETS INTEGRATED & WHEY AT 4:30 PM)
-Must include top reference tables with optimized balanced-text formatting:
-1. Overnight Soaking Prep Reference Table (Daily Jar Routine):
-   - Daily Base (Every Night): 1 tbsp Chia + 1 tbsp Flax (crushed) in 80–100ml WATER + rotate one nut/seed combo on separate lines:
-     • Combo A: 5 Almonds + 2 Walnuts
-     • Combo B: 12 Raw Peanuts + 10g Pumpkin Seeds
-     • Combo C: 5 Cashews + 1 tsp Sunflower Seeds
-   - Office Snack Protocol: Mix your chosen rotated overnight jar into 200g Greek Yogurt at 4:30 PM snack time along with 1 scoop Whey Protein!
-2. Pre-Workout Fuel & Hydration Alternatives Table:
-   - Carbs (20g–30g Fast-Acting): <span class="grain-tag">Kelvaragu (Ragi) Malt</span> OR <span class="fruit-tag">1 Ripe Banana</span> OR 80g Boiled Potato / Sweet Potato.
-   - Strength Amplification: <span class="supp-tag">5g Creatine Monohydrate</span> (taken pre-workout with carbs and water).
-   - Hydration & Pump: 400ml–500ml Water + 1/4 tsp Salt OR 250ml Pure Coconut Water.
-3. Fruit Category Reference Table:
-   - Cat. A (Fast Carbs - Pre/Post Gym): <span class="fruit-tag">Banana, Mango, Grapes</span> (80g–100g max).
-   - Cat. B (Low Calorie / High Fiber): <span class="fruit-tag">Strawberries, Blueberries, Guava, Apple, Pears</span> (100g–150g in Snack).
-   - Cat. C (Hydration & Recovery): <span class="fruit-tag">Orange, Pomegranate, Dragon Fruit</span> (100g max on Rest Days).
-4. Tamil Millets & Ancient Grains Reference Table:
-   - Kelvaragu (Ragi): <span class="grain-tag">Ragi Malt / Dosa / Puttu</span> — Great for morning energy & calcium.
-   - Kambu (Pearl Millet): <span class="grain-tag">Kambu Koozh / Roti</span> — Excellent cooling energy source.
-   - Solam (Sorghum): <span class="grain-tag">Solam Rotis</span> — Ideal slow-carb dinner alternative to control blood sugar.
-   - Minor Millets (Thinai, Varagu, Saamai, Kuthiraivaali): <span class="grain-tag">1/2 cup cooked</span> replacing rice at lunch — High fiber for visceral belly fat loss.
-   - Karuppu Kavuni & Ulundhu: <span class="grain-tag">Black Rice / Ulundhu Kanji</span> — Deep antioxidant support & lower back/joint recovery.
-5. Daily Hydration Target Guide (3.5L – 4.5L Total):
-   - Morning Wake-up: 500ml Water. Morning Work Window: 1.0L. Pre-Gym: 400ml-500ml + Salt (or Coconut Water). During Gym: 300ml-500ml. Post-Gym to Afternoon: 1.0L. Evening: 300ml-400ml.
-
-Must render 4 tabbed tables with bulleted items in "Meal / Protocol" (with [VEG] and [NON-VEG] badges only on main course/protein/salad items like Paneer/Tofu/Chicken, Whole Eggs, ACV Salad, Steamed Veggies) and "Target Macros & Kcal":
-
-* Tab 1: 16:8 Fasting (Mid-Day Split)
-  - 8:00 PM – 11:30 AM (Fasting Zone): Plain water, black coffee, or green tea | Fasted morning walk || Protein: 0g / Carbs: 0g / Fats: 0g / Fiber: 0g (0 kcal)
-  - 11:30 AM (Pre-Workout Ignition): <span class="supp-tag">5g Creatine Monohydrate</span> | <span class="grain-tag">Kelvaragu (Ragi) Malt</span> OR <span class="fruit-tag">1 Ripe Banana</span> OR 80g Boiled Potato | 400ml Water w/ Salt || Protein: 0g / Carbs: 20–25g / Fats: 0g / Fiber: 4g (95 kcal)
-  - 1:15 PM (Post-Workout Lunch): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Paneer/Tofu/Chicken | 1/2 cup cooked <span class="grain-tag">Thinai / Varagu / Saamai / Kuthiraivaali</span> (Minor Millets) | <span class="diet-badge badge-veg">[VEG]</span> ACV Salad | <span class="supp-tag">Fish Oil</span> || Protein: 40g / Carbs: 34g / Fats: 12g / Fiber: 10g (440 kcal)
-  - 4:30 PM (Post-Workout / Afternoon Snack): <span class="supp-tag">1 scoop Whey Protein</span> | 200g Greek Yogurt mixed with water-soaked Rotational Seeds & Nuts Jar | Optional: <span class="fruit-tag">100g Cat. B Fruit</span> || Protein: 51g / Carbs: 18g / Fats: 22g / Fiber: 10g (510 kcal)
-  - 7:30 PM (High-Protein Light Dinner): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 2 Whole Eggs + 70g Chicken Breast (or Paneer) | 2 <span class="grain-tag">Solam (Sorghum) Rotis</span> | <span class="diet-badge badge-veg">[VEG]</span> 1–2 cups Steamed Veggies || Protein: 33g / Carbs: 18g / Fats: 11g / Fiber: 6g (295 kcal)
-  - 8:00 PM (Night Cap): 250ml Warm Low-Fat Cow Milk OR Unsweetened Soy Milk | Turmeric & Pepper | Jaggery | <span class="supp-tag">Vitamin D3 + K2</span> || Protein: 8g / Carbs: 12g / Fats: 2.5g / Fiber: 0g (125 kcal)
-
-* Tab 2: Morning Workout Split
-  - 7:00 AM (Pre-Workout): <span class="supp-tag">5g Creatine</span> | <span class="grain-tag">Kelvaragu Malt</span> OR <span class="fruit-tag">1 Banana</span> | Water w/ Salt || Protein: 0g / Carbs: 22g / Fats: 1g / Fiber: 4g (100 kcal)
-  - 9:00 AM (Post-Workout / Breakfast): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 2 Whole Eggs | <span class="grain-tag">Ragi Dosa or Oats Base</span> | <span class="diet-badge badge-veg">[VEG]</span> <span class="fruit-tag">1 cup Veggies</span> || Protein: 22g / Carbs: 32g / Fats: 14g / Fiber: 7g (370 kcal)
-  - 1:00 PM (Lunch): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Paneer/Tofu/Chicken | 1/2 cup cooked <span class="grain-tag">Minor Millets (Thinai/Saamai)</span> | <span class="diet-badge badge-veg">[VEG]</span> ACV Salad || Protein: 38g / Carbs: 30g / Fats: 12g / Fiber: 10g (380 kcal)
-  - 4:30 PM (Afternoon Snack): <span class="supp-tag">1 scoop Whey</span> | 200g Greek Yogurt mixed with Rotational Seeds & Nuts Jar | Optional <span class="fruit-tag">100g Cat. B Fruit</span> || Protein: 51g / Carbs: 18g / Fats: 22g / Fiber: 10g (510 kcal)
-  - 8:00 PM (Dinner & Night Cap): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Baked Salmon/Chicken/Tofu | 2 <span class="grain-tag">Solam Rotis</span> | <span class="diet-badge badge-veg">[VEG]</span> Green Salad | Warm Turmeric Milk w/ Jaggery || Protein: 45g / Carbs: 30g / Fats: 12g / Fiber: 6g (495 kcal)
-
-* Tab 3: Evening Workout Split
-  - 8:30 AM (Breakfast): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 2 Whole Eggs | <span class="grain-tag">Kambu / Ragi Dosa</span> | <span class="fruit-tag">100g Cat. B Fruit</span> || Protein: 22g / Carbs: 32g / Fats: 14g / Fiber: 7g (370 kcal)
-  - 1:00 PM (Lunch): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Paneer/Tofu/Chicken | 1/2 cup <span class="grain-tag">Minor Millets (Varagu/Kuthiraivaali)</span> | <span class="diet-badge badge-veg">[VEG]</span> ACV Salad || Protein: 38g / Carbs: 30g / Fats: 12g / Fiber: 10g (385 kcal)
-  - 4:30 PM (Post-Workout / Snack): <span class="supp-tag">1 scoop Whey</span> | 200g Greek Yogurt mixed with Rotational Seeds & Nuts Jar || Protein: 51g / Carbs: 18g / Fats: 22g / Fiber: 8g (510 kcal)
-  - 6:00 PM (Pre-Workout Ignition): <span class="supp-tag">5g Creatine</span> | <span class="grain-tag">Kelvaragu Malt</span> OR 120g Boiled Potato | Water w/ Salt || Protein: 0g / Carbs: 28g / Fats: 1g / Fiber: 4g (125 kcal)
-  - 8:45 PM (Dinner): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Pan-Seared Salmon/Chicken | 2 <span class="grain-tag">Solam Rotis</span> | <span class="diet-badge badge-veg">[VEG]</span> Green Salad | Warm Turmeric Milk || Protein: 45g / Carbs: 30g / Fats: 12g / Fiber: 6g (495 kcal)
-
-* Tab 4: Rest Day Split
-  - 8:30 AM (Breakfast): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 2 Whole Eggs | <span class="grain-tag">Ragi Dosa / Oats Base</span> | <span class="fruit-tag">100g Cat. B/C Fruit</span> || Protein: 22g / Carbs: 32g / Fats: 14g / Fiber: 7g (370 kcal)
-  - 1:00 PM (Lunch): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Paneer/Tofu/Chicken | 1/2 cup <span class="grain-tag">Minor Millets</span> | <span class="diet-badge badge-veg">[VEG]</span> Steamed Veggies || Protein: 38g / Carbs: 30g / Fats: 12g / Fiber: 10g (380 kcal)
-  - 4:30 PM (Afternoon Snack): <span class="supp-tag">1 scoop Whey Protein</span> in 200g Greek Yogurt + Rotational Seeds & Nuts Jar | <span class="supp-tag">5g Creatine</span> in water || Protein: 51g / Carbs: 18g / Fats: 23g / Fiber: 8g (490 kcal)
-  - 8:00 PM (Dinner & Night Cap): <span class="diet-badge badge-nonveg">[NON-VEG]</span> 150g Salmon/Chicken/Tofu | 2 <span class="grain-tag">Solam Rotis</span> | <span class="diet-badge badge-veg">[VEG]</span> Green Salad | Warm Turmeric Milk w/ Jaggery || Protein: 45g / Carbs: 30g / Fats: 12g / Fiber: 6g (495 kcal)
-
----
-
-#### B. MODULE 2: WARMUP & POSTURE CHECKLIST
-Includes persistent checkboxes and direct YouTube video links:
-1. Dynamic Mobility Loop (10 reps chest openers & leg swings)
-2. Couch Stretch (1 Min/side to release hip flexors)
-3. Dead-Bugs (3 Sets x 10/side, flatten lower back)
-4. Glute Bridges (2 Sets x 12, counter Anterior Pelvic Tilt / APT)
-5. RKC Plank Hold (3 Sets x 20–30s, drag elbows to toes)
-
----
-
-#### C. MODULE 3: WORKOUT (4-DAY UPPER / LOWER ROUTINE)
-Every exercise includes: Setup Equipment (with Backup Option), Target Muscle, Target Volume, Rest Time, Form Technique Guide, Direct YouTube links (Primary & Backup), and an interactive 3-Set Matrix Logger (Set 1, Set 2, Set 3) that loads baseline weights/reps.
-
-* UPPER A: Machine Chest Press, HS MTS Shoulder Press, Lat Pulldown Machine, Cable Lateral Raise, Cable Tricep Push Down.
-* LOWER A (APT Focus): Seated Leg Press, Glute Machine, Leg Extension Machine, Abdominal Machine, Doorway Stretch & Posture Squats.
-* UPPER B: HS Chest Press, Seated Row Machine, Dual Pulley Pulldown, Row / Rear Deltoid Machine, Biceps Curl Machine, Triceps Extension Machine.
-* LOWER B (APT Focus): Seated Leg Press (High Feet), Hip Abduction Machine, Dual Pulley Row OR Low Row, Torso Machine, Lat Stretch & Child's Pose.
-
----
-
-#### D. MODULE 4: SUPPLEMENTS FRAMEWORK
-Master table with structured line-by-line protocol breakdown:
-- Whey Protein (1 Scoop Daily at 4:30 PM post-workout snack slot for muscle retention)
-- Creatine Monohydrate (5g Daily: Pre-workout window on training days or 4:30 PM on rest days)
-- Fish Oil / Omega-3 (1,000–2,000mg EPA+DHA: with high-protein lunch)
-- Vitamin D3 + K2 (2,000–5,000 IU Daily: with warm turmeric milk at night)
-- Multivitamin (1 Pill Daily: Optional insurance policy)
-
----
-
-#### E. MODULE 5: WORKOUT HISTORY
-Renders saved session records from LocalStorage into card displays showing Date, Exercise Name, and Set 1-3 results (Weight × Reps). Allows inline editing of past set values and deletion of single entries or full memory reset.</div>
+        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer maintaining Arun's Fitness Guide app with gym/home tabs and scaled home weights (5kg/8kg + bench).</div>
     </section>
 </div>
 
@@ -1085,6 +704,38 @@ Renders saved session records from LocalStorage into card displays showing Date,
         ]
     };
 
+    const homeWorkoutData = {
+        "UPPER A (HOME)": [
+            { id: "home_mcp", name: "DB Floor Press / Incline Bench Press", eq: "Bench + 8kg DBs (16kg total)", target: "Mid/Lower Pectorals", vol: "3 Sets x 15–20 Reps", rest: "90s", guide: "Pause elbows on floor for 1s or slow 3-sec bench negative.", mainYt: "https://www.youtube.com/shorts/mTaiQemkEpU", altYt: "https://www.youtube.com/shorts/mTaiQemkEpU" },
+            { id: "home_msp", name: "Seated DB Overhead Press", eq: "5kg or 8kg DBs", target: "Front Shoulders (Anterior Delts)", vol: "3 Sets x 12–15 Reps", rest: "90s", guide: "Strict vertical push, 2s pause at bottom, zero leg drive.", mainYt: "https://www.youtube.com/shorts/k6tzKisR3NY", altYt: "https://www.youtube.com/shorts/k6tzKisR3NY" },
+            { id: "home_lpd", name: "Single-Arm DB Row (Bench Supported)", eq: "8kg DB", target: "Upper Lats (V-Shape Width Taper)", vol: "3 Sets x 15 Reps/side", rest: "90s", guide: "Brace hand/knee on bench. Pull elbow to hip pocket with 2s squeeze.", mainYt: "https://www.youtube.com/shorts/vu_YDt9nGv4", altYt: "https://www.youtube.com/shorts/vu_YDt9nGv4" },
+            { id: "home_clr", name: "DB Lateral Raise", eq: "5kg DBs max", target: "Side Shoulders (V-Shape Framework)", vol: "4 Sets x 15–20 Reps", rest: "60s", guide: "Slight forward lean, strict control, zero momentum swing.", mainYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs", altYt: "https://www.youtube.com/shorts/Kl3LEzQ5Zqs" },
+            { id: "home_ctp", name: "DB Overhead Tricep Extension", eq: "8kg (two hands) or 5kg (single)", target: "Triceps Brachii", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Deep stretch behind head, lock elbows pointing up.", mainYt: "https://www.youtube.com/shorts/b_r_LW4HEcM", altYt: "https://www.youtube.com/shorts/b_r_LW4HEcM" }
+        ],
+        "LOWER A (HOME APT)": [
+            { id: "home_slp", name: "Goblet Squat (Held Vertically)", eq: "8kg DB", target: "Quads, Glutes, Hamstrings", vol: "3 Sets x 15–20 Reps", rest: "120s", guide: "3-sec descent, optional small heel lift for lumbar comfort.", mainYt: "https://www.youtube.com/shorts/lRYBbchqxtI", altYt: "https://www.youtube.com/shorts/lRYBbchqxtI" },
+            { id: "home_gmk", name: "Single-Leg Floor Glute Bridge (+8kg)", eq: "Bodyweight + 8kg on crease", target: "Glutes (Core APT Correction Target)", vol: "3 Sets x 15 Reps/leg", rest: "60s", guide: "Drive working heel hard, 2s hard contraction at top.", mainYt: "https://www.youtube.com/shorts/n1IZ168x2Bw", altYt: "https://www.youtube.com/shorts/n1IZ168x2Bw" },
+            { id: "home_lem", name: "Bulgarian Split Squat (Rear Foot Elevated)", eq: "Bodyweight or 5kg per hand", target: "Quadriceps Isolation", vol: "3 Sets x 10–12 Reps/leg", rest: "60s", guide: "Rear foot on bench, upright torso, load quads completely.", mainYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs", altYt: "https://www.youtube.com/shorts/f7Aw2yiqmVs" },
+            { id: "home_abm", name: "Weighted Floor Crunch / Dead-Bug", eq: "5kg held chest/overhead", target: "Rectus Abdominis (Ab Wall)", vol: "3 Sets x 15–20 Reps", rest: "60s", guide: "Glues lower back flat into floor throughout set.", mainYt: "https://www.youtube.com/shorts/F-C0CzNK22s", altYt: "https://www.youtube.com/shorts/F-C0CzNK22s" },
+            { id: "home_dsp", name: "Doorway Stretch & Posture Squats", eq: "Bodyweight Framework", target: "Posture Realignment", vol: "45s hold + 2x15 squats", rest: "45s", guide: "Hold chest stretch still. On squats, tuck tailbone forward to fight APT.", mainYt: "https://www.youtube.com/results?search_query=Doorway+Chest+Stretch", altYt: "https://www.youtube.com/results?search_query=Posture+Squats+APT" }
+        ],
+        "UPPER B (HOME)": [
+            { id: "home_hcp", name: "Flat / Incline DB Press", eq: "8kg each DBs", target: "Upper & Outer Chest Width Target", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Maximize deep stretch at bottom of range.", mainYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ", altYt: "https://www.youtube.com/shorts/8fXfwG4ftaQ" },
+            { id: "home_srm", name: "Chest-Supported DB Row (Incline Bench)", eq: "8kg each DBs", target: "Mid-Back Thickness & Rhomboids", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Chest pinned to incline bench facing down, zero lower back cheating.", mainYt: "https://www.youtube.com/shorts/yHqqGd0tXcw", altYt: "https://www.youtube.com/shorts/yHqqGd0tXcw" },
+            { id: "home_dpp", name: "DB Pullover (Lying on Bench)", eq: "8kg (held with both hands)", target: "Outer Back Width (V-Taper)", vol: "3 Sets x 15 Reps", rest: "90s", guide: "Control sweep back behind head to expand ribcage/lats.", mainYt: "https://www.youtube.com/shorts/Datv2L6t3-4", altYt: "https://www.youtube.com/shorts/Datv2L6t3-4" },
+            { id: "home_rdm", name: "Bent-Over DB Rear Delt Fly", eq: "5kg each DBs", target: "Rear Shoulders (Anti-Slouch Alignment)", vol: "3 Sets x 15–20 Reps", rest: "60s", guide: "Horizontal sweep, squeeze upper back rear delts.", mainYt: "https://www.youtube.com/shorts/LsT-bR_zxLo", altYt: "https://www.youtube.com/shorts/LsT-bR_zxLo" },
+            { id: "home_bcm", name: "Incline DB Curl (45° Bench)", eq: "5kg or 8kg", target: "Biceps Isolation", vol: "3 Sets x 12–15 Reps", rest: "60s",grade: "Strict 3-sec negative stretch at bottom.", mainYt: "https://www.youtube.com/shorts/_aoad2yuP5w", altYt: "https://www.youtube.com/shorts/_aoad2yuP5w" },
+            { id: "home_tem", name: "DB Skullcrushers (Flat Bench)", eq: "5kg each DBs", target: "Triceps Isolation", vol: "3 Sets x 15 Reps", rest: "60s", guide: "Lower DBs toward ears, upper arm vertical.", mainYt: "https://www.youtube.com/shorts/MlI2HzCzjv8", altYt: "https://www.youtube.com/shorts/MlI2HzCzjv8" }
+        ],
+        "LOWER B (HOME APT)": [
+            { id: "home_lph", name: "DB Romanian Deadlift (RDL)", eq: "8kg each DBs (16kg total)", target: "Hamstrings & Glutes (APT Focus)", vol: "3 Sets x 15–20 Reps", rest: "120s", guide: "Hips back to stretch hamstrings, flat neutral lumbar spine.", mainYt: "https://www.youtube.com/shorts/cjRSNsvqpd8", altYt: "https://www.youtube.com/shorts/cjRSNsvqpd8" },
+            { id: "home_ham", name: "Side-Lying Clamshells / Fire Hydrants", eq: "Bodyweight / Band", target: "Side Glutes (Pelvic Stability)", vol: "3 Sets x 20 Reps/side", rest: "60s", guide: "Keep hips stacked, pause 2s at peak elevation.", mainYt: "https://www.youtube.com/results?search_query=Floor+Clamshells", altYt: "https://www.youtube.com/results?search_query=Floor+Clamshells" },
+            { id: "home_dpr", name: "Single-Arm Unsupported/Supported DB Row", eq: "8kg DB", target: "Lower Lats & Mid-Back Thickness", vol: "3 Sets x 15 Reps/side", rest: "90s", guide: "Alternate sides, strict bracing core.", mainYt: "https://www.youtube.com/shorts/WkFX6_GxAs8", altYt: "https://www.youtube.com/shorts/WkFX6_GxAs8" },
+            { id: "home_trm", name: "Standing DB Woodchoppers", eq: "5kg or 8kg plate/DB", target: "Obliques & Deep Core Alignment", vol: "3 Sets x 15 Reps/side", rest: "60s", guide: "Controlled rotational torque, protect spine.", mainYt: "https://www.youtube.com/shorts/kfgSLKvUtok", altYt: "https://www.youtube.com/shorts/kfgSLKvUtok" },
+            { id: "home_lsc", name: "Lat Stretch & Child's Pose", eq: "Mat / Floor Framework", target: "Spine Decompression", vol: "45s/side + 60s hold", rest: "—", guide: "Deep, slow belly breathing. Hold positions completely still to ease pain.", mainYt: "https://www.youtube.com/shorts/kOUgceEh_zM", altYt: "https://www.youtube.com/shorts/kOUgceEh_zM" }
+        ]
+    };
+
     function routeModule(moduleId, btnElement) {
         document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
@@ -1137,181 +788,85 @@ Renders saved session records from LocalStorage into card displays showing Date,
         const display = document.getElementById('diet-display');
         display.innerHTML = '';
 
-        // 1. Overnight Soaking Prep Table
         const prepContainer = document.createElement('div');
         prepContainer.className = 'table-container ref-container';
-        let prepHTML = `
-            <table class="diet-table ref-table">
-                <thead>
-                    <tr>
-                        <th>OverNight Soaking Prep (Daily Jar Routine)</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-        prepTableRows.forEach(r => {
-            prepHTML += `
-                <tr>
-                    <td class="focus-col">${r.component}</td>
-                    <td>${r.detail}</td>
-                </tr>
-            `;
-        });
+        let prepHTML = `<table class="diet-table ref-table"><thead><tr><th>OverNight Soaking Prep (Daily Jar Routine)</th><th>Details</th></tr></thead><tbody>`;
+        prepTableRows.forEach(r => { prepHTML += `<tr><td class="focus-col">${r.component}</td><td>${r.detail}</td></tr>`; });
         prepHTML += `</tbody></table>`;
         prepContainer.innerHTML = prepHTML;
         display.appendChild(prepContainer);
 
-        // 2. Pre-Workout Fuel & Hydration Alternatives Table
         const fuelContainer = document.createElement('div');
         fuelContainer.className = 'table-container ref-container';
-        let fuelHTML = `
-            <table class="diet-table ref-table">
-                <thead>
-                    <tr>
-                        <th style="color:#1e3a8a; background:rgba(30, 58, 138, 0.08);">⚡ Pre-Workout Fuel & Hydration Alternatives</th>
-                        <th style="color:#1e3a8a; background:rgba(30, 58, 138, 0.08);">Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-        preworkoutFuelRows.forEach(r => {
-            fuelHTML += `
-                <tr>
-                    <td class="focus-col">${r.component}</td>
-                    <td>${r.detail}</td>
-                </tr>
-            `;
-        });
+        let fuelHTML = `<table class="diet-table ref-table"><thead><tr><th style="color:#1e3a8a; background:rgba(30, 58, 138, 0.08);">⚡ Pre-Workout Fuel & Hydration Alternatives</th><th style="color:#1e3a8a; background:rgba(30, 58, 138, 0.08);">Details</th></tr></thead><tbody>`;
+        preworkoutFuelRows.forEach(r => { fuelHTML += `<tr><td class="focus-col">${r.component}</td><td>${r.detail}</td></tr>`; });
         fuelHTML += `</tbody></table>`;
         fuelContainer.innerHTML = fuelHTML;
         display.appendChild(fuelContainer);
 
-        // 3. Fruit Category Reference Table
         const fruitContainer = document.createElement('div');
         fruitContainer.className = 'table-container ref-container';
-        let fruitHTML = `
-            <table class="diet-table ref-table fruit-ref-table">
-                <thead>
-                    <tr>
-                        <th>🍇 Fruit Category Reference Guide</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-        fruitTableRows.forEach(r => {
-            fruitHTML += `
-                <tr>
-                    <td class="focus-col" style="color:#0d9488;">${r.category}</td>
-                    <td>${r.detail}</td>
-                </tr>
-            `;
-        });
+        let fruitHTML = `<table class="diet-table ref-table fruit-ref-table"><thead><tr><th>🍇 Fruit Category Reference Guide</th><th>Details</th></tr></thead><tbody>`;
+        fruitTableRows.forEach(r => { fruitHTML += `<tr><td class="focus-col" style="color:#0d9488;">${r.category}</td><td>${r.detail}</td></tr>`; });
         fruitHTML += `</tbody></table>`;
         fruitContainer.innerHTML = fruitHTML;
         display.appendChild(fruitContainer);
 
-        // 4. Tamil Millets Reference Guide Table
         const milletContainer = document.createElement('div');
         milletContainer.className = 'table-container ref-container';
-        let milletHTML = `
-            <table class="diet-table ref-table millet-ref-table">
-                <thead>
-                    <tr>
-                        <th>🌾 Tamil Millets & Ancient Grains Reference Guide</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-        milletTableRows.forEach(r => {
-            milletHTML += `
-                <tr>
-                    <td class="focus-col" style="color:#b45309;">${r.category}</td>
-                    <td>${r.detail}</td>
-                </tr>
-            `;
-        });
+        let milletHTML = `<table class="diet-table ref-table millet-ref-table"><thead><tr><th>🌾 Tamil Millets & Ancient Grains Reference Guide</th><th>Details</th></tr></thead><tbody>`;
+        milletTableRows.forEach(r => { milletHTML += `<tr><td class="focus-col" style="color:#b45309;">${r.category}</td><td>${r.detail}</td></tr>`; });
         milletHTML += `</tbody></table>`;
         milletContainer.innerHTML = milletHTML;
         display.appendChild(milletContainer);
 
-        // 5. Daily Hydration Target Table
         const hydrationContainer = document.createElement('div');
         hydrationContainer.className = 'table-container ref-container';
-        let hydrationHTML = `
-            <table class="diet-table ref-table" style="background: rgba(13, 148, 136, 0.04);">
-                <thead>
-                    <tr>
-                        <th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">💧 Daily Hydration Strategy (3.5L – 4.5L)</th>
-                        <th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-        hydrationTableRows.forEach(r => {
-            hydrationHTML += `
-                <tr>
-                    <td class="focus-col">${r.component}</td>
-                    <td>${r.detail}</td>
-                </tr>
-            `;
-        });
+        let hydrationHTML = `<table class="diet-table ref-table" style="background: rgba(13, 148, 136, 0.04);"><thead><tr><th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">💧 Daily Hydration Strategy (3.5L – 4.5L)</th><th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">Details</th></tr></thead><tbody>`;
+        hydrationTableRows.forEach(r => { hydrationHTML += `<tr><td class="focus-col">${r.component}</td><td>${r.detail}</td></tr>`; });
         hydrationHTML += `</tbody></table>`;
         hydrationContainer.innerHTML = hydrationHTML;
         display.appendChild(hydrationContainer);
 
-        // 6. Main Schedule Table
         const tableContainer = document.createElement('div');
         tableContainer.className = 'table-container';
-        
-        let tableHTML = `
-            <table class="diet-table">
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>Focus</th>
-                        <th>Meal / Protocol</th>
-                        <th>Target Macros & Kcal</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-
+        let tableHTML = `<table class="diet-table"><thead><tr><th>Time</th><th>Focus</th><th>Meal / Protocol</th><th>Target Macros & Kcal</th></tr></thead><tbody>`;
         dietTableData[slot].forEach(row => {
             const itemsList = row.items.map(i => `<li>${i}</li>`).join('');
             const macrosList = row.macros.map(m => `<li>${m}</li>`).join('');
-            
-            tableHTML += `
-                <tr>
-                    <td class="time-col">${row.time}</td>
-                    <td class="focus-col">${row.focus}</td>
-                    <td><ul class="list-cell">${itemsList}</ul></td>
-                    <td><ul class="list-cell">${macrosList}</ul></td>
-                </tr>
-            `;
+            tableHTML += `<tr><td class="time-col">${row.time}</td><td class="focus-col">${row.focus}</td><td><ul class="list-cell">${itemsList}</ul></td><td><ul class="list-cell">${macrosList}</ul></td></tr>`;
         });
-
-        tableHTML += `
-                </tbody>
-            </table>
-        `;
-
+        tableHTML += `</tbody></table>`;
         tableContainer.innerHTML = tableHTML;
         display.appendChild(tableContainer);
     }
 
     function initWorkoutTabs() {
         const tabWrapper = document.getElementById('workout-tabs');
+        tabWrapper.innerHTML = '';
         let index = 0;
         for (const targetDay in workoutData) {
             const btn = document.createElement('button');
             btn.className = 'tab-btn workout-t';
             btn.innerText = targetDay;
-            btn.onclick = (e) => triggerWorkoutView(targetDay, e.target);
+            btn.onclick = (e) => triggerWorkoutView(targetDay, e.target, 'workout-display', workoutData);
             tabWrapper.appendChild(btn);
-            if(index === 0) triggerWorkoutView(targetDay, btn);
+            if(index === 0) triggerWorkoutView(targetDay, btn, 'workout-display', workoutData);
+            index++;
+        }
+    }
+
+    function initHomeWorkoutTabs() {
+        const tabWrapper = document.getElementById('home-workout-tabs');
+        tabWrapper.innerHTML = '';
+        let index = 0;
+        for (const targetDay in homeWorkoutData) {
+            const btn = document.createElement('button');
+            btn.className = 'tab-btn homeworkout-t';
+            btn.innerText = targetDay;
+            btn.onclick = (e) => triggerWorkoutView(targetDay, e.target, 'home-workout-display', homeWorkoutData);
+            tabWrapper.appendChild(btn);
+            if(index === 0) triggerWorkoutView(targetDay, btn, 'home-workout-display', homeWorkoutData);
             index++;
         }
     }
@@ -1352,8 +907,6 @@ Renders saved session records from LocalStorage into card displays showing Date,
         localStorage.setItem(`baseline_${exId}`, JSON.stringify(newEntry));
 
         alert('✅ Sets Saved to Memory!');
-        const activeTab = document.querySelector('.workout-t.active');
-        if (activeTab) triggerWorkoutView(activeTab.innerText, activeTab);
     }
 
     function getLastBaseline(exId) {
@@ -1448,14 +1001,15 @@ Renders saved session records from LocalStorage into card displays showing Date,
         });
     }
 
-    function triggerWorkoutView(dayKey, element) {
-        document.querySelectorAll('.workout-t').forEach(b => b.classList.remove('active'));
+    function triggerWorkoutView(dayKey, element, targetContainerId, sourceMap) {
+        const btnSelector = targetContainerId === 'workout-display' ? '.workout-t' : '.homeworkout-t';
+        document.querySelectorAll(btnSelector).forEach(b => b.classList.remove('active'));
         element.classList.add('active');
         
-        const targetBody = document.getElementById('workout-display');
+        const targetBody = document.getElementById(targetContainerId);
         targetBody.innerHTML = '';
         
-        workoutData[dayKey].forEach(row => {
+        sourceMap[dayKey].forEach(row => {
             let badgeBlock = '';
             if (row.mainYt) badgeBlock += `<a class="yt-badge" href="${row.mainYt}" target="_blank">🎬 VIDEO</a>`;
             if (row.altYt) badgeBlock += `<a class="yt-badge backup-link" href="${row.altYt}" target="_blank">🏋️ VIDEO</a>`;
@@ -1520,6 +1074,7 @@ Renders saved session records from LocalStorage into card displays showing Date,
         initChecklist();
         initDietTabs();
         initWorkoutTabs();
+        initHomeWorkoutTabs();
     };
 </script>
 
