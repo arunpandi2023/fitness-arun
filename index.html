@@ -9,8 +9,8 @@
             --bg-canvas: #f1f5f9;
             --panel-bg: rgba(255, 255, 255, 0.88);
             --card-inner-bg: rgba(248, 250, 252, 0.8);
-            --athletic-teal: #0d9488;
             --varsity-navy: #1e3a8a;
+            --athletic-teal: #0d9488;
             --soft-emerald: #10b981;
             --text-main: #0f172a;
             --text-muted: #475569;
@@ -113,8 +113,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 14px;
-            gap: 8px;
-            flex-wrap: wrap;
         }
 
         h2 {
@@ -138,34 +136,6 @@
         }
 
         section.module-active { display: block; }
-
-        .diet-sub-nav {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .diet-sub-btn {
-            flex: 1;
-            background: rgba(248, 250, 252, 0.85);
-            color: var(--text-muted);
-            border: 1px solid var(--border-clean);
-            padding: 8px 12px;
-            border-radius: 10px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .diet-sub-btn.active {
-            background: var(--varsity-navy);
-            color: #ffffff;
-            border-color: var(--varsity-navy);
-            box-shadow: 0 3px 8px rgba(30, 58, 138, 0.18);
-        }
 
         .checklist-item {
             display: flex;
@@ -542,26 +512,14 @@
 
     <!-- DIET Section -->
     <section id="mod-diet" class="module-active">
-        <div class="diet-sub-nav">
-            <button id="subbtn-schedule" class="diet-sub-btn active" onclick="switchDietSubpage('schedule', this)">🥗 CHRONOLOGICAL DIET TABLES</button>
-            <button id="subbtn-guides" class="diet-sub-btn" onclick="switchDietSubpage('guides', this)">📚 DIET GUIDES & HYDRATION</button>
+        <div class="section-header"><h2>🥗 CHRONOLOGICAL DIET TABLES</h2></div>
+        <div class="tab-row">
+            <button class="tab-btn diet-t active" onclick="switchDiet('fasting', this)">16:8 Fasting (Mid-Day)</button>
+            <button class="tab-btn diet-t" onclick="switchDiet('morning', this)">Morning Split</button>
+            <button class="tab-btn diet-t" onclick="switchDiet('evening', this)">Evening Split</button>
+            <button class="tab-btn diet-t" onclick="switchDiet('restday', this)">Rest Day</button>
         </div>
-
-        <!-- Sub-page 1: Chronological Diet Tables -->
-        <div id="diet-subpage-schedule">
-            <div class="tab-row">
-                <button class="tab-btn diet-t active" onclick="switchDiet('fasting', this)">16:8 Fasting (Mid-Day)</button>
-                <button class="tab-btn diet-t" onclick="switchDiet('morning', this)">Morning Split</button>
-                <button class="tab-btn diet-t" onclick="switchDiet('evening', this)">Evening Split</button>
-                <button class="tab-btn diet-t" onclick="switchDiet('restday', this)">Rest Day</button>
-            </div>
-            <div id="diet-schedule-display"></div>
-        </div>
-
-        <!-- Sub-page 2: Reference Guides & Hydration Strategy -->
-        <div id="diet-subpage-guides" style="display: none;">
-            <div id="diet-guides-display"></div>
-        </div>
+        <div id="diet-display"></div>
     </section>
 
     <!-- WARMUP Section -->
@@ -641,7 +599,7 @@
             <h2>📋 MASTER PROMPT</h2>
             <button class="copy-prompt-btn" onclick="copyMasterPrompt()">📋 COPY PROMPT</button>
         </div>
-        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer maintaining Arun's Fitness Guide app with gym/home tabs, namespaced [GYM]/[HOME] history tracking, scaled home weights (5kg/8kg + bench), and Diet sub-pages separating Chronological Diet Tables from Diet Guides & Hydration (with schedule-specific hydration strategies for 16:8 Fasting Mid-Day, Morning Split, Evening Split, and Rest Day).</div>
+        <div class="prompt-container" id="prompt-content">Act as an expert fitness coach and software engineer maintaining Arun's Fitness Guide app with gym/home tabs, namespaced [GYM]/[HOME] history tracking, and scaled home weights (5kg/8kg + bench).</div>
     </section>
 </div>
 
@@ -679,23 +637,8 @@
         { category: "Karuppu Kavuni & Ulundhu", detail: "<span class='grain-tag'>Black Rice / Ulundhu Kanji</span> — Deep antioxidant support & lower back/joint recovery." }
     ];
 
-    const hydrationByScheduleRows = [
-        {
-            schedule: "16:8 Fasting (Mid-Day)",
-            detail: "<b>Total Target: 3.5L – 4.5L</b><br>• <b>Wake-Up / Morning Walk (7:00–8:00 AM):</b> 500ml water, black coffee, or unsweetened green tea (zero calories during fast).<br>• <b>Fasting Work Window (8:00–11:30 AM):</b> 1.0L plain water steadily.<br>• <b>Pre-Workout (11:30 AM):</b> 400ml–500ml water w/ 1/4 tsp sea salt OR 250ml coconut water.<br>• <b>During Gym (12:00–1:00 PM):</b> 300ml–500ml sipped between sets.<br>• <b>Post-Workout to Afternoon (1:15–5:00 PM):</b> 1.0L water.<br>• <b>Evening & Night Cap (7:30–8:00 PM):</b> 300ml–400ml water + 250ml warm milk/soy milk (limit late water to protect sleep)."
-        },
-        {
-            schedule: "Morning Split",
-            detail: "<b>Total Target: 3.5L – 4.5L</b><br>• <b>Upon Waking (6:30 AM):</b> 500ml water before pre-workout ignition.<br>• <b>Pre-Workout (7:00 AM):</b> 400ml–500ml water w/ 1/4 tsp sea salt OR 250ml coconut water.<br>• <b>During Gym (7:30–8:30 AM):</b> 300ml–500ml sipped between sets.<br>• <b>Post-Workout Breakfast to Midday (9:00 AM–1:00 PM):</b> 1.0L water.<br>• <b>Afternoon (1:00–5:00 PM):</b> 1.0L water.<br>• <b>Evening / Dinner (8:00 PM):</b> 300ml–400ml water + 1 cup warm turmeric milk."
-        },
-        {
-            schedule: "Evening Split",
-            detail: "<b>Total Target: 3.5L – 4.5L</b><br>• <b>Upon Waking (7:00–8:00 AM):</b> 500ml water.<br>• <b>Morning & Lunch Window (8:30 AM–1:00 PM):</b> 1.0L water.<br>• <b>Afternoon Snack Window (1:00–5:00 PM):</b> 1.0L water (including ~300ml with 4:30 PM snack).<br>• <b>Pre-Workout (6:00 PM):</b> 400ml–500ml water w/ 1/4 tsp sea salt OR 250ml coconut water.<br>• <b>During Evening Gym (7:00–8:00 PM):</b> 300ml–500ml sipped steadily.<br>• <b>Post-Workout Dinner & Night Cap (8:45 PM):</b> Keep extra water to ~200ml–300ml to avoid nighttime bathroom trips."
-        },
-        {
-            schedule: "Rest Day",
-            detail: "<b>Total Target: 3.5L – 4.5L</b><br>• <b>Upon Waking (7:30–8:00 AM):</b> 500ml water.<br>• <b>Morning to Lunch (8:30 AM–1:00 PM):</b> 1.0L water.<br>• <b>Afternoon Window (1:00–5:00 PM):</b> 1.0L water (including creatine in water at 4:30 PM).<br>• <b>Late Afternoon to Evening (5:00–8:00 PM):</b> 600ml–800ml water + 1 cup warm turmeric milk at night cap."
-        }
+    const hydrationTableRows = [
+        { component: "Daily Water Goal (3.5L – 4.5L)", detail: "<b>Wake up:</b> 500ml | <b>Morning Work:</b> 1.0L | <b>Pre-Gym:</b> 400ml-500ml + Salt (or Coconut Water) | <b>During Gym:</b> 300ml-500ml | <b>Post-Gym to Afternoon:</b> 1.0L | <b>Evening:</b> 300ml-400ml." }
     ];
 
     const dietTableData = {
@@ -801,23 +744,6 @@
         if (moduleId === 'history') renderHistoryPage();
     }
 
-    function switchDietSubpage(subpage, btnElement) {
-        document.querySelectorAll('.diet-sub-btn').forEach(b => b.classList.remove('active'));
-        btnElement.classList.add('active');
-
-        const scheduleDiv = document.getElementById('diet-subpage-schedule');
-        const guidesDiv = document.getElementById('diet-subpage-guides');
-
-        if (subpage === 'schedule') {
-            scheduleDiv.style.display = 'block';
-            guidesDiv.style.display = 'none';
-        } else {
-            scheduleDiv.style.display = 'none';
-            guidesDiv.style.display = 'block';
-            renderDietGuidesSubpage();
-        }
-    }
-
     function initChecklist() {
         const wrapper = document.getElementById('checklist-container');
         wrapper.innerHTML = '';
@@ -853,11 +779,13 @@
     function initDietTabs() {
         const firstBtn = document.querySelector('.diet-t');
         if(firstBtn) switchDiet('fasting', firstBtn);
-        renderDietGuidesSubpage();
     }
 
-    function renderDietGuidesSubpage() {
-        const display = document.getElementById('diet-guides-display');
+    function switchDiet(slot, element) {
+        document.querySelectorAll('.diet-t').forEach(b => b.classList.remove('active'));
+        element.classList.add('active');
+        
+        const display = document.getElementById('diet-display');
         display.innerHTML = '';
 
         const prepContainer = document.createElement('div');
@@ -894,19 +822,11 @@
 
         const hydrationContainer = document.createElement('div');
         hydrationContainer.className = 'table-container ref-container';
-        let hydrationHTML = `<table class="diet-table ref-table" style="background: rgba(13, 148, 136, 0.04);"><thead><tr><th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">💧 Daily Hydration Strategy (3.5L – 4.5L)</th><th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">Schedule Breakdown</th></tr></thead><tbody>`;
-        hydrationByScheduleRows.forEach(r => { hydrationHTML += `<tr><td class="focus-col">${r.schedule}</td><td>${r.detail}</td></tr>`; });
+        let hydrationHTML = `<table class="diet-table ref-table" style="background: rgba(13, 148, 136, 0.04);"><thead><tr><th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">💧 Daily Hydration Strategy (3.5L – 4.5L)</th><th style="color:#0d9488; background:rgba(13, 148, 136, 0.1);">Details</th></tr></thead><tbody>`;
+        hydrationTableRows.forEach(r => { hydrationHTML += `<tr><td class="focus-col">${r.component}</td><td>${r.detail}</td></tr>`; });
         hydrationHTML += `</tbody></table>`;
         hydrationContainer.innerHTML = hydrationHTML;
         display.appendChild(hydrationContainer);
-    }
-
-    function switchDiet(slot, element) {
-        document.querySelectorAll('.diet-t').forEach(b => b.classList.remove('active'));
-        element.classList.add('active');
-        
-        const display = document.getElementById('diet-schedule-display');
-        display.innerHTML = '';
 
         const tableContainer = document.createElement('div');
         tableContainer.className = 'table-container';
@@ -1134,7 +1054,7 @@
                         <span class="set-label">Set 2</span>
                         <div class="input-group"><input type="number" id="in_${row.id}_s2_w" placeholder="${p2w}"><span class="input-unit">kg</span></div>
                         <div class="input-group"><input type="number" id="in_${row.id}_s2_r" placeholder="${p2r}"><span class="input-unit">reps</span></div>
-                    </div>
+                        </div>
 
                     <div class="set-row">
                         <span class="set-label">Set 3</span>
